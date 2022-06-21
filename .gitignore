@@ -17,7 +17,7 @@ bin/
 *.ipr
 
 ### NetBeans ###
-nbproject/
+nbproject/private/
 build/
 build/classes
 nbbuild/
