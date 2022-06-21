@@ -7,4 +7,4 @@ Desarrolladores:
 Guillermo Delgado, Andrés Santucci y José Ruiz
 
 Prof:</br>
-Virginia Cabrera
+Virginia Correa
