@@ -4,9 +4,7 @@ Software para la gestion administrativa de afiliados, Con las opciones de alta, 
 Proyecto Java BIOS 2022
 
 Desarrolladores:
-Guillermo Delgado
-Andrés Santucci
-José Ruiz
+Guillermo Delgado, Andrés Santucci y José Ruiz
 
-Prof:
-Virginia Cabrera
+Prof:</br>
+Virginia Correa
