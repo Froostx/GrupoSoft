@@ -19,7 +19,7 @@ bin/
 
 ### NetBeans ###
 nbproject/
-build/*
+build\*
 build/classes
 nbbuild/
 dist/
