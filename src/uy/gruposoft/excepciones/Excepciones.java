@@ -11,4 +11,24 @@ package uy.gruposoft.excepciones;
  */
 public class Excepciones {
     
+    
+    public class UsuarioException extends Exception {
+
+    /**
+     * Creates a new instance of <code>UsuarioException</code> without detail
+     * message.
+     */
+    public UsuarioException() {
+    }
+
+    /**
+     * Constructs an instance of <code>UsuarioException</code> with the
+     * specified detail message.
+     *
+     * @param msg the detail message.
+     */
+    public UsuarioException(String msg) {
+        super(msg);
+    }
+}
 }

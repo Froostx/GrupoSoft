@@ -2,7 +2,6 @@ target/
 bin/
 !.mvn/wrapper/maven-wrapper.jar
 
-
 ### STS ###
 .apt_generated
 .classpath
@@ -19,7 +18,7 @@ bin/
 
 ### NetBeans ###
 nbproject/
-build/*
+build/
 build/classes
 nbbuild/
 dist/
