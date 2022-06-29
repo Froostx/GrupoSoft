@@ -16,8 +16,6 @@ bin/
 *.iml
 *.ipr
 
-
-
 ### NetBeans ###
 nbproject/
 build/
