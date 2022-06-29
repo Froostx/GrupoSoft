@@ -16,7 +16,7 @@ bin/
 *.iml
 *.ipr
 
-*.form
+
 
 ### NetBeans ###
 nbproject/
