@@ -49,7 +49,7 @@ public class PersistenciaUsuario {
         ResultSet rs = null;
         try {
             Connection conexion = con.conectar();
-            String sqlStm = "select * from usuario where usuario='" + nombre + "' and clave='" + clave + "';";
+            String sqlStm = "select * from usuarios where username='" + nombre + "' and contraseña='" + clave + "';";
             ps = conexion.prepareStatement(sqlStm);
             rs = ps.executeQuery();
             if (rs.next()) {
