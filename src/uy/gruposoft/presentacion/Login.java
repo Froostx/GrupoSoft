@@ -65,7 +65,7 @@ public class Login extends javax.swing.JFrame {
 
         jLabel3.setFont(new java.awt.Font("Arial", 1, 36)); // NOI18N
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/uy/gruposoft/presentacion/gruposoft_logo_300x134.png"))); // NOI18N
+        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/uy/gruposoft/assets/gruposoft_logo_300x134.png"))); // NOI18N
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
