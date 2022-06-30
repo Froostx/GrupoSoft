@@ -7,7 +7,9 @@ package uy.gruposoft.presentacion;
 
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-import uy.gruposoft.logica.LogicaUsuario;
+import javax.swing.JPasswordField;
+import uy.gruposoft.logica.FachadaLogica;
+import uy.gruposoft.logica.Usuario;
 import uy.gruposoft.persistencia.PersistenciaUsuario;
 
 /**
@@ -112,6 +114,7 @@ public class Login extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void IngresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_IngresarActionPerformed
@@ -120,20 +123,21 @@ public class Login extends javax.swing.JFrame {
 
         String nombre = this.nombreUsuario.getText();
         String claveIngresada = new String(clave.getPassword());
+        
 
-        System.out.println("El nombre es " + nombre);
-        System.out.println("La clave es " + clave);
+        //System.out.println("El nombre es " + nombre);
+        //System.out.println("La clave es " + clave);
 
         //creo un objeto de tipo Usuario 
-        LogicaUsuario usuario = new LogicaUsuario();
+        Usuario usuario = new Usuario();
         usuario.setNombre(nombre);
         usuario.setClave(claveIngresada);
 
 //       //invoco al existeUsuario con el usuario que cargue en memoria para saber si existe en la base 
-        Boolean existe = PersistenciaUsuario.existeUsuario(usuario);
+        Boolean existe = FachadaLogica.existeUsuario(usuario);
         if (existe) {
             //le doy la bienvenida
-            System.out.println("EL usuario existe");
+            //System.out.println("Inicio de sesion correcto");
             JLabel mensajeLbl = new JLabel();
 
             MenuPrincipal verMenuPrincipal = new MenuPrincipal();
@@ -141,7 +145,11 @@ public class Login extends javax.swing.JFrame {
             dispose();
         } else {
             //lo saco pa juera
-            System.out.println("No esistisssss");
+            //System.out.println("Usuario no encontrado");
+            JOptionPane.showMessageDialog(null, "Usuario no encontrado");
+            nombreUsuario.setText("");
+            clave.setText("");
+            
         }
 
     }//GEN-LAST:event_IngresarActionPerformed

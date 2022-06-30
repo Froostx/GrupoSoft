@@ -13,13 +13,13 @@ import java.util.ArrayList;
  */
 public class LogicaUsuarios {
     
-    ArrayList<LogicaUsuario> usuarios = new ArrayList();
+    ArrayList<Usuario> usuarios = new ArrayList();
 
-    public ArrayList<LogicaUsuario> getUsuarios() {
+    public ArrayList<Usuario> getUsuarios() {
         return usuarios;
     }
 
-    public void setUsuarios(ArrayList<LogicaUsuario> usuarios) {
+    public void setUsuarios(ArrayList<Usuario> usuarios) {
         this.usuarios = usuarios;
     }
     

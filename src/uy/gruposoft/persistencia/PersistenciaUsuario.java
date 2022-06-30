@@ -10,7 +10,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import uy.gruposoft.logica.LogicaUsuario;
+import uy.gruposoft.logica.Usuario;
 import uy.gruposoft.logica.LogicaUsuarios;
 /**
  *
@@ -31,7 +31,7 @@ public class PersistenciaUsuario {
 
     }
 
-    public static Boolean existeUsuario(LogicaUsuario usuario) {
+    public static Boolean existeUsuario(Usuario usuario) {
 
         //paso 1 : crear la conexion a la base
         //paso 2 : crear el prepare statement
@@ -64,7 +64,7 @@ public class PersistenciaUsuario {
 
     }
 
-    public void altaUsuario(LogicaUsuario usuario) {
+    public void altaUsuario(Usuario usuario) {
 
         //paso 1 : crear la conexion a la base
         //paso 2 : crear el prepare statement
@@ -72,7 +72,7 @@ public class PersistenciaUsuario {
         //paso 5 : cerrar la conexion a la base
     }
 
-    public void bajaUsuario(LogicaUsuario usuario) {
+    public void bajaUsuario(Usuario usuario) {
 
         //paso 1 : crear la conexion a la base
         //paso 2 : crear el prepare statement
@@ -80,7 +80,7 @@ public class PersistenciaUsuario {
         //paso 5 : cerrar la conexion a la base
     }
 
-    public void modificacionUsuario(LogicaUsuario usuario) {
+    public void modificacionUsuario(Usuario usuario) {
 
         //paso 1 : crear la conexion a la base
         //paso 2 : crear el prepare statement

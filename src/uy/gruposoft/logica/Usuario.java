@@ -9,7 +9,7 @@ package uy.gruposoft.logica;
  *
  * @author guill
  */
-public class LogicaUsuario {
+public class Usuario {
     private String nombre;
     private String clave;
 
