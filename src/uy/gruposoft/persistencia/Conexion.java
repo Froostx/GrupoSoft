@@ -8,7 +8,7 @@ import java.util.logging.Logger;
 
 public class Conexion {
     
-    public Connection conectar(){
+    public static Connection conectar(){
      Connection con =null;
         try {
             Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
