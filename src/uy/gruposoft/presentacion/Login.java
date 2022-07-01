@@ -137,7 +137,7 @@ public class Login extends javax.swing.JFrame {
         Boolean existe = FachadaLogica.existeUsuario(usuario);
         if (existe) {
             //le doy la bienvenida
-            //System.out.println("Inicio de sesion correcto");
+            System.out.println("LOG - Login: " + nombre + " se conecto");
             JLabel mensajeLbl = new JLabel();
 
             MenuPrincipal verMenuPrincipal = new MenuPrincipal();
@@ -146,6 +146,7 @@ public class Login extends javax.swing.JFrame {
         } else {
             //lo saco pa juera
             //System.out.println("Usuario no encontrado");
+            System.out.println("LOG - Login_ERROR: " + nombre + " no encontrado");
             JOptionPane.showMessageDialog(null, "Usuario no encontrado");
             nombreUsuario.setText("");
             clave.setText("");
