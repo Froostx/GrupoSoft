@@ -5,6 +5,7 @@
  */
 package uy.gruposoft.presentacion;
 
+import java.awt.Dimension;
 import javax.swing.JInternalFrame;
 import javax.swing.JOptionPane;
 
@@ -19,6 +20,8 @@ public class MenuPrincipal extends javax.swing.JFrame {
      */
     public MenuPrincipal() {
         initComponents();
+        this.setExtendedState(this.MAXIMIZED_BOTH);
+
     }
 
     /**
@@ -52,16 +55,18 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(java.awt.Color.white);
+        setMaximumSize(new java.awt.Dimension(1920, 1080));
+        setMinimumSize(new java.awt.Dimension(900, 800));
 
         javax.swing.GroupLayout VentanasLayout = new javax.swing.GroupLayout(Ventanas);
         Ventanas.setLayout(VentanasLayout);
         VentanasLayout.setHorizontalGroup(
             VentanasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 750, Short.MAX_VALUE)
+            .addGap(0, 1130, Short.MAX_VALUE)
         );
         VentanasLayout.setVerticalGroup(
             VentanasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 484, Short.MAX_VALUE)
+            .addGap(0, 695, Short.MAX_VALUE)
         );
 
         jMenu1.setText("Formularios");
@@ -115,7 +120,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(Ventanas, javax.swing.GroupLayout.Alignment.TRAILING)
+            .addComponent(Ventanas)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -144,20 +149,24 @@ public class MenuPrincipal extends javax.swing.JFrame {
         return false;
     }
 
-    
-    
-    
+
     private void UsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UsuarioActionPerformed
         // TODO add your handling code here:
         VentanaDeUsuario verUsuarios = new VentanaDeUsuario();
 
         if (JInternalFrames_Abiertos(verUsuarios) == false) { //Solo si es false se abrirá el InternalFrame ya que si devuelve true es porque esta abierto el mismo InternalFrame.
             Ventanas.add(verUsuarios);
+            
+                      
+            Dimension desktopSize = Ventanas.getSize();
+            Dimension FrameSize = verUsuarios.getSize();
+            verUsuarios.setLocation((desktopSize.width - FrameSize.width) / 2, (desktopSize.height - FrameSize.height) / 2);
             verUsuarios.show();
 
-        
+
     }//GEN-LAST:event_UsuarioActionPerformed
     }
+
     /**
      * @param args the command line arguments
      */
@@ -192,8 +201,8 @@ public class MenuPrincipal extends javax.swing.JFrame {
             }
         });
     }
-    
-    
+
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem Negocio;
     private javax.swing.JMenuItem Usuario;

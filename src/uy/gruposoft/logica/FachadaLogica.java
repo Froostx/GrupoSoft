@@ -1,5 +1,6 @@
 package uy.gruposoft.logica;
 
+import javax.swing.table.DefaultTableModel;
 import uy.gruposoft.excepciones.UsuarioException;
 import uy.gruposoft.persistencia.PersistenciaUsuario;
 
@@ -12,9 +13,17 @@ public class FachadaLogica {
         return existe;
     }
 
-    public static void ingresarUsuario(Usuario usuario) throws UsuarioException{
+    public static void ingresarUsuario(Usuario usuario) throws UsuarioException {
 
         //PersistenciaUsuario.ingresarUsuario(usuario);
+    }
+
+    public static DefaultTableModel cargarUsuario(String[]nombresColumnas) {
+      
+       
+        DefaultTableModel modelo = PersistenciaUsuario.mostrarUsuarios(nombresColumnas);
+        
+        return modelo;
     }
 
 }
