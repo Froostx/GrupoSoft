@@ -4,10 +4,13 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/C:/Users/Administrador/Documents/GitHub/GrupoSoft/src/uy/gruposoft/presentacion/VentanaDeUsuario.java</file>
+            <file>file:/C:/Users/Administrador/Documents/GitHub/GrupoSoft/src/uy/gruposoft/logica/Usuario.java</file>
+            <file>file:/C:/Users/Administrador/Documents/GitHub/GrupoSoft/src/uy/gruposoft/persistencia/PersistenciaUsuario.java</file>
             <file>file:/C:/Users/Administrador/Documents/GitHub/GrupoSoft/src/uy/gruposoft/presentacion/MenuPrincipal.java</file>
+            <file>file:/C:/Users/Administrador/Documents/GitHub/GrupoSoft/src/uy/gruposoft/logica/LogicaVentanaUsuario.java</file>
             <file>file:/C:/Users/Administrador/Documents/GitHub/GrupoSoft/src/uy/gruposoft/presentacion/Login.java</file>
+            <file>file:/C:/Users/Administrador/Documents/GitHub/GrupoSoft/src/uy/gruposoft/logica/FachadaLogica.java</file>
             <file>file:/C:/Users/Administrador/Documents/GitHub/GrupoSoft/src/uy/gruposoft/logica/LogicaUsuarios.java</file>
-            <file>file:/C:/Users/Administrador/Documents/GitHub/GrupoSoft/src/uy/gruposoft/presentacion/VentanaUsuario.java</file>
         </group>
     </open-files>
 </project-private>
