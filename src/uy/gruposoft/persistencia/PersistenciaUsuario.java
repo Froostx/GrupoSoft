@@ -11,7 +11,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
-import javax.swing.table.DefaultTableModel;
 import uy.gruposoft.logica.Usuario;
 
 /**
@@ -20,19 +19,14 @@ import uy.gruposoft.logica.Usuario;
  */
 public class PersistenciaUsuario {
 
-    public static DefaultTableModel mostrarUsuarios(String[] columnas) {
-        DefaultTableModel modelo = new DefaultTableModel(null,columnas);
-        String[] registros = new String[7];
-        
-
-       
+    public static ArrayList<Usuario> mostrarUsuarios() {
 
         final String sql = "SELECT * FROM usuarios";
 
         Connection cn = null;
 
         PreparedStatement pst = null;
-        //ArrayList<Usuario> usuarios= new ArrayList();
+        ArrayList<Usuario> usuarios = new ArrayList();
 
         ResultSet rs = null;
 
@@ -42,25 +36,26 @@ public class PersistenciaUsuario {
             pst = cn.prepareStatement(sql);
 
             rs = pst.executeQuery();
+            
+            
+            
+            
+            
+            
 
             while (rs.next()) {
-                //Usuario usuario=new Usuario();
-                
-                
-                registros[0] = rs.getString("username");
-                //usuario.setNombre(rs.getString("username"));
 
-                registros[1] = rs.getString("nombre");
+                Usuario usuario = new Usuario();
 
-                registros[2] = rs.getString("apellido");
+                usuario.setUsuario(rs.getString("username"));
+                usuario.setNombre(rs.getString("nombre"));
+                usuario.setApellido(rs.getString("apellido"));
+                usuario.setEmail(rs.getString("email"));
+                usuario.setClave(rs.getString("Contraseña"));
+                usuario.setFechaAlta(rs.getString("fecha_alta"));
+                usuario.setFechaBaja(rs.getString("fecha_baja"));
 
-                registros[3] = rs.getString("email");
-                registros[4] = rs.getString("contraseña");
-                registros[5] = rs.getString("fecha_alta");
-                registros[6] = rs.getString("fecha_baja");
-
-              modelo.addRow(registros);
-              //usuarios.add(usuario);
+                usuarios.add(usuario);
 
             }
 
@@ -85,7 +80,7 @@ public class PersistenciaUsuario {
                 JOptionPane.showMessageDialog(null, e);
             }
         }
-        return modelo;
+        return usuarios;
     }
 
     public static Boolean existeUsuario(Usuario usuario) {
