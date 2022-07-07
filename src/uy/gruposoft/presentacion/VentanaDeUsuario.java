@@ -62,6 +62,7 @@ public class VentanaDeUsuario extends javax.swing.JInternalFrame {
 
         setClosable(true);
         setIconifiable(true);
+        setMaximizable(true);
         setResizable(true);
         setTitle("Usuarios");
         setMaximumSize(new java.awt.Dimension(1100, 700));
