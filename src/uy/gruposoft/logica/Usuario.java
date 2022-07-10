@@ -13,6 +13,7 @@ import java.util.Date;
  */
 public class Usuario {
 
+    private int id;
     private String usuario;
     private String nombre;
 
@@ -62,6 +63,14 @@ public class Usuario {
         this.email = email;
     }
 
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
     public String getFechaAlta() {
         return fechaAlta;
     }
@@ -77,9 +86,5 @@ public class Usuario {
     public void setFechaBaja(String fechaBaja) {
         this.fechaBaja = fechaBaja;
     }
-
-    
-
-    
 
 }

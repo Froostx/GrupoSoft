@@ -123,10 +123,6 @@ public class Login extends javax.swing.JFrame {
 
         String nombre = this.nombreUsuario.getText();
         String claveIngresada = new String(clave.getPassword());
-        
-
-        //System.out.println("El nombre es " + nombre);
-        //System.out.println("La clave es " + clave);
 
         //creo un objeto de tipo Usuario 
         Usuario usuario = new Usuario();
@@ -136,21 +132,22 @@ public class Login extends javax.swing.JFrame {
 //       //invoco al existeUsuario con el usuario que cargue en memoria para saber si existe en la base 
         Boolean existe = FachadaLogica.existeUsuario(usuario);
         if (existe) {
-            //le doy la bienvenida
+
             System.out.println("LOG - Login: " + nombre + " se conecto");
+
             JLabel mensajeLbl = new JLabel();
 
             MenuPrincipal verMenuPrincipal = new MenuPrincipal();
             verMenuPrincipal.setVisible(true);
             dispose();
         } else {
-            //lo saco pa juera
+
             //System.out.println("Usuario no encontrado");
             System.out.println("LOG - Login_ERROR: " + nombre + " no encontrado");
             JOptionPane.showMessageDialog(null, "Usuario no encontrado");
             nombreUsuario.setText("");
             clave.setText("");
-            
+
         }
 
     }//GEN-LAST:event_IngresarActionPerformed

@@ -1,7 +1,6 @@
 package uy.gruposoft.logica;
 
 import java.util.ArrayList;
-import javax.swing.table.DefaultTableModel;
 import uy.gruposoft.excepciones.UsuarioException;
 import uy.gruposoft.persistencia.PersistenciaUsuario;
 
@@ -16,7 +15,7 @@ public class FachadaLogica {
 
     public static void ingresarUsuario(Usuario usuario) throws UsuarioException {
 
-        //PersistenciaUsuario.ingresarUsuario(usuario);
+        PersistenciaUsuario.altaUsuario(usuario);
     }
 
     public static ArrayList<Usuario> cargarUsuario() {
@@ -25,6 +24,11 @@ public class FachadaLogica {
         usuarios = PersistenciaUsuario.mostrarUsuarios();
         
         return usuarios;
+    }
+    
+    public static void modificarUsuario(Usuario usuario) throws UsuarioException {
+
+        PersistenciaUsuario.modificacionUsuario(usuario);
     }
 
 }

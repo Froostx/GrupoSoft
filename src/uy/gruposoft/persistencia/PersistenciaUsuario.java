@@ -6,26 +6,33 @@
 package uy.gruposoft.persistencia;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
+import uy.gruposoft.excepciones.UsuarioException;
 import uy.gruposoft.logica.Usuario;
+import static uy.gruposoft.presentacion.VentanaDeUsuario.tabla;
 
 /**
  *
  * @author Administrador
  */
 public class PersistenciaUsuario {
+    
+    private static final String sql = "SELECT * FROM usuarios";
+    private static final String update = "UPDATE grupo_soft.usuarios SET username = ?, nombre = ?, apellido = ?, email = ?, contraseña = ? WHERE id = ?";
+    private static final String insert = "INSERT INTO grupo_soft.usuarios (username, nombre,apellido,email,contraseña,fecha_alta) VALUES (?, ?, ?,?,?,current_timestamp())";
+    static Connection cn = null;
 
+    static PreparedStatement pst = null;
     public static ArrayList<Usuario> mostrarUsuarios() {
 
-        final String sql = "SELECT * FROM usuarios";
+       
 
-        Connection cn = null;
-
-        PreparedStatement pst = null;
+        
         ArrayList<Usuario> usuarios = new ArrayList();
 
         ResultSet rs = null;
@@ -36,17 +43,11 @@ public class PersistenciaUsuario {
             pst = cn.prepareStatement(sql);
 
             rs = pst.executeQuery();
-            
-            
-            
-            
-            
-            
 
             while (rs.next()) {
 
                 Usuario usuario = new Usuario();
-
+                usuario.setId(rs.getInt("id"));
                 usuario.setUsuario(rs.getString("username"));
                 usuario.setNombre(rs.getString("nombre"));
                 usuario.setApellido(rs.getString("apellido"));
@@ -96,14 +97,14 @@ public class PersistenciaUsuario {
         String nombre = usuario.getNombre();
         String clave = usuario.getClave();
 
-        PreparedStatement ps = null;
+       
 
         ResultSet rs = null;
         try {
             Connection conexion = con.conectar();
             final String sqlStm = "select * from usuarios where username='" + nombre + "' and contraseña='" + clave + "';";
-            ps = conexion.prepareStatement(sqlStm);
-            rs = ps.executeQuery();
+            pst = conexion.prepareStatement(sqlStm);
+            rs = pst.executeQuery();
             if (rs.next()) {
                 resultado = true;
             }
@@ -116,8 +117,30 @@ public class PersistenciaUsuario {
 
     }
 
-    public void altaUsuario(Usuario usuario) {
+    public static void altaUsuario(Usuario usuario) throws UsuarioException {
+        
+            
+        Conexion conexion = new Conexion();
+        
+        try {
+            cn = conexion.conectar();
+            pst = cn.prepareStatement(insert);
+            pst.setString(1,usuario.getUsuario() );
+            pst.setString(2, usuario.getNombre());
+            pst.setString(3, usuario.getApellido());
+            pst.setString(4, usuario.getEmail());
+            pst.setString(5, usuario.getClave());
+            
+            
+            pst.executeUpdate();
 
+        } catch (SQLException e) {
+            throw new UsuarioException("No pude insertar el usuario");
+        } finally {
+
+        
+
+    }
         //paso 1 : crear la conexion a la base
         //paso 2 : crear el prepare statement
         //paso 3 : ejecutar la consulta del preparestatement
@@ -132,8 +155,28 @@ public class PersistenciaUsuario {
         //paso 5 : cerrar la conexion a la base
     }
 
-    public void modificacionUsuario(Usuario usuario) {
-
+    public static void modificacionUsuario(Usuario usuario) throws UsuarioException {
+       
+        Conexion conexion = new Conexion();
+       
+        
+        try{
+            cn = conexion.conectar();
+            pst = cn.prepareStatement(update);
+           
+            pst.setString(1, usuario.getUsuario());
+            pst.setString(2, usuario.getNombre());
+            pst.setString(3, usuario.getApellido());
+            pst.setString(4, usuario.getEmail());
+            pst.setString(5, usuario.getClave());
+            
+             pst.setInt(6, usuario.getId());
+            
+            pst.executeUpdate();
+        }catch (SQLException e) {
+            
+             throw new UsuarioException("No pude modificar el usuario");
+        }
         //paso 1 : crear la conexion a la base
         //paso 2 : crear el prepare statement
         //paso 3 : ejecutar la consulta del preparestatement

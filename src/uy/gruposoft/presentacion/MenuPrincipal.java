@@ -71,6 +71,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
         jMenu1.setText("Formularios");
 
+        afiliados.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_1, java.awt.event.InputEvent.CTRL_MASK));
         afiliados.setText("Afiliados");
         afiliados.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -79,9 +80,11 @@ public class MenuPrincipal extends javax.swing.JFrame {
         });
         jMenu1.add(afiliados);
 
+        locales.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_2, java.awt.event.InputEvent.CTRL_MASK));
         locales.setText("Locales");
         jMenu1.add(locales);
 
+        Usuario.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_3, java.awt.event.InputEvent.CTRL_MASK));
         Usuario.setText("Usuarios");
         Usuario.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -90,6 +93,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         });
         jMenu1.add(Usuario);
 
+        Negocio.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_4, java.awt.event.InputEvent.CTRL_MASK));
         Negocio.setText("Negocio");
         jMenu1.add(Negocio);
 
