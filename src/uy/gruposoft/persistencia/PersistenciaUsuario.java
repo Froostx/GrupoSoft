@@ -6,7 +6,7 @@
 package uy.gruposoft.persistencia;
 
 import java.sql.Connection;
-import java.sql.Date;
+
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -14,8 +14,6 @@ import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import uy.gruposoft.excepciones.UsuarioException;
 import uy.gruposoft.logica.Usuario;
-import static uy.gruposoft.presentacion.VentanaDeUsuario.tabla;
-
 /**
  *
  * @author Administrador
@@ -24,7 +22,7 @@ public class PersistenciaUsuario {
     
     private static final String sql = "SELECT * FROM usuarios";
     private static final String update = "UPDATE grupo_soft.usuarios SET username = ?, nombre = ?, apellido = ?, email = ?, contraseña = ? WHERE id = ?";
-    private static final String insert = "INSERT INTO grupo_soft.usuarios (username, nombre,apellido,email,contraseña,fecha_alta) VALUES (?, ?, ?,?,?,current_timestamp())";
+    private static final String insert = "INSERT INTO grupo_soft.usuarios (username, nombre,apellido,email,contraseña,fecha_alta) VALUES (?, ?, ?,?,?, current_timestamp())";
     static Connection cn = null;
 
     static PreparedStatement pst = null;
@@ -53,8 +51,8 @@ public class PersistenciaUsuario {
                 usuario.setApellido(rs.getString("apellido"));
                 usuario.setEmail(rs.getString("email"));
                 usuario.setClave(rs.getString("Contraseña"));
-                usuario.setFechaAlta(rs.getString("fecha_alta"));
-                usuario.setFechaBaja(rs.getString("fecha_baja"));
+                usuario.setFechaAlta(rs.getDate("fecha_alta"))  ;
+                usuario.setFechaBaja(rs.getDate("fecha_baja"));
 
                 usuarios.add(usuario);
 
@@ -182,5 +180,6 @@ public class PersistenciaUsuario {
         //paso 3 : ejecutar la consulta del preparestatement
         //paso 5 : cerrar la conexion a la base
     }
+    
 
 }

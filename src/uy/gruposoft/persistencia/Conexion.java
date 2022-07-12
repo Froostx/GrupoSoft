@@ -12,7 +12,7 @@ public class Conexion {
      Connection con =null;
         try {
             Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
-            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/grupo_soft?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC","root","password");
+            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/grupo_soft?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=America/Montevideo","root","password");
         } catch (SQLException ex) {
             Logger.getLogger(Conexion.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ClassNotFoundException ex) {

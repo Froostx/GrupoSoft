@@ -20,8 +20,8 @@ public class Usuario {
     private String apellido;
     private String email;
     private String clave;
-    private String fechaAlta;
-    private String fechaBaja;
+    private Date fechaAlta;
+    private Date fechaBaja;
 
     public String getNombre() {
         return nombre;
@@ -71,20 +71,22 @@ public class Usuario {
         this.id = id;
     }
 
-    public String getFechaAlta() {
+    public Date getFechaAlta() {
         return fechaAlta;
     }
 
-    public void setFechaAlta(String fechaAlta) {
+    public void setFechaAlta(Date fechaAlta) {
         this.fechaAlta = fechaAlta;
     }
 
-    public String getFechaBaja() {
+    public Date getFechaBaja() {
         return fechaBaja;
     }
 
-    public void setFechaBaja(String fechaBaja) {
+    public void setFechaBaja(Date fechaBaja) {
         this.fechaBaja = fechaBaja;
     }
+
+  
 
 }

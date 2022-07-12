@@ -7,10 +7,8 @@ package uy.gruposoft.presentacion;
 
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-import javax.swing.JPasswordField;
 import uy.gruposoft.logica.FachadaLogica;
 import uy.gruposoft.logica.Usuario;
-import uy.gruposoft.persistencia.PersistenciaUsuario;
 
 /**
  *
