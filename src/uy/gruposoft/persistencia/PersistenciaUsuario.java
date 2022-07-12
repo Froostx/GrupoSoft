@@ -6,6 +6,7 @@
 package uy.gruposoft.persistencia;
 
 import java.sql.Connection;
+import java.sql.Date;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -20,10 +21,13 @@ import uy.gruposoft.logica.Usuario;
  */
 public class PersistenciaUsuario {
     
-    private static final String sql = "SELECT * FROM usuarios";
+    private static final String sql = "SELECT * FROM usuarios WHERE fecha_baja IS NULL";
     private static final String update = "UPDATE grupo_soft.usuarios SET username = ?, nombre = ?, apellido = ?, email = ?, contraseña = ? WHERE id = ?";
     private static final String insert = "INSERT INTO grupo_soft.usuarios (username, nombre,apellido,email,contraseña,fecha_alta) VALUES (?, ?, ?,?,?, current_timestamp())";
+    private static final String eliminar = "UPDATE grupo_soft.usuarios SET fecha_baja = current_timestamp() WHERE id = ?";
+    
     static Connection cn = null;
+    static Conexion conexion = new Conexion();
 
     static PreparedStatement pst = null;
     public static ArrayList<Usuario> mostrarUsuarios() {
@@ -118,7 +122,7 @@ public class PersistenciaUsuario {
     public static void altaUsuario(Usuario usuario) throws UsuarioException {
         
             
-        Conexion conexion = new Conexion();
+        
         
         try {
             cn = conexion.conectar();
@@ -145,17 +149,31 @@ public class PersistenciaUsuario {
         //paso 5 : cerrar la conexion a la base
     }
 
-    public void bajaUsuario(Usuario usuario) {
-
+    public static void bajaUsuario(Usuario usuario) throws UsuarioException {
+        
+        try{
+            cn = conexion.conectar();
+            pst = cn.prepareStatement(eliminar);
+       
+            pst.setInt(1, usuario.getId());
+            
+            pst.executeUpdate();
+        }catch (SQLException e) {
+            
+             throw new UsuarioException("No pude Eliminar el usuario");
+        }
+        
         //paso 1 : crear la conexion a la base
         //paso 2 : crear el prepare statement
         //paso 3 : ejecutar la consulta del preparestatement
         //paso 5 : cerrar la conexion a la base
+        
+        
     }
 
     public static void modificacionUsuario(Usuario usuario) throws UsuarioException {
        
-        Conexion conexion = new Conexion();
+        
        
         
         try{

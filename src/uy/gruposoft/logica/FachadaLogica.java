@@ -29,6 +29,12 @@ public class FachadaLogica {
     public static void modificarUsuario(Usuario usuario) throws UsuarioException {
 
         PersistenciaUsuario.modificacionUsuario(usuario);
+        
     }
+    public static void eliminarUsuario(Usuario usuario) throws UsuarioException {
+
+        PersistenciaUsuario.bajaUsuario(usuario);
+    }
+    
 
 }

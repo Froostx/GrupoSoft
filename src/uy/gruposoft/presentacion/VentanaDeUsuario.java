@@ -6,7 +6,9 @@
 package uy.gruposoft.presentacion;
 
 import java.awt.event.KeyEvent;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JLabel;
@@ -94,7 +96,7 @@ public class VentanaDeUsuario extends javax.swing.JInternalFrame {
         jTextField8 = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
         guardar = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        eliminar = new javax.swing.JButton();
 
         setClosable(true);
         setIconifiable(true);
@@ -118,6 +120,11 @@ public class VentanaDeUsuario extends javax.swing.JInternalFrame {
 
             }
         ));
+        tabla.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tablaMouseClicked(evt);
+            }
+        });
         tabla.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 tablaKeyReleased(evt);
@@ -230,7 +237,12 @@ public class VentanaDeUsuario extends javax.swing.JInternalFrame {
             }
         });
 
-        jButton3.setText("Eliminar");
+        eliminar.setText("Eliminar");
+        eliminar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                eliminarMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -246,7 +258,7 @@ public class VentanaDeUsuario extends javax.swing.JInternalFrame {
                         .addGap(41, 41, 41)
                         .addComponent(guardar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton3))
+                        .addComponent(eliminar))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -260,7 +272,7 @@ public class VentanaDeUsuario extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(guardar)
-                        .addComponent(jButton3))
+                        .addComponent(eliminar))
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jTextField8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jButton1)))
@@ -384,16 +396,38 @@ public class VentanaDeUsuario extends javax.swing.JInternalFrame {
 
     }//GEN-LAST:event_tablaKeyReleased
 
+    private void tablaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaMouseClicked
+        int id = (int) tabla.getValueAt(tabla.getSelectedRow(), 0);
+        
+        usuarioFilaSeleccionada.setId(id);
+    }//GEN-LAST:event_tablaMouseClicked
+
+    private void eliminarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_eliminarMouseClicked
+        // TODO add your handling code here:
+        
+     try {
+            FachadaLogica.eliminarUsuario(usuarioFilaSeleccionada);
+        } catch (UsuarioException ex) {
+            Logger.getLogger(VentanaDeUsuario.class.getName()).log(Level.SEVERE, null, ex);
+            
+        }
+         JOptionPane.showMessageDialog(this, "Registro Eliminado Correctamente");
+        
+    
+                
+           
+    }//GEN-LAST:event_eliminarMouseClicked
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField apellidoTxt;
     private javax.swing.JTextField claveTxt;
+    private javax.swing.JButton eliminar;
     private javax.swing.JTextField emailTxt;
     private javax.swing.JButton guardar;
     private javax.swing.JTextField ingresoUsuario;
     private javax.swing.JButton insertarUsuario;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
