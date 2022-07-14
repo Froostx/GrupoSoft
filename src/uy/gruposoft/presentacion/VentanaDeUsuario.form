@@ -170,13 +170,13 @@
                       <Component id="jLabel5" alignment="0" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
                       <Component id="insertarUsuario" min="-2" max="-2" attributes="0"/>
-                      <Component id="ingresoUsuario" min="-2" pref="165" max="-2" attributes="0"/>
-                      <Component id="nombreTxt" min="-2" pref="165" max="-2" attributes="0"/>
-                      <Component id="apellidoTxt" min="-2" pref="165" max="-2" attributes="0"/>
-                      <Component id="emailTxt" min="-2" pref="165" max="-2" attributes="0"/>
-                      <Component id="claveTxt" min="-2" pref="165" max="-2" attributes="0"/>
+                      <Component id="ingresoUsuario" pref="165" max="32767" attributes="0"/>
+                      <Component id="nombreTxt" pref="165" max="32767" attributes="0"/>
+                      <Component id="apellidoTxt" pref="165" max="32767" attributes="0"/>
+                      <Component id="emailTxt" pref="165" max="32767" attributes="0"/>
+                      <Component id="claveTxt" alignment="0" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace pref="54" max="32767" attributes="0"/>
               </Group>
@@ -205,14 +205,14 @@
                       <Component id="emailTxt" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jLabel4" alignment="3" min="-2" pref="16" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace min="-2" pref="40" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="41" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="claveTxt" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jLabel5" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="claveTxt" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace min="-2" pref="52" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="53" max="-2" attributes="0"/>
                   <Component id="insertarUsuario" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace max="32767" attributes="0"/>
+                  <EmptySpace pref="114" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -266,8 +266,6 @@
             <Property name="text" type="java.lang.String" value="Clave"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="claveTxt">
-        </Component>
         <Component class="javax.swing.JButton" name="insertarUsuario">
           <Properties>
             <Property name="text" type="java.lang.String" value="Crear Usuario"/>
@@ -275,6 +273,8 @@
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="insertarUsuarioActionPerformed"/>
           </Events>
+        </Component>
+        <Component class="javax.swing.JPasswordField" name="claveTxt">
         </Component>
       </SubComponents>
     </Container>

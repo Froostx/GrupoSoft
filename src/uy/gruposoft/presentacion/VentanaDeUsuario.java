@@ -30,7 +30,7 @@ public class VentanaDeUsuario extends javax.swing.JInternalFrame {
     public VentanaDeUsuario() {
         initComponents();
         mostrarUsuarios();
-
+        
     }
 
     public static void mostrarUsuarios() {
@@ -88,8 +88,8 @@ public class VentanaDeUsuario extends javax.swing.JInternalFrame {
         jLabel4 = new javax.swing.JLabel();
         emailTxt = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
-        claveTxt = new javax.swing.JTextField();
         insertarUsuario = new javax.swing.JButton();
+        claveTxt = new javax.swing.JPasswordField();
         jTextField8 = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
         guardar = new javax.swing.JButton();
@@ -182,13 +182,13 @@ public class VentanaDeUsuario extends javax.swing.JInternalFrame {
                         .addComponent(jLabel4))
                     .addComponent(jLabel5))
                 .addGap(33, 33, 33)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(insertarUsuario)
-                    .addComponent(ingresoUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(nombreTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(apellidoTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(emailTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(claveTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(ingresoUsuario, javax.swing.GroupLayout.DEFAULT_SIZE, 165, Short.MAX_VALUE)
+                    .addComponent(nombreTxt, javax.swing.GroupLayout.DEFAULT_SIZE, 165, Short.MAX_VALUE)
+                    .addComponent(apellidoTxt, javax.swing.GroupLayout.DEFAULT_SIZE, 165, Short.MAX_VALUE)
+                    .addComponent(emailTxt, javax.swing.GroupLayout.DEFAULT_SIZE, 165, Short.MAX_VALUE)
+                    .addComponent(claveTxt))
                 .addContainerGap(54, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
@@ -210,13 +210,13 @@ public class VentanaDeUsuario extends javax.swing.JInternalFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(emailTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(40, 40, 40)
+                .addGap(41, 41, 41)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(claveTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel5))
-                .addGap(52, 52, 52)
+                    .addComponent(jLabel5)
+                    .addComponent(claveTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(53, 53, 53)
                 .addComponent(insertarUsuario)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(114, Short.MAX_VALUE))
         );
 
         jTextField8.addActionListener(new java.awt.event.ActionListener() {
@@ -290,7 +290,7 @@ public class VentanaDeUsuario extends javax.swing.JInternalFrame {
             String nombre = this.nombreTxt.getText();
             String apellido = this.apellidoTxt.getText();
             String email = this.emailTxt.getText();
-            String clave = this.claveTxt.getText();
+            String clave = new String(claveTxt.getPassword());
 
             //valido que no se ingresen numeros en los campos usuario, nombre y apellido
             if (caracteresValidos(nombre.trim()) && caracteresValidos(apellido.trim()) && caracteresValidos(nombreUsuario.trim())) {
@@ -389,6 +389,7 @@ public class VentanaDeUsuario extends javax.swing.JInternalFrame {
             usuarioFilaSeleccionada.setApellido(apellidoFila);
             usuarioFilaSeleccionada.setEmail(emailFila);
             usuarioFilaSeleccionada.setClave(claveFila);
+            
 
         }
 
@@ -403,19 +404,31 @@ public class VentanaDeUsuario extends javax.swing.JInternalFrame {
         int id = (int) tabla.getValueAt(tabla.getSelectedRow(), 0);
 
         usuarioFilaSeleccionada.setId(id);
+       
     }//GEN-LAST:event_tablaMouseClicked
 
     private void eliminarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_eliminarMouseClicked
         // TODO add your handling code here:
-
+       
+        int seleccion = tabla.getSelectedRowCount();
         try {
-            FachadaLogica.eliminarUsuario(usuarioFilaSeleccionada);
+            if (seleccion == 1){
+                int res = JOptionPane.showConfirmDialog(null, "¿Desea Eliminar el Registro?","Confirm",JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+                if(res==JOptionPane.YES_OPTION){
+              
+              FachadaLogica.eliminarUsuario(usuarioFilaSeleccionada); 
+           }
+            }else{
+                JOptionPane.showMessageDialog(null,"Debe Seleccionar Fila");
+            }
+            
+            
         } catch (UsuarioException ex) {
             Logger.getLogger(VentanaDeUsuario.class.getName()).log(Level.SEVERE, null, ex);
 
         }
-        JOptionPane.showMessageDialog(this, "Registro Eliminado Correctamente");
-
+        
+        
         mostrarUsuarios();
 
 
@@ -424,7 +437,7 @@ public class VentanaDeUsuario extends javax.swing.JInternalFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField apellidoTxt;
-    private javax.swing.JTextField claveTxt;
+    private javax.swing.JPasswordField claveTxt;
     private javax.swing.JButton eliminar;
     private javax.swing.JTextField emailTxt;
     private javax.swing.JButton guardar;
