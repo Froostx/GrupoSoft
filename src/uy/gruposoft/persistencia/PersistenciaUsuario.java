@@ -25,7 +25,7 @@ public class PersistenciaUsuario {
     private static final String update = "UPDATE grupo_soft.usuarios SET username = ?, nombre = ?, apellido = ?, email = ?, contraseña = ? WHERE id = ?";
     private static final String insert = "INSERT INTO grupo_soft.usuarios (username, nombre,apellido,email,contraseña,fecha_alta) VALUES (?, ?, ?,?,?, current_timestamp())";
     private static final String eliminar = "UPDATE grupo_soft.usuarios SET fecha_baja = current_timestamp() WHERE id = ?";
-    
+    private static final String verificar = "SELECT username FROM grupo_soft.usuarios WHERE username = ?";
     static Connection cn = null;
     static Conexion conexion = new Conexion();
 
@@ -56,7 +56,7 @@ public class PersistenciaUsuario {
                 usuario.setEmail(rs.getString("email"));
                 usuario.setClave(rs.getString("Contraseña"));
                 usuario.setFechaAlta(rs.getDate("fecha_alta"))  ;
-                usuario.setFechaBaja(rs.getDate("fecha_baja"));
+               
 
                 usuarios.add(usuario);
 
@@ -197,6 +197,26 @@ public class PersistenciaUsuario {
         //paso 2 : crear el prepare statement
         //paso 3 : ejecutar la consulta del preparestatement
         //paso 5 : cerrar la conexion a la base
+    }
+    
+    
+    public static boolean verificarUsuario(Usuario usuario)throws UsuarioException {        
+        boolean res = false;       
+        
+        try{
+          cn=  conexion.conectar();
+              
+           pst = cn.prepareStatement(verificar);  
+           pst.setString(1, usuario.getUsuario());
+           
+            ResultSet rs = pst.executeQuery();        
+            if(rs.next())
+                res = true;
+        } catch(SQLException  e){
+            throw new UsuarioException("No encontre el usuario");
+        } 
+        
+        return res;
     }
     
 

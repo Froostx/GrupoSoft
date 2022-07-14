@@ -6,9 +6,7 @@
 package uy.gruposoft.presentacion;
 
 import java.awt.event.KeyEvent;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JLabel;
@@ -37,7 +35,7 @@ public class VentanaDeUsuario extends javax.swing.JInternalFrame {
 
     public static void mostrarUsuarios() {
 
-        String[] nombresColumnas = {"Id", "Usuario", "Nombre", "Apellido", "Email", "Contraseña", "Fecha Alta", "Fecha Baja"};
+        String[] nombresColumnas = {"Id", "Usuario", "Nombre", "Apellido", "Email", "Contraseña", "Fecha Alta"};
         ArrayList<Usuario> usuarios = FachadaLogica.cargarUsuario();
         DefaultTableModel modelo = new DefaultTableModel(null, nombresColumnas);
 
@@ -51,7 +49,6 @@ public class VentanaDeUsuario extends javax.swing.JInternalFrame {
             fila[4] = usuarios.get(i).getEmail();
             fila[5] = usuarios.get(i).getClave();
             fila[6] = usuarios.get(i).getFechaAlta();
-            fila[7] = usuarios.get(i).getFechaBaja();
 
             modelo.addRow(fila);
 
@@ -65,7 +62,7 @@ public class VentanaDeUsuario extends javax.swing.JInternalFrame {
         tabla.getColumnModel().getColumn(4).setPreferredWidth(160);
         tabla.getColumnModel().getColumn(5).setPreferredWidth(60);
         tabla.getColumnModel().getColumn(6).setPreferredWidth(60);
-        tabla.getColumnModel().getColumn(7).setPreferredWidth(60);
+
     }
 
     /**
@@ -286,7 +283,7 @@ public class VentanaDeUsuario extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    public void verificarUsuario() {
+    public void validarUsuario() {
         try {
             //obtengo los valores de las cajas de texto
             String nombreUsuario = this.ingresoUsuario.getText();
@@ -294,17 +291,26 @@ public class VentanaDeUsuario extends javax.swing.JInternalFrame {
             String apellido = this.apellidoTxt.getText();
             String email = this.emailTxt.getText();
             String clave = this.claveTxt.getText();
+
             //valido que no se ingresen numeros en los campos usuario, nombre y apellido
             if (caracteresValidos(nombre.trim()) && caracteresValidos(apellido.trim()) && caracteresValidos(nombreUsuario.trim())) {
                 //creo un objeto de tipo Usuario
+
                 Usuario usuario = new Usuario();
+
                 usuario.setUsuario(nombreUsuario);
                 usuario.setNombre(nombre);
                 usuario.setApellido(apellido);
                 usuario.setEmail(email);
                 usuario.setClave(clave);
-
-//       //invoco al existeUsuario con el usuario que cargue en memoria para saber si existe en la base
+                
+                if (FachadaLogica.verificarUsuario(usuario)) {
+                    JOptionPane.showMessageDialog(this, " El usuario ya existe, ingrese otro");
+                    
+                    return;
+                    
+                }
+//       
                 FachadaLogica.ingresarUsuario(usuario);
 
                 JLabel mensajeLbl = new JLabel();
@@ -336,27 +342,26 @@ public class VentanaDeUsuario extends javax.swing.JInternalFrame {
     private void insertarUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_insertarUsuarioActionPerformed
         // TODO add your handling code here:
 
-        verificarUsuario();
+        validarUsuario();
 
 
     }//GEN-LAST:event_insertarUsuarioActionPerformed
 
     private void guardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_guardarActionPerformed
 
-        if(caracteresValidos(usuarioFilaSeleccionada.getUsuario()) && caracteresValidos(usuarioFilaSeleccionada.getNombre()) && caracteresValidos(usuarioFilaSeleccionada.getApellido())){
-        try {
-            FachadaLogica.modificarUsuario(usuarioFilaSeleccionada);
-        } catch (UsuarioException ex) {
-            Logger.getLogger(VentanaDeUsuario.class.getName()).log(Level.SEVERE, null, ex);
-            
+        if (caracteresValidos(usuarioFilaSeleccionada.getUsuario()) && caracteresValidos(usuarioFilaSeleccionada.getNombre()) && caracteresValidos(usuarioFilaSeleccionada.getApellido())) {
+            try {
+                FachadaLogica.modificarUsuario(usuarioFilaSeleccionada);
+            } catch (UsuarioException ex) {
+                Logger.getLogger(VentanaDeUsuario.class.getName()).log(Level.SEVERE, null, ex);
+
+            }
+            JOptionPane.showMessageDialog(this, "Registro Modificado Correctamente");
+
+        } else {
+            JOptionPane.showMessageDialog(this, "ingrese Caracteres Validos");
+
         }
-         JOptionPane.showMessageDialog(this, "Registro Modificado Correctamente");
-        
-    }else {
-                JOptionPane.showMessageDialog(this, "ingrese Caracteres Validos");
-                
-        }
-        
 
 
     }//GEN-LAST:event_guardarActionPerformed
@@ -378,14 +383,12 @@ public class VentanaDeUsuario extends javax.swing.JInternalFrame {
 
             String claveFila = tabla.getValueAt(tabla.getSelectedRow(), 5).toString();
 
-            
-                usuarioFilaSeleccionada.setId(id);
-                usuarioFilaSeleccionada.setUsuario(usuarioFila);
-                usuarioFilaSeleccionada.setNombre(nombreFila);
-                usuarioFilaSeleccionada.setApellido(apellidoFila);
-                usuarioFilaSeleccionada.setEmail(emailFila);
-                usuarioFilaSeleccionada.setClave(claveFila);
-           
+            usuarioFilaSeleccionada.setId(id);
+            usuarioFilaSeleccionada.setUsuario(usuarioFila);
+            usuarioFilaSeleccionada.setNombre(nombreFila);
+            usuarioFilaSeleccionada.setApellido(apellidoFila);
+            usuarioFilaSeleccionada.setEmail(emailFila);
+            usuarioFilaSeleccionada.setClave(claveFila);
 
         }
 
@@ -398,24 +401,24 @@ public class VentanaDeUsuario extends javax.swing.JInternalFrame {
 
     private void tablaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaMouseClicked
         int id = (int) tabla.getValueAt(tabla.getSelectedRow(), 0);
-        
+
         usuarioFilaSeleccionada.setId(id);
     }//GEN-LAST:event_tablaMouseClicked
 
     private void eliminarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_eliminarMouseClicked
         // TODO add your handling code here:
-        
-     try {
+
+        try {
             FachadaLogica.eliminarUsuario(usuarioFilaSeleccionada);
         } catch (UsuarioException ex) {
             Logger.getLogger(VentanaDeUsuario.class.getName()).log(Level.SEVERE, null, ex);
-            
+
         }
-         JOptionPane.showMessageDialog(this, "Registro Eliminado Correctamente");
-        
-    
-                
-           
+        JOptionPane.showMessageDialog(this, "Registro Eliminado Correctamente");
+
+        mostrarUsuarios();
+
+
     }//GEN-LAST:event_eliminarMouseClicked
 
 

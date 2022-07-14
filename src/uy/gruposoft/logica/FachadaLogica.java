@@ -1,5 +1,6 @@
 package uy.gruposoft.logica;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import uy.gruposoft.excepciones.UsuarioException;
 import uy.gruposoft.persistencia.PersistenciaUsuario;
@@ -35,6 +36,11 @@ public class FachadaLogica {
 
         PersistenciaUsuario.bajaUsuario(usuario);
     }
-    
+     public static boolean verificarUsuario(Usuario usuario) throws UsuarioException {
+         boolean existeUsuario;
+        existeUsuario = PersistenciaUsuario.verificarUsuario(usuario);
+        
+        return existeUsuario;
+    }
 
 }

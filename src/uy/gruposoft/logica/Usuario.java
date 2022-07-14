@@ -21,7 +21,7 @@ public class Usuario {
     private String email;
     private String clave;
     private Date fechaAlta;
-    private Date fechaBaja;
+    
 
     public String getNombre() {
         return nombre;
@@ -79,13 +79,8 @@ public class Usuario {
         this.fechaAlta = fechaAlta;
     }
 
-    public Date getFechaBaja() {
-        return fechaBaja;
-    }
-
-    public void setFechaBaja(Date fechaBaja) {
-        this.fechaBaja = fechaBaja;
-    }
+    
+    
 
   
 
