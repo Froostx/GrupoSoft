@@ -10,28 +10,31 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import javax.swing.JOptionPane;
 import uy.gruposoft.excepciones.UsuarioException;
 import uy.gruposoft.logica.Usuario;
+import uy.gruposoft.logica.Usuarios;
 /**
  *
  * @author Administrador
  */
 public class PersistenciaUsuario {
     
-    private static final String sql = "SELECT * FROM usuarios";
+    private static final String sql = "SELECT * FROM usuarios WHERE fecha_baja IS NULL";
     private static final String update = "UPDATE grupo_soft.usuarios SET username = ?, nombre = ?, apellido = ?, email = ?, contraseña = ? WHERE id = ?";
     private static final String insert = "INSERT INTO grupo_soft.usuarios (username, nombre,apellido,email,contraseña,fecha_alta) VALUES (?, ?, ?,?,?, current_timestamp())";
+    private static final String eliminar = "UPDATE grupo_soft.usuarios SET fecha_baja = current_timestamp() WHERE id = ?";
+    private static final String verificar = "SELECT username FROM grupo_soft.usuarios WHERE username = ?";
+    private static final String buscar = "SELECT * FROM grupo_soft.usuarios WHERE username LIKE ? '%' and fecha_baja IS NULL ORDER BY username";
     static Connection cn = null;
+    static Conexion conexion = new Conexion();
 
     static PreparedStatement pst = null;
-    public static ArrayList<Usuario> mostrarUsuarios() {
+    public static Usuarios mostrarUsuarios() throws UsuarioException {
 
        
 
         
-        ArrayList<Usuario> usuarios = new ArrayList();
+        Usuarios usuarios = new Usuarios();
 
         ResultSet rs = null;
 
@@ -52,15 +55,15 @@ public class PersistenciaUsuario {
                 usuario.setEmail(rs.getString("email"));
                 usuario.setClave(rs.getString("Contraseña"));
                 usuario.setFechaAlta(rs.getDate("fecha_alta"))  ;
-                usuario.setFechaBaja(rs.getDate("fecha_baja"));
+               
 
-                usuarios.add(usuario);
+                usuarios.agregarUsuario(usuario);
 
             }
 
         } catch (SQLException e) {
 
-            JOptionPane.showMessageDialog(null, "Error al conectar");
+            throw new UsuarioException("No pude cargar los usuarios");
 
         } finally {
             try {
@@ -76,7 +79,7 @@ public class PersistenciaUsuario {
                     cn.close();
                 }
             } catch (SQLException e) {
-                JOptionPane.showMessageDialog(null, e);
+               throw new UsuarioException("No pude insertar el usuario");
             }
         }
         return usuarios;
@@ -118,7 +121,7 @@ public class PersistenciaUsuario {
     public static void altaUsuario(Usuario usuario) throws UsuarioException {
         
             
-        Conexion conexion = new Conexion();
+        
         
         try {
             cn = conexion.conectar();
@@ -145,17 +148,31 @@ public class PersistenciaUsuario {
         //paso 5 : cerrar la conexion a la base
     }
 
-    public void bajaUsuario(Usuario usuario) {
-
+    public static void bajaUsuario(Usuario usuario) throws UsuarioException {
+        
+        try{
+            cn = conexion.conectar();
+            pst = cn.prepareStatement(eliminar);
+       
+            pst.setInt(1, usuario.getId());
+            
+            pst.executeUpdate();
+        }catch (SQLException e) {
+            
+             throw new UsuarioException("No pude Eliminar el usuario");
+        }
+        
         //paso 1 : crear la conexion a la base
         //paso 2 : crear el prepare statement
         //paso 3 : ejecutar la consulta del preparestatement
         //paso 5 : cerrar la conexion a la base
+        
+        
     }
 
     public static void modificacionUsuario(Usuario usuario) throws UsuarioException {
        
-        Conexion conexion = new Conexion();
+        
        
         
         try{
@@ -181,5 +198,83 @@ public class PersistenciaUsuario {
         //paso 5 : cerrar la conexion a la base
     }
     
+    
+    public static boolean verificarUsuario(Usuario usuario)throws UsuarioException {        
+        boolean res = false;       
+        
+        try{
+          cn=  conexion.conectar();
+              
+           pst = cn.prepareStatement(verificar);  
+           pst.setString(1, usuario.getUsuario());
+           
+            ResultSet rs = pst.executeQuery();        
+            if(rs.next())
+                res = true;
+        } catch(SQLException  e){
+            throw new UsuarioException("No encontre el usuario");
+        } 
+        
+        return res;
+    }
+    
+    public static Usuarios buscarUsuarios(Usuario usuarioEncontrado) throws UsuarioException {
 
-}
+       
+
+        
+        Usuarios usuarios = new Usuarios();
+
+        ResultSet rs = null;
+
+        try {
+            cn = Conexion.conectar();
+            
+            pst = cn.prepareStatement(buscar);
+            pst.setString(1, usuarioEncontrado.getUsuario());
+            rs = pst.executeQuery();
+
+            while (rs.next()) {
+
+                Usuario usuario = new Usuario();
+                usuario.setId(rs.getInt("id"));
+                usuario.setUsuario(rs.getString("username"));
+                usuario.setNombre(rs.getString("nombre"));
+                usuario.setApellido(rs.getString("apellido"));
+                usuario.setEmail(rs.getString("email"));
+                usuario.setClave(rs.getString("Contraseña"));
+                usuario.setFechaAlta(rs.getDate("fecha_alta"))  ;
+               
+               
+                usuarios.agregarUsuario(usuario);
+
+            }
+
+        } catch (SQLException e) {
+
+            throw new UsuarioException("No pude cargar los usuarios");
+
+        } finally {
+            try {
+                if (rs != null) {
+                    rs.close();
+                }
+
+                if (pst != null) {
+                    pst.close();
+                }
+
+                if (cn != null) {
+                    cn.close();
+                }
+            } catch (SQLException e) {
+               throw new UsuarioException("No pude insertar el usuario");
+            }
+        }
+        return usuarios;
+    }
+   
+    }
+    
+
+
