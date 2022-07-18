@@ -6,8 +6,11 @@
 package uy.gruposoft.presentacion;
 
 import java.awt.Dimension;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JInternalFrame;
 import javax.swing.JOptionPane;
+import uy.gruposoft.excepciones.UsuarioException;
 
 /**
  *
@@ -156,7 +159,12 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
     private void UsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UsuarioActionPerformed
         // TODO add your handling code here:
-        VentanaDeUsuario verUsuarios = new VentanaDeUsuario();
+        VentanaDeUsuario verUsuarios = null;
+        try {
+            verUsuarios = new VentanaDeUsuario();
+        } catch (UsuarioException ex) {
+            Logger.getLogger(MenuPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        }
 
         if (JInternalFrames_Abiertos(verUsuarios) == false) { //Solo si es false se abrirá el InternalFrame ya que si devuelve true es porque esta abierto el mismo InternalFrame.
             Ventanas.add(verUsuarios);

@@ -42,5 +42,14 @@ public class FachadaLogica {
         
         return existeUsuario;
     }
+    
+    
+    public static Usuarios buscarUsuario(Usuario usuario) throws UsuarioException {
+        Usuarios usuarios = new Usuarios();
+        usuarios = PersistenciaUsuario.buscarUsuarios(usuario);
 
+
+        return usuarios;
+    }
+   
 }
