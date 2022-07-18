@@ -1,5 +1,7 @@
 package uy.gruposoft.logica;
 
+import java.sql.SQLException;
+import java.util.ArrayList;
 import uy.gruposoft.excepciones.UsuarioException;
 import uy.gruposoft.persistencia.PersistenciaUsuario;
 
@@ -17,28 +19,27 @@ public class FachadaLogica {
         PersistenciaUsuario.altaUsuario(usuario);
     }
 
-    public static Usuarios cargarUsuario() throws UsuarioException {
-        Usuarios usuarios = new Usuarios();
+    public static ArrayList<Usuario> cargarUsuario() {
+      
+     ArrayList<Usuario> usuarios = new ArrayList();
         usuarios = PersistenciaUsuario.mostrarUsuarios();
-
+        
         return usuarios;
     }
-
+    
     public static void modificarUsuario(Usuario usuario) throws UsuarioException {
 
         PersistenciaUsuario.modificacionUsuario(usuario);
-
+        
     }
-
     public static void eliminarUsuario(Usuario usuario) throws UsuarioException {
 
         PersistenciaUsuario.bajaUsuario(usuario);
     }
-
-    public static boolean verificarUsuario(Usuario usuario) throws UsuarioException {
-        boolean existeUsuario;
+     public static boolean verificarUsuario(Usuario usuario) throws UsuarioException {
+         boolean existeUsuario;
         existeUsuario = PersistenciaUsuario.verificarUsuario(usuario);
-
+        
         return existeUsuario;
     }
     
@@ -47,8 +48,8 @@ public class FachadaLogica {
         Usuarios usuarios = new Usuarios();
         usuarios = PersistenciaUsuario.buscarUsuarios(usuario);
 
+
         return usuarios;
     }
    
-
 }
