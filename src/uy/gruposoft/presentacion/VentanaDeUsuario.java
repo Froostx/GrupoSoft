@@ -6,14 +6,15 @@
 package uy.gruposoft.presentacion;
 
 import java.awt.event.KeyEvent;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import uy.gruposoft.excepciones.UsuarioException;
 import uy.gruposoft.logica.FachadaLogica;
 import uy.gruposoft.logica.Usuario;
-import uy.gruposoft.logica.Usuarios;
 
 /**
  *
@@ -26,28 +27,28 @@ public class VentanaDeUsuario extends javax.swing.JInternalFrame {
     /**
      * Creates new form VentanaDeUsuario
      */
-    public VentanaDeUsuario() throws UsuarioException {
+    public VentanaDeUsuario() {
         initComponents();
         mostrarUsuarios();
-
+        
     }
 
-    public static void mostrarUsuarios() throws UsuarioException {
+    public static void mostrarUsuarios() {
 
         String[] nombresColumnas = {"Id", "Usuario", "Nombre", "Apellido", "Email", "Contraseña", "Fecha Alta"};
-        Usuarios usuarios = FachadaLogica.cargarUsuario();
+        ArrayList<Usuario> usuarios = FachadaLogica.cargarUsuario();
         DefaultTableModel modelo = new DefaultTableModel(null, nombresColumnas);
 
         Object[] fila = new Object[modelo.getColumnCount()];
 
-        for (int i = 0; i < usuarios.getUsuarios().size(); i++) {
-            fila[0] = usuarios.getUsuarios().get(i).getId();
-            fila[1] = usuarios.getUsuarios().get(i).getUsuario();
-            fila[2] = usuarios.getUsuarios().get(i).getNombre();
-            fila[3] = usuarios.getUsuarios().get(i).getApellido();
-            fila[4] = usuarios.getUsuarios().get(i).getEmail();
-            fila[5] = usuarios.getUsuarios().get(i).getClave();
-            fila[6] = usuarios.getUsuarios().get(i).getFechaAlta();
+        for (int i = 0; i < usuarios.size(); i++) {
+            fila[0] = usuarios.get(i).getId();
+            fila[1] = usuarios.get(i).getUsuario();
+            fila[2] = usuarios.get(i).getNombre();
+            fila[3] = usuarios.get(i).getApellido();
+            fila[4] = usuarios.get(i).getEmail();
+            fila[5] = usuarios.get(i).getClave();
+            fila[6] = usuarios.get(i).getFechaAlta();
 
             modelo.addRow(fila);
 
@@ -89,7 +90,7 @@ public class VentanaDeUsuario extends javax.swing.JInternalFrame {
         jLabel5 = new javax.swing.JLabel();
         insertarUsuario = new javax.swing.JButton();
         claveTxt = new javax.swing.JPasswordField();
-        buscar = new javax.swing.JTextField();
+        jTextField8 = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
         guardar = new javax.swing.JButton();
         eliminar = new javax.swing.JButton();
@@ -218,18 +219,13 @@ public class VentanaDeUsuario extends javax.swing.JInternalFrame {
                 .addContainerGap(114, Short.MAX_VALUE))
         );
 
-        buscar.addActionListener(new java.awt.event.ActionListener() {
+        jTextField8.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                buscarActionPerformed(evt);
+                jTextField8ActionPerformed(evt);
             }
         });
 
         jButton1.setText("Buscar");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
 
         guardar.setText("Guardar");
         guardar.addActionListener(new java.awt.event.ActionListener() {
@@ -253,7 +249,7 @@ public class VentanaDeUsuario extends javax.swing.JInternalFrame {
                 .addContainerGap(72, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(buscar, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jTextField8, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(jButton1)
                         .addGap(41, 41, 41)
@@ -275,7 +271,7 @@ public class VentanaDeUsuario extends javax.swing.JInternalFrame {
                         .addComponent(guardar)
                         .addComponent(eliminar))
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(buscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jTextField8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jButton1)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -287,7 +283,7 @@ public class VentanaDeUsuario extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    public void validarUsuario() throws UsuarioException {
+    public void validarUsuario() {
         try {
             //obtengo los valores de las cajas de texto
             String nombreUsuario = this.ingresoUsuario.getText();
@@ -307,26 +303,27 @@ public class VentanaDeUsuario extends javax.swing.JInternalFrame {
                 usuario.setApellido(apellido);
                 usuario.setEmail(email);
                 usuario.setClave(clave);
-
+                
                 if (FachadaLogica.verificarUsuario(usuario)) {
                     JOptionPane.showMessageDialog(this, " El usuario ya existe, ingrese otro");
-
+                    
                     return;
-
+                    
                 }
 //       
                 FachadaLogica.ingresarUsuario(usuario);
 
-                JOptionPane.showMessageDialog(this, "El usuario se ingreso correctamente");
+                JLabel mensajeLbl = new JLabel();
+                JOptionPane.showMessageDialog(mensajeLbl, "El usuario se ingreso correctamente");
             } else {
                 JOptionPane.showMessageDialog(this, "Ingrese Caracteres Validos");
             }
 
             //navego 
         } catch (UsuarioException ex) {
-
+            JLabel mensajeLbl = new JLabel();
             Logger.getLogger(VentanaDeUsuario.class.getName()).log(Level.SEVERE, null, ex);
-            JOptionPane.showMessageDialog(this, ex.getMessage());
+            JOptionPane.showMessageDialog(mensajeLbl, ex.getMessage());
         }
 
         FachadaLogica.cargarUsuario();
@@ -337,52 +334,15 @@ public class VentanaDeUsuario extends javax.swing.JInternalFrame {
         emailTxt.setText("");
         claveTxt.setText("");
     }
-    
-    
-   /* public static void buscarUsuarios() {
 
-        String[] nombresColumnas = {"Id", "Usuario", "Nombre", "Apellido", "Email", "Contraseña", "Fecha Alta"};
-        Usuarios usuarios = FachadaLogica.buscarUsuario();
-        DefaultTableModel modelo = new DefaultTableModel(null, nombresColumnas);
-
-        Object[] fila = new Object[modelo.getColumnCount()];
-
-        for (int i = 0; i < usuarios.size(); i++) {
-            fila[0] = usuarios.get(i).getId();
-            fila[1] = usuarios.get(i).getUsuario();
-            fila[2] = usuarios.get(i).getNombre();
-            fila[3] = usuarios.get(i).getApellido();
-            fila[4] = usuarios.get(i).getEmail();
-            fila[5] = usuarios.get(i).getClave();
-            fila[6] = usuarios.get(i).getFechaAlta();
-
-            modelo.addRow(fila);
-
-        }
-        tabla.setModel(modelo);
-
-        tabla.getColumnModel().getColumn(0).setPreferredWidth(20);
-        tabla.getColumnModel().getColumn(1).setPreferredWidth(60);
-        tabla.getColumnModel().getColumn(2).setPreferredWidth(60);
-        tabla.getColumnModel().getColumn(3).setPreferredWidth(60);
-        tabla.getColumnModel().getColumn(4).setPreferredWidth(160);
-        tabla.getColumnModel().getColumn(5).setPreferredWidth(60);
-        tabla.getColumnModel().getColumn(6).setPreferredWidth(60);
-
-    }*/
-
-    private void buscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buscarActionPerformed
+    private void jTextField8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField8ActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_buscarActionPerformed
+    }//GEN-LAST:event_jTextField8ActionPerformed
 
     private void insertarUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_insertarUsuarioActionPerformed
-        try {
-            // TODO add your handling code here:
+        // TODO add your handling code here:
 
-            validarUsuario();
-        } catch (UsuarioException ex) {
-            Logger.getLogger(VentanaDeUsuario.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        validarUsuario();
 
 
     }//GEN-LAST:event_insertarUsuarioActionPerformed
@@ -429,6 +389,7 @@ public class VentanaDeUsuario extends javax.swing.JInternalFrame {
             usuarioFilaSeleccionada.setApellido(apellidoFila);
             usuarioFilaSeleccionada.setEmail(emailFila);
             usuarioFilaSeleccionada.setClave(claveFila);
+            
 
         }
 
@@ -443,47 +404,39 @@ public class VentanaDeUsuario extends javax.swing.JInternalFrame {
         int id = (int) tabla.getValueAt(tabla.getSelectedRow(), 0);
 
         usuarioFilaSeleccionada.setId(id);
-
+       
     }//GEN-LAST:event_tablaMouseClicked
 
     private void eliminarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_eliminarMouseClicked
         // TODO add your handling code here:
-
+       
         int seleccion = tabla.getSelectedRowCount();
         try {
-            if (seleccion == 1) {
-                int res = JOptionPane.showConfirmDialog(null, "¿Desea Eliminar el Registro?", "Confirm", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
-                if (res == JOptionPane.YES_OPTION) {
-
-                    FachadaLogica.eliminarUsuario(usuarioFilaSeleccionada);
-                }
-            } else {
-                JOptionPane.showMessageDialog(null, "Debe Seleccionar Fila");
+            if (seleccion == 1){
+                int res = JOptionPane.showConfirmDialog(null, "¿Desea Eliminar el Registro?","Confirm",JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+                if(res==JOptionPane.YES_OPTION){
+              
+              FachadaLogica.eliminarUsuario(usuarioFilaSeleccionada); 
+           }
+            }else{
+                JOptionPane.showMessageDialog(null,"Debe Seleccionar Fila");
             }
-
+            
+            
         } catch (UsuarioException ex) {
             Logger.getLogger(VentanaDeUsuario.class.getName()).log(Level.SEVERE, null, ex);
 
         }
-
-        try {
-            mostrarUsuarios();
-        } catch (UsuarioException ex) {
-            Logger.getLogger(VentanaDeUsuario.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        
+        
+        mostrarUsuarios();
 
 
     }//GEN-LAST:event_eliminarMouseClicked
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-       
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField apellidoTxt;
-    private javax.swing.JTextField buscar;
     private javax.swing.JPasswordField claveTxt;
     private javax.swing.JButton eliminar;
     private javax.swing.JTextField emailTxt;
@@ -499,6 +452,7 @@ public class VentanaDeUsuario extends javax.swing.JInternalFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTextField jTextField8;
     private javax.swing.JTextField nombreTxt;
     public static javax.swing.JTable tabla;
     // End of variables declaration//GEN-END:variables
