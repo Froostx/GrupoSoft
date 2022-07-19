@@ -133,13 +133,16 @@ public class VentanaDeUsuario extends javax.swing.JInternalFrame {
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 687, Short.MAX_VALUE)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 710, Short.MAX_VALUE)
+                .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 532, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 12, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 574, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 3, Short.MAX_VALUE))
         );
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Datos Usuario", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 1, 14))); // NOI18N
@@ -216,7 +219,7 @@ public class VentanaDeUsuario extends javax.swing.JInternalFrame {
                     .addComponent(claveTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(53, 53, 53)
                 .addComponent(insertarUsuario)
-                .addContainerGap(114, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jTextField8.addActionListener(new java.awt.event.ActionListener() {
@@ -240,44 +243,48 @@ public class VentanaDeUsuario extends javax.swing.JInternalFrame {
                 eliminarMouseClicked(evt);
             }
         });
+        eliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                eliminarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(72, Short.MAX_VALUE)
+                .addContainerGap(45, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jTextField8, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jButton1)
-                        .addGap(41, 41, 41)
-                        .addComponent(guardar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(eliminar))
+                        .addComponent(jLabel6)
+                        .addGap(34, 34, 34)
+                        .addComponent(txtbuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(36, 36, 36)
+                        .addComponent(modificar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(eliminar)
+                        .addGap(17, 17, 17))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(14, 14, 14))
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap())))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(56, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(guardar)
-                        .addComponent(eliminar))
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jTextField8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jButton1)))
+                .addContainerGap(8, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(modificar)
+                    .addComponent(eliminar)
+                    .addComponent(txtbuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel6))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(16, 16, 16))
+                .addGap(31, 31, 31))
         );
 
         pack();
@@ -335,19 +342,35 @@ public class VentanaDeUsuario extends javax.swing.JInternalFrame {
         claveTxt.setText("");
     }
 
-    private void jTextField8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField8ActionPerformed
+
+    private void txtbuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtbuscarActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField8ActionPerformed
 
     private void insertarUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_insertarUsuarioActionPerformed
-        // TODO add your handling code here:
+        String nombreUsuario = ingresoUsuario.getText();
+        String nombre = nombreTxt.getText();
+        String apellido = apellidoTxt.getText();
+        String email = emailTxt.getText();
+        String clave = new String(claveTxt.getPassword());
 
-        validarUsuario();
+        try {
+            if ((nombreUsuario).equals("") || (nombre).equals("") || (apellido).equals("") || (email).equals("") || (clave).equals("")) {
+                JOptionPane.showMessageDialog(this, "Hay Campos Vacios");
+            } else {
+                validarUsuario();
+            }
+
+        } catch (UsuarioException ex) {
+            Logger.getLogger(VentanaDeUsuario.class.getName()).log(Level.SEVERE, null, ex);
+        }
 
 
     }//GEN-LAST:event_insertarUsuarioActionPerformed
 
-    private void guardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_guardarActionPerformed
+    private void modificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_modificarActionPerformed
+
+        int seleccion = tabla.getSelectedRowCount();
 
         if (caracteresValidos(usuarioFilaSeleccionada.getUsuario()) && caracteresValidos(usuarioFilaSeleccionada.getNombre()) && caracteresValidos(usuarioFilaSeleccionada.getApellido())) {
             try {
@@ -355,11 +378,19 @@ public class VentanaDeUsuario extends javax.swing.JInternalFrame {
             } catch (UsuarioException ex) {
                 Logger.getLogger(VentanaDeUsuario.class.getName()).log(Level.SEVERE, null, ex);
 
+                    } catch (UsuarioException ex) {
+                        Logger.getLogger(VentanaDeUsuario.class.getName()).log(Level.SEVERE, null, ex);
+
+                    }
+                    JOptionPane.showMessageDialog(this, "Registro Modificado Correctamente");
+
+                } else {
+                    JOptionPane.showMessageDialog(this, "ingrese Caracteres Validos");
+                }
             }
-            JOptionPane.showMessageDialog(this, "Registro Modificado Correctamente");
 
         } else {
-            JOptionPane.showMessageDialog(this, "ingrese Caracteres Validos");
+            JOptionPane.showMessageDialog(this, "no hay fila seleccionada");
 
         }
 
@@ -433,6 +464,62 @@ public class VentanaDeUsuario extends javax.swing.JInternalFrame {
 
 
     }//GEN-LAST:event_eliminarMouseClicked
+
+    private void txtbuscarKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtbuscarKeyReleased
+        if (txtbuscar.getText().equals("")) {
+            try {
+                mostrarUsuarios();
+            } catch (UsuarioException ex) {
+                Logger.getLogger(VentanaDeUsuario.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } else {
+            try {
+                buscarUsuarios();
+            } catch (UsuarioException ex) {
+                Logger.getLogger(VentanaDeUsuario.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }//GEN-LAST:event_txtbuscarKeyReleased
+
+    private void eliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eliminarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_eliminarActionPerformed
+
+    public void buscarUsuarios() throws UsuarioException {
+
+        String[] nombresColumnas = {"Id", "Usuario", "Nombre", "Apellido", "Email", "Contraseña", "Fecha Alta"};
+
+        String buscar = txtbuscar.getText();
+        Usuario usuario = new Usuario();
+        usuario.setUsuario(buscar);
+        Usuarios usuarios = FachadaLogica.buscarUsuario(usuario);
+        DefaultTableModel modelo = new DefaultTableModel(null, nombresColumnas);
+
+        Object[] fila = new Object[modelo.getColumnCount()];
+
+        for (int i = 0; i < usuarios.getUsuarios().size(); i++) {
+            fila[0] = usuarios.getUsuarios().get(i).getId();
+            fila[1] = usuarios.getUsuarios().get(i).getUsuario();
+            fila[2] = usuarios.getUsuarios().get(i).getNombre();
+            fila[3] = usuarios.getUsuarios().get(i).getApellido();
+            fila[4] = usuarios.getUsuarios().get(i).getEmail();
+            fila[5] = usuarios.getUsuarios().get(i).getClave();
+            fila[6] = usuarios.getUsuarios().get(i).getFechaAlta();
+
+            modelo.addRow(fila);
+
+        }
+        tabla.setModel(modelo);
+
+        tabla.getColumnModel().getColumn(0).setPreferredWidth(20);
+        tabla.getColumnModel().getColumn(1).setPreferredWidth(60);
+        tabla.getColumnModel().getColumn(2).setPreferredWidth(60);
+        tabla.getColumnModel().getColumn(3).setPreferredWidth(60);
+        tabla.getColumnModel().getColumn(4).setPreferredWidth(160);
+        tabla.getColumnModel().getColumn(5).setPreferredWidth(60);
+        tabla.getColumnModel().getColumn(6).setPreferredWidth(60);
+
+    }
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -69,7 +69,6 @@ public class MenuPrincipal extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Menu Principal - GrupoSoft V.1");
         setBackground(java.awt.Color.white);
-        setMaximumSize(new java.awt.Dimension(1920, 1080));
         setMinimumSize(new java.awt.Dimension(900, 800));
 
         javax.swing.GroupLayout VentanasLayout = new javax.swing.GroupLayout(Ventanas);
@@ -129,9 +128,9 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenu2);
 
-        jMenu3.setText("Cerrar");
+        jMenu3.setText("Salir");
 
-        jMenuItem3.setText("Cerrar sesion");
+        jMenuItem3.setText("Cerrar Sesion");
         jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem3ActionPerformed(evt);
@@ -201,10 +200,17 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
     }//GEN-LAST:event_UsuarioActionPerformed
     }
-    
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
         dispose();
     }//GEN-LAST:event_jMenuItem2ActionPerformed
+
+    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
+        // TODO add your handling code here:
+        Login verLogin = new Login();
+            verLogin.setVisible(true);
+            dispose();
+    }//GEN-LAST:event_jMenuItem3ActionPerformed
+        
 
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
         Login login = new Login();
