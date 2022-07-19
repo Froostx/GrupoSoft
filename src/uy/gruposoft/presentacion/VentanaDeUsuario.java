@@ -132,13 +132,16 @@ public class VentanaDeUsuario extends javax.swing.JInternalFrame {
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 687, Short.MAX_VALUE)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 710, Short.MAX_VALUE)
+                .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 532, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 12, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 574, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 3, Short.MAX_VALUE))
         );
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Datos Usuario", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 1, 14))); // NOI18N
@@ -215,7 +218,7 @@ public class VentanaDeUsuario extends javax.swing.JInternalFrame {
                     .addComponent(claveTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(53, 53, 53)
                 .addComponent(insertarUsuario)
-                .addContainerGap(114, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         txtbuscar.addActionListener(new java.awt.event.ActionListener() {
@@ -242,6 +245,11 @@ public class VentanaDeUsuario extends javax.swing.JInternalFrame {
                 eliminarMouseClicked(evt);
             }
         });
+        eliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                eliminarActionPerformed(evt);
+            }
+        });
 
         jLabel6.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel6.setText("Buscar por Usuario");
@@ -251,26 +259,27 @@ public class VentanaDeUsuario extends javax.swing.JInternalFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(72, Short.MAX_VALUE)
+                .addContainerGap(45, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel6)
-                        .addGap(31, 31, 31)
+                        .addGap(34, 34, 34)
                         .addComponent(txtbuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(102, 102, 102)
+                        .addGap(36, 36, 36)
                         .addComponent(modificar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(eliminar))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(eliminar)
+                        .addGap(17, 17, 17))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(14, 14, 14))
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap())))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(56, Short.MAX_VALUE)
+                .addContainerGap(8, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(modificar)
                     .addComponent(eliminar)
@@ -280,7 +289,7 @@ public class VentanaDeUsuario extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(16, 16, 16))
+                .addGap(31, 31, 31))
         );
 
         pack();
@@ -337,16 +346,25 @@ public class VentanaDeUsuario extends javax.swing.JInternalFrame {
         claveTxt.setText("");
     }
 
-    
 
     private void txtbuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtbuscarActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtbuscarActionPerformed
 
     private void insertarUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_insertarUsuarioActionPerformed
-        try {
+        String nombreUsuario = ingresoUsuario.getText();
+        String nombre = nombreTxt.getText();
+        String apellido = apellidoTxt.getText();
+        String email = emailTxt.getText();
+        String clave = new String(claveTxt.getPassword());
 
-            validarUsuario();
+        try {
+            if ((nombreUsuario).equals("") || (nombre).equals("") || (apellido).equals("") || (email).equals("") || (clave).equals("")) {
+                JOptionPane.showMessageDialog(this, "Hay Campos Vacios");
+            } else {
+                validarUsuario();
+            }
+
         } catch (UsuarioException ex) {
             Logger.getLogger(VentanaDeUsuario.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -355,7 +373,7 @@ public class VentanaDeUsuario extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_insertarUsuarioActionPerformed
 
     private void modificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_modificarActionPerformed
-        
+
         int seleccion = tabla.getSelectedRowCount();
 
         if (seleccion == 1) {
@@ -371,16 +389,15 @@ public class VentanaDeUsuario extends javax.swing.JInternalFrame {
 
                     }
                     JOptionPane.showMessageDialog(this, "Registro Modificado Correctamente");
-                  
 
                 } else {
                     JOptionPane.showMessageDialog(this, "ingrese Caracteres Validos");
                 }
             }
-        
-        }else{
+
+        } else {
             JOptionPane.showMessageDialog(this, "no hay fila seleccionada");
-    
+
         }
     }//GEN-LAST:event_modificarActionPerformed
 
@@ -454,25 +471,29 @@ public class VentanaDeUsuario extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_eliminarMouseClicked
 
     private void txtbuscarKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtbuscarKeyReleased
-       if(txtbuscar.getText().equals("")){
-           try {
-               mostrarUsuarios();
-           } catch (UsuarioException ex) {
-               Logger.getLogger(VentanaDeUsuario.class.getName()).log(Level.SEVERE, null, ex);
-           }
-       }else{
+        if (txtbuscar.getText().equals("")) {
             try {
-            buscarUsuarios();
-        } catch (UsuarioException ex) {
-            Logger.getLogger(VentanaDeUsuario.class.getName()).log(Level.SEVERE, null, ex);
+                mostrarUsuarios();
+            } catch (UsuarioException ex) {
+                Logger.getLogger(VentanaDeUsuario.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } else {
+            try {
+                buscarUsuarios();
+            } catch (UsuarioException ex) {
+                Logger.getLogger(VentanaDeUsuario.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
-       }
     }//GEN-LAST:event_txtbuscarKeyReleased
 
-    public  void buscarUsuarios() throws UsuarioException {
+    private void eliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eliminarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_eliminarActionPerformed
+
+    public void buscarUsuarios() throws UsuarioException {
 
         String[] nombresColumnas = {"Id", "Usuario", "Nombre", "Apellido", "Email", "Contraseña", "Fecha Alta"};
-        
+
         String buscar = txtbuscar.getText();
         Usuario usuario = new Usuario();
         usuario.setUsuario(buscar);
@@ -504,7 +525,7 @@ public class VentanaDeUsuario extends javax.swing.JInternalFrame {
         tabla.getColumnModel().getColumn(6).setPreferredWidth(60);
 
     }
-    
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField apellidoTxt;
