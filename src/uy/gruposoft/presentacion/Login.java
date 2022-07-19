@@ -5,11 +5,6 @@
  */
 package uy.gruposoft.presentacion;
 
-import static com.sun.corba.se.impl.util.Utility.printStackTrace;
-import java.awt.Desktop;
-import java.awt.Toolkit;
-import java.awt.event.KeyEvent;
-import java.net.URI;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import uy.gruposoft.logica.FachadaLogica;
@@ -26,7 +21,6 @@ public class Login extends javax.swing.JFrame {
      */
     public Login() {
         initComponents();
-        setIconImage();
     }
 
     /**
@@ -39,52 +33,27 @@ public class Login extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        jLabel5 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         nombreUsuario = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         Ingresar = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
         clave = new javax.swing.JPasswordField();
-        jLabel4 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Login - GrupoSoft V.1");
 
         jPanel1.setBackground(java.awt.Color.white);
-        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/uy/gruposoft/assets/github-logo.png"))); // NOI18N
-        jLabel5.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel5MouseClicked(evt);
-            }
-        });
-        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 310, -1, 40));
-
-        jLabel6.setBackground(new java.awt.Color(34, 105, 130));
-        jLabel6.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        jLabel6.setForeground(new java.awt.Color(34, 105, 130));
-        jLabel6.setText("V.1");
-        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 330, -1, -1));
 
         jLabel1.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(34, 105, 130));
         jLabel1.setText("Usuario:");
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 180, -1, -1));
 
-        nombreUsuario.setBackground(java.awt.Color.white);
         nombreUsuario.setToolTipText("");
         nombreUsuario.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        jPanel1.add(nombreUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(97, 205, 320, -1));
 
         jLabel2.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(34, 105, 130));
         jLabel2.setText("Contraseña:");
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(222, 235, -1, -1));
 
-        Ingresar.setBackground(new java.awt.Color(34, 105, 130));
+        Ingresar.setBackground(new java.awt.Color(0, 153, 51));
         Ingresar.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         Ingresar.setForeground(new java.awt.Color(255, 255, 255));
         Ingresar.setText("INGRESAR");
@@ -93,23 +62,43 @@ public class Login extends javax.swing.JFrame {
                 IngresarActionPerformed(evt);
             }
         });
-        jPanel1.add(Ingresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(193, 296, 127, 43));
 
         jLabel3.setFont(new java.awt.Font("Arial", 1, 36)); // NOI18N
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/uy/gruposoft/assets/gruposoft_logo_300x134.png"))); // NOI18N
-        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(97, 34, 320, -1));
 
-        clave.setBackground(java.awt.Color.white);
-        clave.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                claveKeyPressed(evt);
-            }
-        });
-        jPanel1.add(clave, new org.netbeans.lib.awtextra.AbsoluteConstraints(97, 255, 320, -1));
-
-        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/uy/gruposoft/assets/login-background.jpg"))); // NOI18N
-        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 510, 360));
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(97, 97, 97)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                    .addComponent(Ingresar, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(clave)
+                    .addComponent(jLabel2)
+                    .addComponent(nombreUsuario)
+                    .addComponent(jLabel1)
+                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 320, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(91, 91, 91))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addGap(34, 34, 34)
+                .addComponent(jLabel3)
+                .addGap(16, 16, 16)
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(nombreUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel2)
+                .addGap(5, 5, 5)
+                .addComponent(clave, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 19, Short.MAX_VALUE)
+                .addComponent(Ingresar, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(20, 20, 20))
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -161,56 +150,6 @@ public class Login extends javax.swing.JFrame {
 
     }//GEN-LAST:event_IngresarActionPerformed
 
-    private void claveKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_claveKeyPressed
-        // TODO add your handling code here:
-        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
-            //obtengo los valores de las cajas de texto 
-
-        String nombre = this.nombreUsuario.getText();
-        String claveIngresada = new String(clave.getPassword());
-
-        //creo un objeto de tipo Usuario 
-        Usuario usuario = new Usuario();
-        usuario.setNombre(nombre);
-        usuario.setClave(claveIngresada);
-
-//       //invoco al existeUsuario con el usuario que cargue en memoria para saber si existe en la base 
-        Boolean existe = FachadaLogica.existeUsuario(usuario);
-        if (existe) {
-
-            System.out.println("LOG - Login: " + nombre + " se conecto");
-
-            JLabel mensajeLbl = new JLabel();
-
-            MenuPrincipal verMenuPrincipal = new MenuPrincipal();
-            verMenuPrincipal.setVisible(true);
-            dispose();
-        } else {
-
-            //System.out.println("Usuario no encontrado");
-            printStackTrace();
-            JOptionPane.showMessageDialog(null, "Usuario no encontrado");
-            nombreUsuario.setText("");
-            clave.setText("");
-
-        }
-        }
-    }//GEN-LAST:event_claveKeyPressed
-
-    private void jLabel5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel5MouseClicked
-        // TODO add your handling code here:
-        try{
-            if (Desktop.isDesktopSupported()){
-                Desktop desktop = Desktop.getDesktop();
-                if (desktop.isSupported(Desktop.Action.BROWSE)) {
-                    desktop.browse(new URI("https://github.com/Froostx/GrupoSoft"));
-                }
-            }
-        } catch (Exception e){
-            e.printStackTrace();
-        }
-    }//GEN-LAST:event_jLabel5MouseClicked
-
     /**
      * @param args the command line arguments
      */
@@ -253,14 +192,7 @@ public class Login extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JTextField nombreUsuario;
     // End of variables declaration//GEN-END:variables
-
-    private void setIconImage() {
-        setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/uy/gruposoft/assets/windows-icon.png")));
-    }
 }

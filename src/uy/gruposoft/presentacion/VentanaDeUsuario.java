@@ -6,15 +6,14 @@
 package uy.gruposoft.presentacion;
 
 import java.awt.event.KeyEvent;
-import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import uy.gruposoft.excepciones.UsuarioException;
 import uy.gruposoft.logica.FachadaLogica;
 import uy.gruposoft.logica.Usuario;
+import uy.gruposoft.logica.Usuarios;
 
 /**
  *
@@ -27,28 +26,28 @@ public class VentanaDeUsuario extends javax.swing.JInternalFrame {
     /**
      * Creates new form VentanaDeUsuario
      */
-    public VentanaDeUsuario() {
+    public VentanaDeUsuario() throws UsuarioException {
         initComponents();
         mostrarUsuarios();
-        
+
     }
 
-    public static void mostrarUsuarios() {
+    public static void mostrarUsuarios() throws UsuarioException {
 
         String[] nombresColumnas = {"Id", "Usuario", "Nombre", "Apellido", "Email", "Contraseña", "Fecha Alta"};
-        ArrayList<Usuario> usuarios = FachadaLogica.cargarUsuario();
+        Usuarios usuarios = FachadaLogica.cargarUsuario();
         DefaultTableModel modelo = new DefaultTableModel(null, nombresColumnas);
 
         Object[] fila = new Object[modelo.getColumnCount()];
 
-        for (int i = 0; i < usuarios.size(); i++) {
-            fila[0] = usuarios.get(i).getId();
-            fila[1] = usuarios.get(i).getUsuario();
-            fila[2] = usuarios.get(i).getNombre();
-            fila[3] = usuarios.get(i).getApellido();
-            fila[4] = usuarios.get(i).getEmail();
-            fila[5] = usuarios.get(i).getClave();
-            fila[6] = usuarios.get(i).getFechaAlta();
+        for (int i = 0; i < usuarios.getUsuarios().size(); i++) {
+            fila[0] = usuarios.getUsuarios().get(i).getId();
+            fila[1] = usuarios.getUsuarios().get(i).getUsuario();
+            fila[2] = usuarios.getUsuarios().get(i).getNombre();
+            fila[3] = usuarios.getUsuarios().get(i).getApellido();
+            fila[4] = usuarios.getUsuarios().get(i).getEmail();
+            fila[5] = usuarios.getUsuarios().get(i).getClave();
+            fila[6] = usuarios.getUsuarios().get(i).getFechaAlta();
 
             modelo.addRow(fila);
 
@@ -90,10 +89,10 @@ public class VentanaDeUsuario extends javax.swing.JInternalFrame {
         jLabel5 = new javax.swing.JLabel();
         insertarUsuario = new javax.swing.JButton();
         claveTxt = new javax.swing.JPasswordField();
-        jTextField8 = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
-        guardar = new javax.swing.JButton();
+        txtbuscar = new javax.swing.JTextField();
+        modificar = new javax.swing.JButton();
         eliminar = new javax.swing.JButton();
+        jLabel6 = new javax.swing.JLabel();
 
         setClosable(true);
         setIconifiable(true);
@@ -133,16 +132,13 @@ public class VentanaDeUsuario extends javax.swing.JInternalFrame {
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 710, Short.MAX_VALUE)
-                .addContainerGap())
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 687, Short.MAX_VALUE)
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 574, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 3, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 532, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 12, Short.MAX_VALUE))
         );
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Datos Usuario", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 1, 14))); // NOI18N
@@ -219,21 +215,24 @@ public class VentanaDeUsuario extends javax.swing.JInternalFrame {
                     .addComponent(claveTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(53, 53, 53)
                 .addComponent(insertarUsuario)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(114, Short.MAX_VALUE))
         );
 
-        jTextField8.addActionListener(new java.awt.event.ActionListener() {
+        txtbuscar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField8ActionPerformed(evt);
+                txtbuscarActionPerformed(evt);
+            }
+        });
+        txtbuscar.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtbuscarKeyReleased(evt);
             }
         });
 
-        jButton1.setText("Buscar");
-
-        guardar.setText("Guardar");
-        guardar.addActionListener(new java.awt.event.ActionListener() {
+        modificar.setText("Modificar");
+        modificar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                guardarActionPerformed(evt);
+                modificarActionPerformed(evt);
             }
         });
 
@@ -243,38 +242,35 @@ public class VentanaDeUsuario extends javax.swing.JInternalFrame {
                 eliminarMouseClicked(evt);
             }
         });
-        eliminar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                eliminarActionPerformed(evt);
-            }
-        });
+
+        jLabel6.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        jLabel6.setText("Buscar por Usuario");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(45, Short.MAX_VALUE)
+                .addContainerGap(64, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel6)
-                        .addGap(34, 34, 34)
+                        .addGap(31, 31, 31)
                         .addComponent(txtbuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(36, 36, 36)
+                        .addGap(102, 102, 102)
                         .addComponent(modificar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(eliminar)
-                        .addGap(17, 17, 17))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(eliminar))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap())))
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(14, 14, 14))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(8, Short.MAX_VALUE)
+                .addContainerGap(56, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(modificar)
                     .addComponent(eliminar)
@@ -284,13 +280,13 @@ public class VentanaDeUsuario extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(31, 31, 31))
+                .addGap(16, 16, 16))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    public void validarUsuario() {
+    public void validarUsuario() throws UsuarioException {
         try {
             //obtengo los valores de las cajas de texto
             String nombreUsuario = this.ingresoUsuario.getText();
@@ -310,27 +306,26 @@ public class VentanaDeUsuario extends javax.swing.JInternalFrame {
                 usuario.setApellido(apellido);
                 usuario.setEmail(email);
                 usuario.setClave(clave);
-                
+
                 if (FachadaLogica.verificarUsuario(usuario)) {
                     JOptionPane.showMessageDialog(this, " El usuario ya existe, ingrese otro");
-                    
+
                     return;
-                    
+
                 }
 //       
                 FachadaLogica.ingresarUsuario(usuario);
 
-                JLabel mensajeLbl = new JLabel();
-                JOptionPane.showMessageDialog(mensajeLbl, "El usuario se ingreso correctamente");
+                JOptionPane.showMessageDialog(this, "El usuario se ingreso correctamente");
             } else {
                 JOptionPane.showMessageDialog(this, "Ingrese Caracteres Validos");
             }
 
             //navego 
         } catch (UsuarioException ex) {
-            JLabel mensajeLbl = new JLabel();
+
             Logger.getLogger(VentanaDeUsuario.class.getName()).log(Level.SEVERE, null, ex);
-            JOptionPane.showMessageDialog(mensajeLbl, ex.getMessage());
+            JOptionPane.showMessageDialog(this, ex.getMessage());
         }
 
         FachadaLogica.cargarUsuario();
@@ -342,25 +337,16 @@ public class VentanaDeUsuario extends javax.swing.JInternalFrame {
         claveTxt.setText("");
     }
 
+    
 
     private void txtbuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtbuscarActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField8ActionPerformed
+    }//GEN-LAST:event_txtbuscarActionPerformed
 
     private void insertarUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_insertarUsuarioActionPerformed
-        String nombreUsuario = ingresoUsuario.getText();
-        String nombre = nombreTxt.getText();
-        String apellido = apellidoTxt.getText();
-        String email = emailTxt.getText();
-        String clave = new String(claveTxt.getPassword());
-
         try {
-            if ((nombreUsuario).equals("") || (nombre).equals("") || (apellido).equals("") || (email).equals("") || (clave).equals("")) {
-                JOptionPane.showMessageDialog(this, "Hay Campos Vacios");
-            } else {
-                validarUsuario();
-            }
 
+            validarUsuario();
         } catch (UsuarioException ex) {
             Logger.getLogger(VentanaDeUsuario.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -369,33 +355,34 @@ public class VentanaDeUsuario extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_insertarUsuarioActionPerformed
 
     private void modificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_modificarActionPerformed
-
+        
         int seleccion = tabla.getSelectedRowCount();
 
-        if (caracteresValidos(usuarioFilaSeleccionada.getUsuario()) && caracteresValidos(usuarioFilaSeleccionada.getNombre()) && caracteresValidos(usuarioFilaSeleccionada.getApellido())) {
-            try {
-                FachadaLogica.modificarUsuario(usuarioFilaSeleccionada);
-            } catch (UsuarioException ex) {
-                Logger.getLogger(VentanaDeUsuario.class.getName()).log(Level.SEVERE, null, ex);
+        if (seleccion == 1) {
+            if (usuarioFilaSeleccionada.getUsuario() == null && usuarioFilaSeleccionada.getNombre() == null && usuarioFilaSeleccionada.getApellido() == null && usuarioFilaSeleccionada.getEmail() == null && usuarioFilaSeleccionada.getClave() == null) {
+                JOptionPane.showMessageDialog(this, "no se modifico ningun registro");
+            } else {
+                if (caracteresValidos(usuarioFilaSeleccionada.getUsuario()) && caracteresValidos(usuarioFilaSeleccionada.getNombre()) && caracteresValidos(usuarioFilaSeleccionada.getApellido())) {
+                    try {
+                        FachadaLogica.modificarUsuario(usuarioFilaSeleccionada);
 
                     } catch (UsuarioException ex) {
                         Logger.getLogger(VentanaDeUsuario.class.getName()).log(Level.SEVERE, null, ex);
 
                     }
                     JOptionPane.showMessageDialog(this, "Registro Modificado Correctamente");
+                  
 
                 } else {
                     JOptionPane.showMessageDialog(this, "ingrese Caracteres Validos");
                 }
             }
-
-        } else {
+        
+        }else{
             JOptionPane.showMessageDialog(this, "no hay fila seleccionada");
-
+    
         }
-
-
-    }//GEN-LAST:event_guardarActionPerformed
+    }//GEN-LAST:event_modificarActionPerformed
 
     private void tablaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tablaKeyReleased
         // TODO add your handling code here:
@@ -420,7 +407,6 @@ public class VentanaDeUsuario extends javax.swing.JInternalFrame {
             usuarioFilaSeleccionada.setApellido(apellidoFila);
             usuarioFilaSeleccionada.setEmail(emailFila);
             usuarioFilaSeleccionada.setClave(claveFila);
-            
 
         }
 
@@ -435,60 +421,58 @@ public class VentanaDeUsuario extends javax.swing.JInternalFrame {
         int id = (int) tabla.getValueAt(tabla.getSelectedRow(), 0);
 
         usuarioFilaSeleccionada.setId(id);
-       
+
     }//GEN-LAST:event_tablaMouseClicked
 
     private void eliminarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_eliminarMouseClicked
         // TODO add your handling code here:
-       
+
         int seleccion = tabla.getSelectedRowCount();
         try {
-            if (seleccion == 1){
-                int res = JOptionPane.showConfirmDialog(null, "¿Desea Eliminar el Registro?","Confirm",JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
-                if(res==JOptionPane.YES_OPTION){
-              
-              FachadaLogica.eliminarUsuario(usuarioFilaSeleccionada); 
-           }
-            }else{
-                JOptionPane.showMessageDialog(null,"Debe Seleccionar Fila");
+            if (seleccion == 1) {
+                int res = JOptionPane.showConfirmDialog(null, "¿Desea Eliminar el Registro?", "Confirm", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+                if (res == JOptionPane.YES_OPTION) {
+
+                    FachadaLogica.eliminarUsuario(usuarioFilaSeleccionada);
+                }
+            } else {
+                JOptionPane.showMessageDialog(null, "Debe Seleccionar Fila");
             }
-            
-            
+
         } catch (UsuarioException ex) {
             Logger.getLogger(VentanaDeUsuario.class.getName()).log(Level.SEVERE, null, ex);
 
         }
-        
-        
-        mostrarUsuarios();
+
+        try {
+            mostrarUsuarios();
+        } catch (UsuarioException ex) {
+            Logger.getLogger(VentanaDeUsuario.class.getName()).log(Level.SEVERE, null, ex);
+        }
 
 
     }//GEN-LAST:event_eliminarMouseClicked
 
     private void txtbuscarKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtbuscarKeyReleased
-        if (txtbuscar.getText().equals("")) {
+       if(txtbuscar.getText().equals("")){
+           try {
+               mostrarUsuarios();
+           } catch (UsuarioException ex) {
+               Logger.getLogger(VentanaDeUsuario.class.getName()).log(Level.SEVERE, null, ex);
+           }
+       }else{
             try {
-                mostrarUsuarios();
-            } catch (UsuarioException ex) {
-                Logger.getLogger(VentanaDeUsuario.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        } else {
-            try {
-                buscarUsuarios();
-            } catch (UsuarioException ex) {
-                Logger.getLogger(VentanaDeUsuario.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            buscarUsuarios();
+        } catch (UsuarioException ex) {
+            Logger.getLogger(VentanaDeUsuario.class.getName()).log(Level.SEVERE, null, ex);
         }
+       }
     }//GEN-LAST:event_txtbuscarKeyReleased
 
-    private void eliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eliminarActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_eliminarActionPerformed
-
-    public void buscarUsuarios() throws UsuarioException {
+    public  void buscarUsuarios() throws UsuarioException {
 
         String[] nombresColumnas = {"Id", "Usuario", "Nombre", "Apellido", "Email", "Contraseña", "Fecha Alta"};
-
+        
         String buscar = txtbuscar.getText();
         Usuario usuario = new Usuario();
         usuario.setUsuario(buscar);
@@ -520,27 +504,27 @@ public class VentanaDeUsuario extends javax.swing.JInternalFrame {
         tabla.getColumnModel().getColumn(6).setPreferredWidth(60);
 
     }
-
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField apellidoTxt;
     private javax.swing.JPasswordField claveTxt;
     private javax.swing.JButton eliminar;
     private javax.swing.JTextField emailTxt;
-    private javax.swing.JButton guardar;
     private javax.swing.JTextField ingresoUsuario;
     private javax.swing.JButton insertarUsuario;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField jTextField8;
+    private javax.swing.JButton modificar;
     private javax.swing.JTextField nombreTxt;
     public static javax.swing.JTable tabla;
+    private javax.swing.JTextField txtbuscar;
     // End of variables declaration//GEN-END:variables
 }
