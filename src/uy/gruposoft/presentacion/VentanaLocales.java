@@ -5,6 +5,11 @@
  */
 package uy.gruposoft.presentacion;
 
+import javax.swing.table.DefaultTableModel;
+import uy.gruposoft.excepciones.LocalException;
+import uy.gruposoft.logica.FachadaLogica;
+import uy.gruposoft.logica.Locales;
+
 /**
  *
  * @author andressantucci
@@ -13,9 +18,38 @@ public class VentanaLocales extends javax.swing.JInternalFrame {
 
     /**
      * Creates new form VentanaLocales
+     * @throws uy.gruposoft.excepciones.LocalException
      */
-    public VentanaLocales() {
+    public VentanaLocales() throws LocalException {
         initComponents();
+        mostrarLocales();
+    }
+    
+    
+    public static void mostrarLocales() throws LocalException {
+
+        String[] nombresColumnas = {"nro_local", "negocio", "encargado", "Fecha Alta"};
+        Locales locales = FachadaLogica.cargarLocales();
+        DefaultTableModel modelo = new DefaultTableModel(null, nombresColumnas);
+
+        Object[] fila = new Object[modelo.getColumnCount()];
+
+        for (int i = 0; i < locales.getLocales().size(); i++) {
+            fila[0] = locales.getLocales().get(i).getNumeroLocal();
+            fila[1] = locales.getLocales().get(i).getNombreNegocio();
+            fila[2] = locales.getLocales().get(i).getEncargado();
+            fila[3] = locales.getLocales().get(i).getFechaAlta();
+
+            modelo.addRow(fila);
+
+        }
+        tabla.setModel(modelo);
+
+        tabla.getColumnModel().getColumn(0).setPreferredWidth(20);
+        tabla.getColumnModel().getColumn(1).setPreferredWidth(60);
+        tabla.getColumnModel().getColumn(2).setPreferredWidth(60);
+        tabla.getColumnModel().getColumn(3).setPreferredWidth(60);
+
     }
 
     /**
@@ -27,8 +61,21 @@ public class VentanaLocales extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPanel4 = new javax.swing.JPanel();
+        jLabel11 = new javax.swing.JLabel();
+        ingresoUsuario2 = new javax.swing.JTextField();
+        nombreTxt2 = new javax.swing.JTextField();
+        jLabel12 = new javax.swing.JLabel();
+        jLabel13 = new javax.swing.JLabel();
+        apellidoTxt2 = new javax.swing.JTextField();
+        insertarUsuario2 = new javax.swing.JButton();
+        txtbuscar = new javax.swing.JTextField();
+        modificar = new javax.swing.JButton();
+        eliminar = new javax.swing.JButton();
+        jLabel16 = new javax.swing.JLabel();
+        jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tabla = new javax.swing.JTable();
 
         setClosable(true);
         setIconifiable(true);
@@ -37,41 +84,347 @@ public class VentanaLocales extends javax.swing.JInternalFrame {
         setMinimumSize(new java.awt.Dimension(1150, 700));
         setPreferredSize(new java.awt.Dimension(1150, 700));
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Datos Usuario", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 1, 14))); // NOI18N
+
+        jLabel11.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        jLabel11.setText("Numero");
+
+        jLabel12.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        jLabel12.setText("Negocio");
+
+        jLabel13.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        jLabel13.setText("Encargado");
+
+        apellidoTxt2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                apellidoTxt2ActionPerformed(evt);
+            }
+        });
+
+        insertarUsuario2.setText("Crear Local");
+        insertarUsuario2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                insertarUsuario2ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
+        jPanel4.setLayout(jPanel4Layout);
+        jPanel4Layout.setHorizontalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addGap(34, 34, 34)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addComponent(jLabel11)
+                        .addGap(4, 4, 4))
+                    .addComponent(jLabel13)
+                    .addComponent(jLabel12))
+                .addGap(33, 33, 33)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(insertarUsuario2)
+                    .addComponent(ingresoUsuario2, javax.swing.GroupLayout.DEFAULT_SIZE, 165, Short.MAX_VALUE)
+                    .addComponent(nombreTxt2, javax.swing.GroupLayout.DEFAULT_SIZE, 165, Short.MAX_VALUE)
+                    .addComponent(apellidoTxt2, javax.swing.GroupLayout.DEFAULT_SIZE, 165, Short.MAX_VALUE))
+                .addContainerGap(54, Short.MAX_VALUE))
+        );
+        jPanel4Layout.setVerticalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addGap(66, 66, 66)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(ingresoUsuario2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel11))
+                .addGap(56, 56, 56)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(nombreTxt2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel12))
+                .addGap(61, 61, 61)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel13)
+                    .addComponent(apellidoTxt2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(133, 133, 133)
+                .addComponent(insertarUsuario2)
+                .addContainerGap(150, Short.MAX_VALUE))
+        );
+
+        txtbuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtbuscarActionPerformed(evt);
+            }
+        });
+        txtbuscar.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtbuscarKeyReleased(evt);
+            }
+        });
+
+        modificar.setText("Modificar");
+        modificar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                modificarActionPerformed(evt);
+            }
+        });
+
+        eliminar.setText("Eliminar");
+        eliminar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                eliminarMouseClicked(evt);
+            }
+        });
+
+        jLabel16.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        jLabel16.setText("Buscar por negocio");
+
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Lista De Locales", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 1, 14))); // NOI18N
+
+        tabla.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {},
+                {},
+                {},
+                {}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        tabla.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tablaMouseClicked(evt);
+            }
+        });
+        tabla.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                tablaKeyReleased(evt);
+            }
+        });
+        jScrollPane1.setViewportView(tabla);
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 687, Short.MAX_VALUE)
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 532, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 12, Short.MAX_VALUE))
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(130, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 390, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addContainerGap(30, Short.MAX_VALUE)
+                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(29, 29, 29)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel16)
+                        .addGap(31, 31, 31)
+                        .addComponent(txtbuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(102, 102, 102)
+                        .addComponent(modificar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(eliminar))
+                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(14, 14, 14))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(56, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(modificar)
+                            .addComponent(eliminar)
+                            .addComponent(txtbuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel16))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(16, 16, 16))
         );
+
+        jPanel1.getAccessibleContext().setAccessibleName("Lista De Locales");
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void insertarUsuario2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_insertarUsuario2ActionPerformed
+//        try {
+//
+//            validarUsuario();
+//        } catch (UsuarioException ex) {
+//            Logger.getLogger(VentanaDeUsuario.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+
+    }//GEN-LAST:event_insertarUsuario2ActionPerformed
+
+    private void txtbuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtbuscarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtbuscarActionPerformed
+
+    private void txtbuscarKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtbuscarKeyReleased
+//        if(txtbuscar.getText().equals("")){
+//            try {
+//                mostrarUsuarios();
+//            } catch (UsuarioException ex) {
+//                Logger.getLogger(VentanaDeUsuario.class.getName()).log(Level.SEVERE, null, ex);
+//            }
+//        }else{
+//            try {
+//                buscarUsuarios();
+//            } catch (UsuarioException ex) {
+//                Logger.getLogger(VentanaDeUsuario.class.getName()).log(Level.SEVERE, null, ex);
+//            }
+//        }
+    }//GEN-LAST:event_txtbuscarKeyReleased
+
+    private void modificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_modificarActionPerformed
+//
+//        int seleccion = tabla.getSelectedRowCount();
+//
+//        if (seleccion == 1) {
+//            if (usuarioFilaSeleccionada.getUsuario() == null && usuarioFilaSeleccionada.getNombre() == null && usuarioFilaSeleccionada.getApellido() == null && usuarioFilaSeleccionada.getEmail() == null && usuarioFilaSeleccionada.getClave() == null) {
+//                JOptionPane.showMessageDialog(this, "no se modifico ningun registro");
+//            } else {
+//                if (caracteresValidos(usuarioFilaSeleccionada.getUsuario()) && caracteresValidos(usuarioFilaSeleccionada.getNombre()) && caracteresValidos(usuarioFilaSeleccionada.getApellido())) {
+//                    try {
+//                        FachadaLogica.modificarUsuario(usuarioFilaSeleccionada);
+//
+//                    } catch (UsuarioException ex) {
+//                        Logger.getLogger(VentanaDeUsuario.class.getName()).log(Level.SEVERE, null, ex);
+//
+//                    }
+//                    JOptionPane.showMessageDialog(this, "Registro Modificado Correctamente");
+//
+//                } else {
+//                    JOptionPane.showMessageDialog(this, "ingrese Caracteres Validos");
+//                }
+//            }
+//
+//        }else{
+//            JOptionPane.showMessageDialog(this, "no hay fila seleccionada");
+//
+//        }
+    }//GEN-LAST:event_modificarActionPerformed
+
+    private void eliminarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_eliminarMouseClicked
+        // TODO add your handling code here:
+
+//        int seleccion = tabla.getSelectedRowCount();
+//        try {
+//            if (seleccion == 1) {
+//                int res = JOptionPane.showConfirmDialog(null, "¿Desea Eliminar el Registro?", "Confirm", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+//                if (res == JOptionPane.YES_OPTION) {
+//
+//                    FachadaLogica.eliminarUsuario(usuarioFilaSeleccionada);
+//                }
+//            } else {
+//                JOptionPane.showMessageDialog(null, "Debe Seleccionar Fila");
+//            }
+//
+//        } catch (UsuarioException ex) {
+//            Logger.getLogger(VentanaDeUsuario.class.getName()).log(Level.SEVERE, null, ex);
+//
+//        }
+//
+//        try {
+//            mostrarUsuarios();
+//        } catch (UsuarioException ex) {
+//            Logger.getLogger(VentanaDeUsuario.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+
+    }//GEN-LAST:event_eliminarMouseClicked
+
+    private void tablaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaMouseClicked
+//        int id = (int) tabla.getValueAt(tabla.getSelectedRow(), 0);
+//
+//        usuarioFilaSeleccionada.setId(id);
+    }//GEN-LAST:event_tablaMouseClicked
+
+    private void tablaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tablaKeyReleased
+        // TODO add your handling code here:
+//        int key = evt.getKeyCode();
+//        if (key == KeyEvent.VK_ENTER) {
+//
+//            int id = (int) tabla.getValueAt(tabla.getSelectedRow(), 0);
+//
+//            String usuarioFila = tabla.getValueAt(tabla.getSelectedRow(), 1).toString();
+//
+//            String nombreFila = tabla.getValueAt(tabla.getSelectedRow(), 2).toString();
+//
+//            String apellidoFila = tabla.getValueAt(tabla.getSelectedRow(), 3).toString();
+//
+//            String emailFila = tabla.getValueAt(tabla.getSelectedRow(), 4).toString();
+//
+//            String claveFila = tabla.getValueAt(tabla.getSelectedRow(), 5).toString();
+//
+//            usuarioFilaSeleccionada.setId(id);
+//            usuarioFilaSeleccionada.setUsuario(usuarioFila);
+//            usuarioFilaSeleccionada.setNombre(nombreFila);
+//            usuarioFilaSeleccionada.setApellido(apellidoFila);
+//            usuarioFilaSeleccionada.setEmail(emailFila);
+//            usuarioFilaSeleccionada.setClave(claveFila);
+//
+//        }
+//
+//        }
+//
+//        public static boolean caracteresValidos(String datos) {
+//            return datos.matches("[a-z A-Z]*");
+    }//GEN-LAST:event_tablaKeyReleased
+
+    private void apellidoTxt2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_apellidoTxt2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_apellidoTxt2ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextField apellidoTxt;
+    private javax.swing.JTextField apellidoTxt1;
+    private javax.swing.JTextField apellidoTxt2;
+    private javax.swing.JPasswordField claveTxt;
+    private javax.swing.JPasswordField claveTxt1;
+    private javax.swing.JButton eliminar;
+    private javax.swing.JTextField emailTxt;
+    private javax.swing.JTextField emailTxt1;
+    private javax.swing.JTextField ingresoUsuario;
+    private javax.swing.JTextField ingresoUsuario1;
+    private javax.swing.JTextField ingresoUsuario2;
+    private javax.swing.JButton insertarUsuario;
+    private javax.swing.JButton insertarUsuario1;
+    private javax.swing.JButton insertarUsuario2;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JButton modificar;
+    private javax.swing.JTextField nombreTxt;
+    private javax.swing.JTextField nombreTxt1;
+    private javax.swing.JTextField nombreTxt2;
+    public static javax.swing.JTable tabla;
+    private javax.swing.JTextField txtbuscar;
     // End of variables declaration//GEN-END:variables
 }

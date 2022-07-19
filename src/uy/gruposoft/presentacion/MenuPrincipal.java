@@ -10,6 +10,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JInternalFrame;
 import javax.swing.JOptionPane;
+import uy.gruposoft.excepciones.LocalException;
 import uy.gruposoft.excepciones.UsuarioException;
 
 /**
@@ -85,6 +86,11 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
         locales.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_2, java.awt.event.InputEvent.CTRL_MASK));
         locales.setText("Locales");
+        locales.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                localesActionPerformed(evt);
+            }
+        });
         jMenu1.add(locales);
 
         Usuario.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_3, java.awt.event.InputEvent.CTRL_MASK));
@@ -175,8 +181,41 @@ public class MenuPrincipal extends javax.swing.JFrame {
             verUsuarios.setLocation((desktopSize.width - FrameSize.width) / 2, (desktopSize.height - FrameSize.height) / 2);
             verUsuarios.show();
 
-
+        }
     }//GEN-LAST:event_UsuarioActionPerformed
+
+    private void localesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_localesActionPerformed
+        // TODO add your handling code here:
+        VentanaLocales verLocales = null;
+        try {
+            verLocales = new VentanaLocales();
+        } catch (LocalException ex) {
+            Logger.getLogger(MenuPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        if (JInternalFrames_AbiertosLocal(verLocales) == false) {
+            Ventanas.add(verLocales);
+
+            Dimension desktopSize = Ventanas.getSize();
+            Dimension FrameSize = verLocales.getSize();
+            verLocales.setLocation((desktopSize.width - FrameSize.width) / 2, (desktopSize.height - FrameSize.height) / 2);
+            verLocales.show();
+
+        }
+    }//GEN-LAST:event_localesActionPerformed
+    
+    
+    public boolean JInternalFrames_AbiertosLocal(VentanaLocales jif) { 
+    JInternalFrame[] jif_Activos = MenuPrincipal.Ventanas.getAllFrames();
+
+    for (int i = 0; i < jif_Activos.length; i++) {
+
+        if (jif.getClass().isInstance(jif_Activos[i])) {
+            JOptionPane.showMessageDialog(null, "La ventana que esta intentando abrir ya esta abierta.", "Información", JOptionPane.INFORMATION_MESSAGE);
+            return true;
+        }
+    }
+    return false;
     }
 
     /**

@@ -1,6 +1,8 @@
 package uy.gruposoft.logica;
 
+import uy.gruposoft.excepciones.LocalException;
 import uy.gruposoft.excepciones.UsuarioException;
+import uy.gruposoft.persistencia.PersistenciaLocal;
 import uy.gruposoft.persistencia.PersistenciaUsuario;
 
 public class FachadaLogica {
@@ -49,6 +51,16 @@ public class FachadaLogica {
 
         return usuarios;
     }
-   
+    
+    
+    // Locales:
+    
+    
+    public static Locales cargarLocales() throws LocalException {
+        Locales locales = new Locales();
+        locales = PersistenciaLocal.mostrarLocales();
+
+        return locales;
+    }
 
 }

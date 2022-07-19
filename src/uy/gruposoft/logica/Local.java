@@ -13,26 +13,22 @@ import java.util.Date;
  */
 public class Local {
     private int numeroLocal;
-    private Negocio negocio;
+    private String nombreNegocio;
     private Date fechaAlta;
-    private Date fechaBaja;
     private String encargado;
 
     public void setNumeroLocal(int numeroLocal) {
         this.numeroLocal = numeroLocal;
     }
 
-    public void setNegocio(Negocio negocio) {
-        this.negocio = negocio;
+    public void setNombreNegocio(String negocio) {
+        this.nombreNegocio = negocio;
     }
 
     public void setFechaAlta(Date fechaAlta) {
         this.fechaAlta = fechaAlta;
     }
 
-    public void setFechaBaja(Date fechaBaja) {
-        this.fechaBaja = fechaBaja;
-    }
     
     public void setEncargado(String encargado){
         this.encargado = encargado;
@@ -42,16 +38,12 @@ public class Local {
         return numeroLocal;
     }
 
-    public Negocio getNegocio() {
-        return negocio;
+    public String getNombreNegocio() {
+        return nombreNegocio;
     }
 
     public Date getFechaAlta() {
         return fechaAlta;
-    }
-
-    public Date getFechaBaja() {
-        return fechaBaja;
     }
 
     public String getEncargado() {
