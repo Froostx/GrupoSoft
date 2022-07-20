@@ -5,9 +5,13 @@
  */
 package uy.gruposoft.presentacion;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import uy.gruposoft.excepciones.LocalException;
 import uy.gruposoft.logica.FachadaLogica;
+import uy.gruposoft.logica.Local;
 import uy.gruposoft.logica.Locales;
 
 /**
@@ -18,14 +22,14 @@ public class VentanaLocales extends javax.swing.JInternalFrame {
 
     /**
      * Creates new form VentanaLocales
+     *
      * @throws uy.gruposoft.excepciones.LocalException
      */
     public VentanaLocales() throws LocalException {
         initComponents();
         mostrarLocales();
     }
-    
-    
+
     public static void mostrarLocales() throws LocalException {
 
         String[] nombresColumnas = {"nro_local", "negocio", "encargado", "Fecha Alta"};
@@ -63,11 +67,11 @@ public class VentanaLocales extends javax.swing.JInternalFrame {
 
         jPanel4 = new javax.swing.JPanel();
         jLabel11 = new javax.swing.JLabel();
-        ingresoUsuario2 = new javax.swing.JTextField();
-        nombreTxt2 = new javax.swing.JTextField();
+        ingresoNumero = new javax.swing.JTextField();
+        negocioTxt2 = new javax.swing.JTextField();
         jLabel12 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
-        apellidoTxt2 = new javax.swing.JTextField();
+        encargadoTxt2 = new javax.swing.JTextField();
         insertarUsuario2 = new javax.swing.JButton();
         txtbuscar = new javax.swing.JTextField();
         modificar = new javax.swing.JButton();
@@ -89,22 +93,28 @@ public class VentanaLocales extends javax.swing.JInternalFrame {
         jLabel11.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel11.setText("Numero");
 
+        ingresoNumero.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ingresoLocal2ActionPerformed(evt);
+            }
+        });
+
         jLabel12.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel12.setText("Negocio");
 
         jLabel13.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel13.setText("Encargado");
 
-        apellidoTxt2.addActionListener(new java.awt.event.ActionListener() {
+        encargadoTxt2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                apellidoTxt2ActionPerformed(evt);
+                encargadoTxt2ActionPerformed(evt);
             }
         });
 
         insertarUsuario2.setText("Crear Local");
         insertarUsuario2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                insertarUsuario2ActionPerformed(evt);
+                insertarLocal2ActionPerformed(evt);
             }
         });
 
@@ -123,9 +133,9 @@ public class VentanaLocales extends javax.swing.JInternalFrame {
                 .addGap(33, 33, 33)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(insertarUsuario2)
-                    .addComponent(ingresoUsuario2, javax.swing.GroupLayout.DEFAULT_SIZE, 165, Short.MAX_VALUE)
-                    .addComponent(nombreTxt2, javax.swing.GroupLayout.DEFAULT_SIZE, 165, Short.MAX_VALUE)
-                    .addComponent(apellidoTxt2, javax.swing.GroupLayout.DEFAULT_SIZE, 165, Short.MAX_VALUE))
+                    .addComponent(ingresoNumero, javax.swing.GroupLayout.DEFAULT_SIZE, 165, Short.MAX_VALUE)
+                    .addComponent(negocioTxt2, javax.swing.GroupLayout.DEFAULT_SIZE, 165, Short.MAX_VALUE)
+                    .addComponent(encargadoTxt2, javax.swing.GroupLayout.DEFAULT_SIZE, 165, Short.MAX_VALUE))
                 .addContainerGap(54, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
@@ -133,16 +143,16 @@ public class VentanaLocales extends javax.swing.JInternalFrame {
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addGap(66, 66, 66)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(ingresoUsuario2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(ingresoNumero, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel11))
                 .addGap(56, 56, 56)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(nombreTxt2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(negocioTxt2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel12))
                 .addGap(61, 61, 61)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel13)
-                    .addComponent(apellidoTxt2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(encargadoTxt2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(133, 133, 133)
                 .addComponent(insertarUsuario2)
                 .addContainerGap(150, Short.MAX_VALUE))
@@ -251,20 +261,60 @@ public class VentanaLocales extends javax.swing.JInternalFrame {
                 .addGap(16, 16, 16))
         );
 
-        jPanel1.getAccessibleContext().setAccessibleName("Lista De Locales");
-
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void insertarUsuario2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_insertarUsuario2ActionPerformed
-//        try {
-//
-//            validarUsuario();
-//        } catch (UsuarioException ex) {
-//            Logger.getLogger(VentanaDeUsuario.class.getName()).log(Level.SEVERE, null, ex);
-//        }
+    
+    
+    public void validarLocal() throws LocalException{
+        
+        
+        String numeroStr = this.ingresoNumero.getText();
+        String negocio = this.negocioTxt2.getText();
+        String encargado = this.encargadoTxt2.getText();
+        
+        boolean isNumeric =  numeroStr.matches("[+-]?\\d*(\\.\\d+)?");
+        if (isNumeric)
+        {   
+            int numero = Integer.parseInt(numeroStr);
+            
+            Local local = new Local();
+            
+            local.setNumeroLocal(numero);
+            local.setNombreNegocio(negocio);
+            local.setEncargado(encargado);
+            
+            if (FachadaLogica.verificarLocal(local)){
+                JOptionPane.showMessageDialog(this, " ya existe un local con ese numero, ingrese otro");
+            }
+            else{
+                FachadaLogica.insertarLocal(local);
+                JOptionPane.showMessageDialog(this, "El Local se ingreso correctamente");
 
-    }//GEN-LAST:event_insertarUsuario2ActionPerformed
+            }
+             
+        }
+        else
+        {
+            JOptionPane.showMessageDialog(this, "Ingrese un caracter valido para el numero del local");            
+        }
+        
+        
+    }
+            
+            
+    
+    
+    
+    
+    private void insertarLocal2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_insertarLocal2ActionPerformed
+        try {
+            validarLocal();
+        } catch (LocalException ex) {
+            Logger.getLogger(VentanaDeUsuario.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }//GEN-LAST:event_insertarLocal2ActionPerformed
 
     private void txtbuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtbuscarActionPerformed
         // TODO add your handling code here:
@@ -381,49 +431,29 @@ public class VentanaLocales extends javax.swing.JInternalFrame {
 //            return datos.matches("[a-z A-Z]*");
     }//GEN-LAST:event_tablaKeyReleased
 
-    private void apellidoTxt2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_apellidoTxt2ActionPerformed
+    private void encargadoTxt2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_encargadoTxt2ActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_apellidoTxt2ActionPerformed
+    }//GEN-LAST:event_encargadoTxt2ActionPerformed
+
+    private void ingresoLocal2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ingresoLocal2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_ingresoLocal2ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextField apellidoTxt;
-    private javax.swing.JTextField apellidoTxt1;
-    private javax.swing.JTextField apellidoTxt2;
-    private javax.swing.JPasswordField claveTxt;
-    private javax.swing.JPasswordField claveTxt1;
     private javax.swing.JButton eliminar;
-    private javax.swing.JTextField emailTxt;
-    private javax.swing.JTextField emailTxt1;
-    private javax.swing.JTextField ingresoUsuario;
-    private javax.swing.JTextField ingresoUsuario1;
-    private javax.swing.JTextField ingresoUsuario2;
-    private javax.swing.JButton insertarUsuario;
-    private javax.swing.JButton insertarUsuario1;
+    private javax.swing.JTextField encargadoTxt2;
+    private javax.swing.JTextField ingresoNumero;
     private javax.swing.JButton insertarUsuario2;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel16;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JButton modificar;
-    private javax.swing.JTextField nombreTxt;
-    private javax.swing.JTextField nombreTxt1;
-    private javax.swing.JTextField nombreTxt2;
+    private javax.swing.JTextField negocioTxt2;
     public static javax.swing.JTable tabla;
     private javax.swing.JTextField txtbuscar;
     // End of variables declaration//GEN-END:variables

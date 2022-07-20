@@ -23,6 +23,7 @@ public class PersistenciaLocal {
     
     private static final String all = "SELECT * FROM grupo_soft.locales WHERE fecha_baja IS NULL";
     private static final String insert = "INSERT INTO grupo_soft.locales (nro_local, negocio, encargado, fecha_alta) VALUES (?, ?, ?, current_timestamp())";
+    private static final String verificar = "SELECT nro_local FROM grupo_soft.locales WHERE nro_local = ?";
 
     static Connection cn = null;
     static Conexion conexion = new Conexion();
@@ -86,7 +87,6 @@ public class PersistenciaLocal {
             
         cn = conexion.conectar();
         pst = cn.prepareStatement(insert);
-       // stirng nuero = 
         pst.setInt(1,local.getNumeroLocal());
         pst.setString(2, local.getNombreNegocio());
         pst.setString(3, local.getEncargado());
@@ -95,7 +95,26 @@ public class PersistenciaLocal {
 
         } catch (SQLException e) {
             throw new LocalException("No pude insertar el local");
-        } finally {
         }
+    }
+    
+    
+    public static boolean verificarLocal(Local local) throws LocalException
+    {
+        boolean existe = false;
+        try{
+            cn = conexion.conectar();
+            pst = cn.prepareStatement(verificar);
+            pst.setInt(1, local.getNumeroLocal());
+            
+            ResultSet rs = pst.executeQuery();
+            if (rs.next())
+                existe = true;
+        
+        } catch(SQLException  e){
+            throw new LocalException("No encontre el local");
+        }
+    
+        return existe;
     }
 }

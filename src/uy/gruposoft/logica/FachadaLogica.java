@@ -62,5 +62,19 @@ public class FachadaLogica {
 
      return locales;
     }
+    
+    public static boolean verificarLocal(Local local) throws LocalException{
+        
+        boolean existeLocal = PersistenciaLocal.verificarLocal(local);
+        
+        return existeLocal;
+        
+    }
+    
+    public static void insertarLocal(Local local) throws LocalException{
+        PersistenciaLocal.altaLocal(local);
+    }
+    
+   
 
 }
