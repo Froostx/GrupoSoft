@@ -1,7 +1,9 @@
 package uy.gruposoft.logica;
 
+import uy.gruposoft.excepciones.AfiliadoException;
 import uy.gruposoft.excepciones.LocalException;
 import uy.gruposoft.excepciones.UsuarioException;
+import uy.gruposoft.persistencia.PersistenciaAfiliado;
 import uy.gruposoft.persistencia.PersistenciaLocal;
 import uy.gruposoft.persistencia.PersistenciaUsuario;
 
@@ -74,6 +76,19 @@ public class FachadaLogica {
     public static void insertarLocal(Local local) throws LocalException{
         PersistenciaLocal.altaLocal(local);
     }
+    
+    
+    
+    //Afiliados:
+    
+    
+    public static Afiliados cargarAfiliados() throws AfiliadoException{
+        Afiliados afiliados = new Afiliados();
+        afiliados = PersistenciaAfiliado.mostrarAfiliados();
+        
+        return afiliados;
+    }
+    
     
    
 

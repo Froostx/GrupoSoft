@@ -10,6 +10,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JInternalFrame;
 import javax.swing.JOptionPane;
+import uy.gruposoft.excepciones.AfiliadoException;
 import uy.gruposoft.excepciones.LocalException;
 import uy.gruposoft.excepciones.UsuarioException;
 
@@ -146,6 +147,23 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
     private void afiliadosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_afiliadosActionPerformed
         // TODO add your handling code here:
+        VentanaAfiliados verAfiliados = null;
+        try {
+            verAfiliados = new VentanaAfiliados();
+        } catch (AfiliadoException ex) {
+            Logger.getLogger(MenuPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        if (JInternalFrames_AbiertosLocal(verAfiliados) == false) {
+            Ventanas.add(verAfiliados);
+
+            Dimension desktopSize = Ventanas.getSize();
+            Dimension FrameSize = verAfiliados.getSize();
+            verAfiliados.setLocation((desktopSize.width - FrameSize.width) / 2, (desktopSize.height - FrameSize.height) / 2);
+            verAfiliados.show();
+
+        }
+        
     }//GEN-LAST:event_afiliadosActionPerformed
 
     public boolean JInternalFrames_Abiertos(VentanaDeUsuario jif) { // Creamos un metodo publico de tipo boolean.
@@ -217,6 +235,20 @@ public class MenuPrincipal extends javax.swing.JFrame {
     }
     return false;
     }
+    
+    public boolean JInternalFrames_AbiertosLocal(VentanaAfiliados jif) { 
+    JInternalFrame[] jif_Activos = MenuPrincipal.Ventanas.getAllFrames();
+
+    for (int i = 0; i < jif_Activos.length; i++) {
+
+        if (jif.getClass().isInstance(jif_Activos[i])) {
+            JOptionPane.showMessageDialog(null, "La ventana que esta intentando abrir ya esta abierta.", "Información", JOptionPane.INFORMATION_MESSAGE);
+            return true;
+        }
+    }
+    return false;
+    }
+    
 
     /**
      * @param args the command line arguments
