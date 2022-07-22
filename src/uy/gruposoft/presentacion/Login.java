@@ -5,6 +5,10 @@
  */
 package uy.gruposoft.presentacion;
 
+import java.awt.Desktop;
+import java.awt.Toolkit;
+import java.awt.event.KeyEvent;
+import java.net.URI;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import uy.gruposoft.logica.FachadaLogica;
@@ -21,6 +25,7 @@ public class Login extends javax.swing.JFrame {
      */
     public Login() {
         initComponents();
+	setIconImage();
     }
 
     /**
@@ -39,21 +44,29 @@ public class Login extends javax.swing.JFrame {
         Ingresar = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
         clave = new javax.swing.JPasswordField();
+        jLabel4 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jPanel1.setBackground(java.awt.Color.white);
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(34, 105, 130));
         jLabel1.setText("Usuario:");
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(233, 184, -1, -1));
 
+        nombreUsuario.setBackground(java.awt.Color.white);
         nombreUsuario.setToolTipText("");
         nombreUsuario.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        jPanel1.add(nombreUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(97, 204, 320, -1));
 
         jLabel2.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(34, 105, 130));
         jLabel2.setText("Contraseña:");
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(222, 232, -1, -1));
 
-        Ingresar.setBackground(new java.awt.Color(0, 153, 51));
+        Ingresar.setBackground(new java.awt.Color(34, 105, 130));
         Ingresar.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         Ingresar.setForeground(new java.awt.Color(255, 255, 255));
         Ingresar.setText("INGRESAR");
@@ -62,43 +75,18 @@ public class Login extends javax.swing.JFrame {
                 IngresarActionPerformed(evt);
             }
         });
+        jPanel1.add(Ingresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(193, 292, 127, 43));
 
         jLabel3.setFont(new java.awt.Font("Arial", 1, 36)); // NOI18N
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/uy/gruposoft/assets/gruposoft_logo_300x134.png"))); // NOI18N
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(97, 34, 320, -1));
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(97, 97, 97)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
-                    .addComponent(Ingresar, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(clave)
-                    .addComponent(jLabel2)
-                    .addComponent(nombreUsuario)
-                    .addComponent(jLabel1)
-                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 320, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(91, 91, 91))
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGap(34, 34, 34)
-                .addComponent(jLabel3)
-                .addGap(16, 16, 16)
-                .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(nombreUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel2)
-                .addGap(5, 5, 5)
-                .addComponent(clave, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 19, Short.MAX_VALUE)
-                .addComponent(Ingresar, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(20, 20, 20))
-        );
+        clave.setBackground(java.awt.Color.white);
+        jPanel1.add(clave, new org.netbeans.lib.awtextra.AbsoluteConstraints(97, 251, 320, -1));
+
+        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/uy/gruposoft/assets/login-background.jpg"))); // NOI18N
+        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 510, 360));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -192,7 +180,11 @@ public class Login extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JTextField nombreUsuario;
     // End of variables declaration//GEN-END:variables
+private void setIconImage() {
+        setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/uy/gruposoft/assets/windows-icon.png")));
+    }
 }
