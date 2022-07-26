@@ -5,12 +5,17 @@
  */
 package uy.gruposoft.presentacion;
 
-import javax.swing.JScrollPane;
+import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import uy.gruposoft.excepciones.AfiliadoException;
+import uy.gruposoft.logica.Afiliado;
 import uy.gruposoft.logica.Afiliados;
 import uy.gruposoft.logica.FachadaLogica;
-import static uy.gruposoft.presentacion.VentanaDeUsuario.tabla;
+import uy.gruposoft.logica.Paises;
 
 /**
  *
@@ -21,15 +26,47 @@ public class VentanaAfiliados extends javax.swing.JInternalFrame {
     /**
      * Creates new form Afiliados
      */
-    public VentanaAfiliados()throws AfiliadoException {
+    public VentanaAfiliados() throws AfiliadoException {
         initComponents();
-        mostrarUsuarios();
+        mostrarAfiliados();
+        cargarPaises();
     }
-    
-    
-    public static void mostrarUsuarios() throws AfiliadoException {
 
-        String[] nombresColumnas = {"Cedula", "Nombre", "Apellido", "Nacionalidad", "Direccion", "Telefono","Email","Nacimiento", "Numero_Local","Propietario", "Fecha Alta"};
+    public static void main(String args[]) {
+        /* Set the Nimbus look and feel */
+        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         */
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        } catch (ClassNotFoundException ex) {
+            java.util.logging.Logger.getLogger(MenuPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(MenuPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(MenuPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(MenuPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
+        //</editor-fold>
+
+        /* Create and display the form */
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new MenuPrincipal().setVisible(true);
+            }
+        });
+    }
+
+    public static void mostrarAfiliados() throws AfiliadoException {
+
+        String[] nombresColumnas = {"Cedula", "Nombre", "Apellido", "Nacionalidad", "Direccion", "Telefono", "Email", "Nacimiento", "Numero_Local", "Propietario", "Fecha Alta"};
         Afiliados afiliados = FachadaLogica.cargarAfiliados();
         DefaultTableModel modelo = new DefaultTableModel(null, nombresColumnas);
 
@@ -64,9 +101,69 @@ public class VentanaAfiliados extends javax.swing.JInternalFrame {
         tabla.getColumnModel().getColumn(8).setPreferredWidth(110);
         tabla.getColumnModel().getColumn(9).setPreferredWidth(90);
         tabla.getColumnModel().getColumn(10).setPreferredWidth(80);
-        
+
         tabla.setAutoResizeMode(tabla.AUTO_RESIZE_OFF);
-        tabla.getTableHeader().setReorderingAllowed(false) ;
+        tabla.getTableHeader().setReorderingAllowed(false);
+    }
+
+    public void cargarPaises() throws AfiliadoException {
+        Paises paises = FachadaLogica.cargarPaises();
+        DefaultComboBoxModel model = new DefaultComboBoxModel();
+        
+        for (int i = 0; i < paises.getPaises().size(); i++) {
+            model.addElement(paises.getPaises().get(i).getPais());
+
+        }
+       
+        model.setSelectedItem("Seleccione Un Pais...");
+        nacionalidad.setModel(model);
+        
+    }
+
+    public void validarAfiliado() throws AfiliadoException {
+
+        Date date = nacimiento.getDate(); //ic es la interfaz, jDate el JDatechooser
+
+        long d = date.getTime(); //guardamos en un long el tiempo
+
+        java.sql.Date nacimientoAfiliado = new java.sql.Date(d);// parseamos al formato del sql  
+
+        String nombreAfiliado = nombre.getText();
+        String apellidoAfiliado = apellido.getText();
+        String nacionalidadAfiliado = (String) nacionalidad.getSelectedItem();
+        String direccionAfiliado = direccion.getText();
+        String telefonoAfiliado = telefono.getText();
+        String mailAfiliado = mail.getText();
+
+        int numeroLocal = Integer.parseInt(local.getText());
+        boolean propietarioAfiliado = propietario.isSelected();
+        if (caracteresValidos(nombreAfiliado.trim()) && caracteresValidos(apellidoAfiliado.trim()) && !caracteresValidos(cedula.getText()) && !caracteresValidos(String.valueOf(numeroLocal))) {
+            int cI = Integer.parseInt(cedula.getText());
+            Afiliado afiliado = new Afiliado();
+
+            afiliado.setCedula(cI);
+            afiliado.setNombre(nombreAfiliado);
+            afiliado.setApellido(apellidoAfiliado);
+            afiliado.setNacionalidad(nacionalidadAfiliado);
+            afiliado.setDireccion(direccionAfiliado);
+            afiliado.setTelefono(telefonoAfiliado);
+            afiliado.setMail(mailAfiliado);
+            afiliado.setNacimiento(nacimientoAfiliado);
+            afiliado.setNumeroLocal(numeroLocal);
+            afiliado.setPropietario(propietarioAfiliado);
+
+            FachadaLogica.insertarAfiliado(afiliado);
+            FachadaLogica.cargarAfiliados();
+            mostrarAfiliados();
+        } else {
+            JOptionPane.showMessageDialog(this, "Ingrese Caracteres Validos");
+        }
+
+    }
+
+    public static boolean caracteresValidos(String datos) {
+        return datos.matches("[a-z A-Z]*");
+
     }
 
     /**
@@ -97,9 +194,9 @@ public class VentanaAfiliados extends javax.swing.JInternalFrame {
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        nuevoAfiliado = new javax.swing.JButton();
         nacimiento = new com.toedter.calendar.JDateChooser();
-        propietario = new javax.swing.JComboBox<>();
+        propietario = new javax.swing.JRadioButton();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tabla = new javax.swing.JTable();
@@ -129,7 +226,14 @@ public class VentanaAfiliados extends javax.swing.JInternalFrame {
         jLabel4.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         jLabel4.setText("Nacionalidad");
 
-        nacionalidad.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione Un Pais...", "Afganistán", "Albania", "Alemania", "Andorra", "Angola", "Antigua y Barbuda", "Arabia Saudita", "Argelia", "Argentina", "Armenia", "Australia", "Austria", "Azerbaiyán", "Bahamas", "Bangladés", "Barbados", "Baréin", "Bélgica", "Belice", "Benín", "Bielorrusia", "Birmania", "Bolivia", "Bosnia-Herzegovina", "Botsuana", "Brasil", "Brunéi", "Bulgaria", "Burkina Faso", "Burundi", "Bután", "Cabo Verde", "Camboya", "Camerún", "Canadá", "Catar", "Chad", "Chile", "China", "Chipre", "Colombia", "Comoras", "Congo", "Corea del Norte", "Corea del Sur", "Costa de Marfil", "Costa Rica", "Croacia", "Cuba", "Dinamarca", "Dominica", "Ecuador", "Egipto", "El Salvador", "Emiratos Árabes Unidos", "Eritrea", "Eslovaquia", "Eslovenia", "España", "Estados Unidos", "Estonia", "Esuatini", "Etiopía", "Filipinas", "Finlandia", "Fiyi", "Francia", "Gabón", "Gambia", "Georgia", "Ghana", "Granada", "Grecia", "Guatemala", "Guinea", "Guinea Ecuatorial", "Guinea-Bisáu", "Guyana", "Haití", "Honduras", "Hungría", "India", "Indonesia", "Irak", "Irán", "Irlanda", "Islandia", "Islas Marshall", "Islas Salomón", "Israel", "Italia", "Jamaica", "Japón", "Jordania", "Kazajistán", "Kenia", "Kirguistán", "Kiribati", "Kosovo", "Kuwait", "Laos", "Lesoto", "Letonia", "Líbano", "Liberia", "Libia", "Liechtenstein", "Lituania", "Luxemburgo", "Macedonia del Norte", "Madagascar", "Malasia", "Malaui", "Maldivas", "Malí", "Malta", "Marruecos", "Mauricio", "Mauritania", "México", "Micronesia", "Moldavia", "Mónaco", "Mongolia", "Montenegro", "Mozambique", "Namibia", "Nauru", "Nepal", "Nicaragua", "Níger", "Nigeria", "Noruega", "Nueva Zelanda", "Omán", "Países Bajos", "Pakistán", "Palaos", "Palestina", "Panamá", "Papúa Nueva Guinea", "Paraguay", "Perú", "Polonia", "Portugal", "Reino Unido", "República Centroafricana", "República Checa", "República Democrática del Congo", "República Dominicana", "Ruanda", "Rumania", "Rusia", "Samoa", "San Cristóbal y Nieves", "San Marino", "San Vicente y las Granadinas", "Santa Lucía", "Santo Tomé y Príncipe", "Senegal", "Serbia", "Seychelles", "Sierra Leona", "Singapur", "Siria", "Somalia", "Sri Lanka", "Sudáfrica", "Sudán", "Sudán del Sur", "Suecia", "Suiza", "Surinam", "Tailandia", "Taiwán", "Tanzania", "Tayikistán", "Timor Oriental", "Togo", "Tonga", "Trinidad y Tobago", "Túnez", "Turkmenistán", "Turquía", "Tuvalu", "Ucrania", "Uganda", "Uruguay", "Uzbekistán", "Vanuatu", "Vaticano", "Venezuela", "Vietnam", "Yemen", "Yibuti", "Zambia", "Zimbabue" }));
+        nacionalidad.setToolTipText("");
+        nacionalidad.setAutoscrolls(true);
+        nacionalidad.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        nacionalidad.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                nacionalidadActionPerformed(evt);
+            }
+        });
 
         jLabel5.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         jLabel5.setText("Direccion");
@@ -149,9 +253,14 @@ public class VentanaAfiliados extends javax.swing.JInternalFrame {
         jLabel10.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         jLabel10.setText("Propietario");
 
-        jButton1.setText("Crear Afiliado");
+        nuevoAfiliado.setText("Crear Afiliado");
+        nuevoAfiliado.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                nuevoAfiliadoActionPerformed(evt);
+            }
+        });
 
-        propietario.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione Una Opcion...", "Si", "No" }));
+        propietario.setText("SI");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -176,7 +285,6 @@ public class VentanaAfiliados extends javax.swing.JInternalFrame {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                 .addComponent(nombre, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(propietario, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(apellido, javax.swing.GroupLayout.Alignment.LEADING)
                                 .addComponent(local, javax.swing.GroupLayout.Alignment.LEADING)
                                 .addComponent(nacimiento, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -184,10 +292,11 @@ public class VentanaAfiliados extends javax.swing.JInternalFrame {
                                 .addComponent(telefono, javax.swing.GroupLayout.Alignment.LEADING)
                                 .addComponent(direccion, javax.swing.GroupLayout.Alignment.LEADING)
                                 .addComponent(nacionalidad, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(cedula, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(cedula, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(propietario)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(110, 110, 110)
-                        .addComponent(jButton1)))
+                        .addComponent(nuevoAfiliado)))
                 .addContainerGap(31, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -229,12 +338,12 @@ public class VentanaAfiliados extends javax.swing.JInternalFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(local, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel9))
-                .addGap(26, 26, 26)
+                .addGap(25, 25, 25)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel10)
-                    .addComponent(propietario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(propietario))
                 .addGap(18, 18, 18)
-                .addComponent(jButton1)
+                .addComponent(nuevoAfiliado)
                 .addGap(23, 23, 23))
         );
 
@@ -274,8 +383,20 @@ public class VentanaAfiliados extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-   
-    
+    private void nuevoAfiliadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nuevoAfiliadoActionPerformed
+        try {
+            // TODO add your handling code here:
+            validarAfiliado();
+        } catch (AfiliadoException ex) {
+            Logger.getLogger(VentanaAfiliados.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }//GEN-LAST:event_nuevoAfiliadoActionPerformed
+
+    private void nacionalidadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nacionalidadActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_nacionalidadActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField apellido;
@@ -283,7 +404,6 @@ public class VentanaAfiliados extends javax.swing.JInternalFrame {
     private javax.swing.JTextField cedula;
     private javax.swing.JTextField direccion;
     private javax.swing.JButton eliminar;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -304,11 +424,10 @@ public class VentanaAfiliados extends javax.swing.JInternalFrame {
     private com.toedter.calendar.JDateChooser nacimiento;
     private javax.swing.JComboBox<String> nacionalidad;
     private javax.swing.JTextField nombre;
-    private javax.swing.JComboBox<String> propietario;
+    private javax.swing.JButton nuevoAfiliado;
+    private javax.swing.JRadioButton propietario;
     private static javax.swing.JTable tabla;
     private javax.swing.JTextField telefono;
     // End of variables declaration//GEN-END:variables
-
- 
 
 }
