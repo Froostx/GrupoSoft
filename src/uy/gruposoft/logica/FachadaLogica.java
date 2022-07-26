@@ -89,6 +89,17 @@ public class FachadaLogica {
         return afiliados;
     }
     
+    public static Paises cargarPaises() throws AfiliadoException{
+        Paises paises = new Paises();
+        paises = PersistenciaAfiliado.cargarPais();
+        
+        return paises;
+    }
+    
+    public static void insertarAfiliado(Afiliado afiliado) throws AfiliadoException{
+        PersistenciaAfiliado.altaAfiliado(afiliado);
+    }
+    
     
    
 
