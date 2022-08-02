@@ -9,6 +9,8 @@ import java.awt.Desktop;
 import java.awt.Toolkit;
 import java.awt.event.KeyEvent;
 import java.net.URI;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import uy.gruposoft.logica.FachadaLogica;
@@ -47,6 +49,7 @@ public class Login extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Login - GrupoSoft v.1");
 
         jPanel1.setBackground(java.awt.Color.white);
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -118,8 +121,10 @@ public class Login extends javax.swing.JFrame {
 //       //invoco al existeUsuario con el usuario que cargue en memoria para saber si existe en la base 
         Boolean existe = FachadaLogica.existeUsuario(usuario);
         if (existe) {
-
-            System.out.println("LOG - Login: " + nombre + " se conecto");
+	    
+	    LocalDateTime dateTime = LocalDateTime.now();
+	    String timeStamp = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss").format(dateTime);
+            System.out.println(timeStamp + " ||INFO|| " + "--" + " ||Login|| " + "Message: " + nombre + " se conecto");
 
             JLabel mensajeLbl = new JLabel();
 
@@ -129,7 +134,9 @@ public class Login extends javax.swing.JFrame {
         } else {
 
             //System.out.println("Usuario no encontrado");
-            System.out.println("LOG - Login_ERROR: " + nombre + " no encontrado");
+	    LocalDateTime dateTime = LocalDateTime.now();
+	    String timeStamp2 = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss").format(dateTime);
+            System.out.println(timeStamp2 + " ||ERROR|| " + "--" + " ||Login|| " + "Message: " + nombre + " no encontrado");
             JOptionPane.showMessageDialog(null, "Usuario no encontrado");
             nombreUsuario.setText("");
             clave.setText("");

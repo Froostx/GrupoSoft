@@ -25,6 +25,7 @@ public class PersistenciaUsuario {
     private static final String eliminar = "UPDATE grupo_soft.usuarios SET fecha_baja = current_timestamp() WHERE id = ?";
     private static final String verificar = "SELECT username FROM grupo_soft.usuarios WHERE username = ?";
     private static final String buscar = "SELECT * FROM grupo_soft.usuarios WHERE username LIKE ? '%' and fecha_baja IS NULL ORDER BY username";
+    
     static Connection cn = null;
     static Conexion conexion = new Conexion();
 
@@ -219,10 +220,7 @@ public class PersistenciaUsuario {
     }
     
     public static Usuarios buscarUsuarios(Usuario usuarioEncontrado) throws UsuarioException {
-
-       
-
-        
+               
         Usuarios usuarios = new Usuarios();
 
         ResultSet rs = null;
@@ -244,16 +242,12 @@ public class PersistenciaUsuario {
                 usuario.setEmail(rs.getString("email"));
                 usuario.setClave(rs.getString("Contraseña"));
                 usuario.setFechaAlta(rs.getDate("fecha_alta"))  ;
-               
-               
+                              
                 usuarios.agregarUsuario(usuario);
-
             }
-
         } catch (SQLException e) {
 
             throw new UsuarioException("No pude cargar los usuarios");
-
         } finally {
             try {
                 if (rs != null) {
