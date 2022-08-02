@@ -77,6 +77,22 @@ public class FachadaLogica {
         PersistenciaLocal.altaLocal(local);
     }
     
+    public static void modificarLocal(Local local) throws LocalException {
+
+    PersistenciaLocal.modificarLocal(local);
+
+    }
+    
+    public static void eliminarLocal(Local local) throws LocalException{
+        PersistenciaLocal.eliminarLocal(local);
+    }
+
+    public static Locales buscarLocal(Local local) throws LocalException {
+        Locales locales = new Locales();
+        locales = PersistenciaLocal.buscarLocales(local);
+
+        return locales;
+    }
     
     
     //Afiliados:
@@ -89,7 +105,5 @@ public class FachadaLogica {
         return afiliados;
     }
     
-    
-   
-
+ 
 }
