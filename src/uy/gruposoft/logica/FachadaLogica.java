@@ -1,9 +1,12 @@
 package uy.gruposoft.logica;
 
+import java.sql.SQLException;
 import uy.gruposoft.excepciones.AfiliadoException;
+import uy.gruposoft.excepciones.DeudorException;
 import uy.gruposoft.excepciones.LocalException;
 import uy.gruposoft.excepciones.UsuarioException;
 import uy.gruposoft.persistencia.PersistenciaAfiliado;
+import uy.gruposoft.persistencia.PersistenciaDeudor;
 import uy.gruposoft.persistencia.PersistenciaLocal;
 import uy.gruposoft.persistencia.PersistenciaUsuario;
 
@@ -117,7 +120,25 @@ public class FachadaLogica {
     }
     
     
-   
+   // deudores
+    
+        public static Deudores cargarDeudores() throws DeudorException, SQLException{
+        Deudores deudores = new Deudores();
+        deudores = PersistenciaDeudor.mostrarDeudores();
+        
+        return deudores;
+    }
+        
+    public static boolean verificarDeudor(Deudor deudor) throws DeudorException {
+        boolean existeDeudor;
+        existeDeudor = PersistenciaDeudor.verificarDeudor(deudor);
+
+        return existeDeudor;
+    }
+    
+    public static void insertarDeudor(Deudor deudor) throws DeudorException{
+        PersistenciaDeudor.altaDeudor(deudor);
+    }
 
 
 }
