@@ -59,6 +59,18 @@
                 </Property>
                 <Property name="text" type="java.lang.String" value="Negocio"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="NegocioActionPerformed"/>
+              </Events>
+            </MenuItem>
+            <MenuItem class="javax.swing.JMenuItem" name="deudores">
+              <Properties>
+                <Property name="actionCommand" type="java.lang.String" value="Deudores"/>
+                <Property name="label" type="java.lang.String" value="Deudores"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="deudoresActionPerformed"/>
+              </Events>
             </MenuItem>
           </SubComponents>
         </Menu>
