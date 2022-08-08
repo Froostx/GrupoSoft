@@ -139,6 +139,20 @@ public class FachadaLogica {
     public static void insertarDeudor(Deudor deudor) throws DeudorException{
         PersistenciaDeudor.altaDeudor(deudor);
     }
+    
+    public static void eliminarDeudor(Deudor deudor) throws DeudorException {
+
+        PersistenciaDeudor.bajaDeudor(deudor);
+    }
+    
+    public static void modificarDeuda(Deudor deudor) throws DeudorException{
+        
+        PersistenciaDeudor.modificarDeuda(deudor);
+        
+    
+    }
+    
+    
 
 
 }

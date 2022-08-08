@@ -25,6 +25,10 @@ import uy.gruposoft.logica.FachadaLogica;
  */
 public class VentanaDeudores extends javax.swing.JInternalFrame {
 
+    
+    
+    public Deudor deudorSeleccionado = new Deudor();
+    
     /**
      * Creates new form VentanaDeudores
      */
@@ -78,7 +82,7 @@ public class VentanaDeudores extends javax.swing.JInternalFrame {
     private void initComponents() {
 
         txtbuscar = new javax.swing.JTextField();
-        modificar = new javax.swing.JButton();
+        aumentar = new javax.swing.JButton();
         eliminar = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
         jLabel11 = new javax.swing.JLabel();
@@ -90,6 +94,8 @@ public class VentanaDeudores extends javax.swing.JInternalFrame {
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tabla = new javax.swing.JTable();
+        disminuir = new javax.swing.JButton();
+        jLabel17 = new javax.swing.JLabel();
 
         setClosable(true);
         setIconifiable(true);
@@ -105,10 +111,10 @@ public class VentanaDeudores extends javax.swing.JInternalFrame {
             }
         });
 
-        modificar.setText("Modificar");
-        modificar.addActionListener(new java.awt.event.ActionListener() {
+        aumentar.setText("+");
+        aumentar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                modificarActionPerformed(evt);
+                aumentarActionPerformed(evt);
             }
         });
 
@@ -116,6 +122,11 @@ public class VentanaDeudores extends javax.swing.JInternalFrame {
         eliminar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 eliminarMouseClicked(evt);
+            }
+        });
+        eliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                eliminarActionPerformed(evt);
             }
         });
 
@@ -183,7 +194,7 @@ public class VentanaDeudores extends javax.swing.JInternalFrame {
         );
 
         jLabel16.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        jLabel16.setText("Buscar Deudor");
+        jLabel16.setText("Consultar ci");
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Lista De Locales", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 1, 14))); // NOI18N
         jPanel1.setLayout(new java.awt.BorderLayout());
@@ -213,6 +224,16 @@ public class VentanaDeudores extends javax.swing.JInternalFrame {
 
         jPanel1.add(jScrollPane1, java.awt.BorderLayout.CENTER);
 
+        disminuir.setText("-");
+        disminuir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                disminuirActionPerformed(evt);
+            }
+        });
+
+        jLabel17.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        jLabel17.setText("Modificar meses");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -223,31 +244,38 @@ public class VentanaDeudores extends javax.swing.JInternalFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jLabel16)
-                        .addGap(31, 31, 31)
-                        .addComponent(txtbuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(54, 54, 54)
-                        .addComponent(modificar)
-                        .addGap(18, 18, 18)
-                        .addComponent(eliminar)
-                        .addGap(36, 36, 36))
+                        .addComponent(jLabel16, javax.swing.GroupLayout.DEFAULT_SIZE, 96, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtbuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(88, 88, 88)
+                        .addComponent(jLabel17)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(disminuir)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(aumentar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(eliminar))
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(14, 14, 14))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(modificar)
-                            .addComponent(eliminar)
-                            .addComponent(txtbuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel16))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(txtbuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabel16))
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(eliminar)
+                                .addComponent(aumentar, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(disminuir, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabel17)))
+                        .addGap(10, 10, 10)
                         .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addGap(16, 16, 16))
         );
@@ -277,56 +305,72 @@ public class VentanaDeudores extends javax.swing.JInternalFrame {
 //        }
     }//GEN-LAST:event_txtbuscarKeyReleased
 
-    private void modificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_modificarActionPerformed
+    private void aumentarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aumentarActionPerformed
 
-//        int seleccion = tabla.getSelectedRowCount();
-//
-//        if (seleccion == 1) {
-//            if (localSeleccionado.getNombreNegocio() == null) {
-//                JOptionPane.showMessageDialog(this, "no se modifico ningun registro");
-//            } else {
-//                try {
-//                    FachadaLogica.modificarLocal(localSeleccionado);
-//
-//                } catch (LocalException ex) {
-//                    Logger.getLogger(VentanaLocales.class.getName()).log(Level.SEVERE, null, ex);
-//
-//                }
-//                JOptionPane.showMessageDialog(this, "Registro Modificado Correctamente");
-//
-//            }
-//
-//        }else{
-//            JOptionPane.showMessageDialog(this, "no hay fila seleccionada");
-//        }
+        int seleccion = tabla.getSelectedRowCount();
 
-    }//GEN-LAST:event_modificarActionPerformed
+        if (seleccion == 1) {
+            if (tabla.getSelectedRow() < 0) {
+                JOptionPane.showMessageDialog(this, "Por favor seleccione un deudor");
+            } else {
+                try {
+                    int meses = deudorSeleccionado.getCantMeses();
+                    meses++;
+                    deudorSeleccionado.setCantMeses(meses);
+                    FachadaLogica.modificarDeuda(deudorSeleccionado);
+
+                } catch (DeudorException ex) {
+                    Logger.getLogger(VentanaLocales.class.getName()).log(Level.SEVERE, null, ex);
+
+                }
+                JOptionPane.showMessageDialog(this, "Registro Modificado Correctamente");
+                try {
+                    mostrarDeudores();
+                } catch (DeudorException ex) {
+                    Logger.getLogger(VentanaDeudores.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (SQLException ex) {
+                    Logger.getLogger(VentanaDeudores.class.getName()).log(Level.SEVERE, null, ex);
+                }
+
+            }
+
+        }else{
+            JOptionPane.showMessageDialog(this, "no hay fila seleccionada");
+        }
+
+    }//GEN-LAST:event_aumentarActionPerformed
 
     private void eliminarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_eliminarMouseClicked
         // TODO add your handling code here:
 
-//        int seleccion = tabla.getSelectedRowCount();
-//        try {
-//            if (seleccion == 1) {
-//                int res = JOptionPane.showConfirmDialog(null, "¿Desea Eliminar el Registro?", "Confirm", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
-//                if (res == JOptionPane.YES_OPTION) {
-//
-//                    FachadaLogica.eliminarLocal(localSeleccionado);
-//                }
-//            } else {
-//                JOptionPane.showMessageDialog(null, "Debe Seleccionar Fila");
-//            }
-//
-//        } catch (LocalException ex) {
-//            Logger.getLogger(VentanaDeUsuario.class.getName()).log(Level.SEVERE, null, ex);
-//
-//        }
-//
-//        try {
-//            mostrarLocales();
-//        } catch (LocalException ex) {
-//            Logger.getLogger(VentanaDeUsuario.class.getName()).log(Level.SEVERE, null, ex);
-//        }
+        int seleccion = tabla.getSelectedRowCount();
+        try {
+            if (seleccion == 1) {
+                int res = JOptionPane.showConfirmDialog(null, "¿Desea Eliminar el Deudor?" , "Confirm", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+                if (res == JOptionPane.YES_OPTION) {
+
+                    FachadaLogica.eliminarDeudor(deudorSeleccionado);
+                    
+                  
+                      
+                      
+                }
+            } else {
+                JOptionPane.showMessageDialog(null, "Debe Seleccionar Fila");
+            }
+
+        } catch (DeudorException ex) {
+            Logger.getLogger(VentanaDeUsuario.class.getName()).log(Level.SEVERE, null, ex);
+
+        }
+
+        try {
+            mostrarDeudores();
+        } catch (DeudorException ex) {
+            Logger.getLogger(VentanaDeUsuario.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(VentanaDeudores.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_eliminarMouseClicked
 
     private void ingreso_ciingresoLocal2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ingreso_ciingresoLocal2ActionPerformed
@@ -414,15 +458,12 @@ public class VentanaDeudores extends javax.swing.JInternalFrame {
     
     
     private void tablaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaMouseClicked
-//        int nro = (int) tabla.getValueAt(tabla.getSelectedRow(), 0);
-//
-//        String negocio = tabla.getValueAt(tabla.getSelectedRow(), 1).toString();
-//
-//        String encargado = tabla.getValueAt(tabla.getSelectedRow(), 2).toString();
-//
-//        localSeleccionado.setNumeroLocal(nro);
-//        localSeleccionado.setNombreNegocio(negocio);
-//        localSeleccionado.setEncargado(encargado);
+        int nro = (int) tabla.getValueAt(tabla.getSelectedRow(), 0);
+
+        int meses = (int) tabla.getValueAt(tabla.getSelectedRow(), 1);
+
+        deudorSeleccionado.setCiAfiliado(nro);
+        deudorSeleccionado.setCantMeses(meses);
     }//GEN-LAST:event_tablaMouseClicked
 
     private void tablaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tablaKeyReleased
@@ -452,8 +493,74 @@ public class VentanaDeudores extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_ingreso_mesesActionPerformed
 
+    private void eliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eliminarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_eliminarActionPerformed
+
+    private void disminuirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_disminuirActionPerformed
+        // TODO add your handling code here:
+        int seleccion = tabla.getSelectedRowCount();
+        boolean controlador = false;
+        if (seleccion == 1) {
+            if (tabla.getSelectedRow() < 0) {
+                JOptionPane.showMessageDialog(this, "Por favor seleccione un deudor");
+            } else {
+                try {
+                    int meses = deudorSeleccionado.getCantMeses();
+                    meses--;
+                    
+                    if (meses <= 0)
+                    {
+                        FachadaLogica.eliminarDeudor(deudorSeleccionado);
+                        controlador = true;
+                    }
+                    else{
+                        deudorSeleccionado.setCantMeses(meses);
+                        FachadaLogica.modificarDeuda(deudorSeleccionado);
+                    }
+
+                } catch (DeudorException ex) {
+                    Logger.getLogger(VentanaLocales.class.getName()).log(Level.SEVERE, null, ex);
+
+                }
+            
+                if(controlador)
+                {
+                
+                    JOptionPane.showMessageDialog(this, "El deudor se elimino al no tener mas deuda");
+                    try {
+                        mostrarDeudores();
+                    } catch (DeudorException ex) {
+                        Logger.getLogger(VentanaDeudores.class.getName()).log(Level.SEVERE, null, ex);
+                    } catch (SQLException ex) {
+                        Logger.getLogger(VentanaDeudores.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
+                else{
+                    try {
+                        JOptionPane.showMessageDialog(this, "Registro Modificado Correctamente");
+                        mostrarDeudores();
+                    } catch (DeudorException ex) {
+                        Logger.getLogger(VentanaDeudores.class.getName()).log(Level.SEVERE, null, ex);
+                    } catch (SQLException ex) {
+                        Logger.getLogger(VentanaDeudores.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+
+                }
+                    
+
+            }
+
+        }else{
+            JOptionPane.showMessageDialog(this, "no hay fila seleccionada");
+        }
+        
+    }//GEN-LAST:event_disminuirActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton aumentar;
+    private javax.swing.JButton disminuir;
     private javax.swing.JButton eliminar;
     private javax.swing.JTextField ingreso_ci;
     private javax.swing.JTextField ingreso_meses;
@@ -461,10 +568,10 @@ public class VentanaDeudores extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel17;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JButton modificar;
     public static javax.swing.JTable tabla;
     private javax.swing.JTextField txtbuscar;
     // End of variables declaration//GEN-END:variables

@@ -24,6 +24,8 @@ public class PersistenciaDeudor {
     private static final String all = "SELECT * FROM deudores";
     private static final String verificar = "SELECT ci_afiliado FROM grupo_soft.deudores WHERE ci_afiliado = ?";
     private static final String insert = "INSERT INTO grupo_soft.deudores (ci_afiliado, cant_meses) VALUES (?, ?)";
+    private static final String eliminar = "DELETE FROM grupo_soft.deudores WHERE ci_afiliado = ?";
+    private static final String update = "UPDATE grupo_soft.deudores SET cant_meses = ? WHERE ci_afiliado = ?";
 
     
     
@@ -112,6 +114,40 @@ public class PersistenciaDeudor {
 
         } catch (SQLException e) {
             throw new DeudorException("No pude insertar el deudor");
+        }
+    }
+    
+    public static void bajaDeudor(Deudor deudor) throws DeudorException{
+        try{
+            cn = conexion.conectar();
+            pst= cn.prepareStatement(eliminar);
+            pst.setInt(1, deudor.getCiAfiliado());
+            
+            pst.execute();
+            
+            
+        } catch (SQLException e) {
+            throw new DeudorException("No pude eliminar el deudor");
+        }       
+        
+    } 
+    
+    
+    public static void modificarDeuda(Deudor deudor)throws DeudorException {
+      
+        
+        try{
+            cn = conexion.conectar();
+            pst = cn.prepareStatement(update);
+           
+            pst.setInt(1, deudor.getCantMeses());
+            pst.setInt(2, deudor.getCiAfiliado());
+            
+            pst.executeUpdate();
+            
+        }catch (SQLException e) {
+            
+             throw new DeudorException("No pude modificar la deuda");
         }
     }
     

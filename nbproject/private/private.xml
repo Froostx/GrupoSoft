@@ -3,10 +3,10 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/Users/andressantucci/Desktop/BIOS/GrupoSoft/src/uy/gruposoft/persistencia/PersistenciaDeudor.java</file>
             <file>file:/Users/andressantucci/Desktop/BIOS/GrupoSoft/src/uy/gruposoft/presentacion/MenuPrincipal.java</file>
-            <file>file:/Users/andressantucci/Desktop/BIOS/GrupoSoft/src/uy/gruposoft/presentacion/VentanaDeudores.java</file>
             <file>file:/Users/andressantucci/Desktop/BIOS/GrupoSoft/src/uy/gruposoft/presentacion/VentanaDeUsuario.java</file>
+            <file>file:/Users/andressantucci/Desktop/BIOS/GrupoSoft/src/uy/gruposoft/logica/Afiliados.java</file>
+            <file>file:/Users/andressantucci/Desktop/BIOS/GrupoSoft/src/uy/gruposoft/logica/FachadaLogica.java</file>
             <file>file:/Users/andressantucci/Desktop/BIOS/GrupoSoft/src/uy/gruposoft/persistencia/PersistenciaLocal.java</file>
         </group>
     </open-files>
