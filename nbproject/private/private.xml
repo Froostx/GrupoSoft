@@ -6,9 +6,12 @@
             <file>file:/C:/Users/Administrador/Documents/GitHub/GrupoSoft/src/uy/gruposoft/presentacion/VentanaDeUsuario.java</file>
             <file>file:/C:/Users/Administrador/Documents/GitHub/GrupoSoft/src/uy/gruposoft/persistencia/PersistenciaUsuario.java</file>
             <file>file:/C:/Users/Administrador/Documents/GitHub/GrupoSoft/src/uy/gruposoft/presentacion/Login.java</file>
+            <file>file:/C:/Users/Administrador/Documents/GitHub/GrupoSoft/src/uy/gruposoft/logica/Afiliado.java</file>
             <file>file:/C:/Users/Administrador/Documents/GitHub/GrupoSoft/src/uy/gruposoft/presentacion/VentanaAfiliados.java</file>
-            <file>file:/C:/Users/Administrador/Documents/GitHub/GrupoSoft/src/uy/gruposoft/persistencia/PersistenciaAfiliado.java</file>
+            <file>file:/C:/Users/Administrador/Documents/GitHub/GrupoSoft/src/uy/gruposoft/persistencia/Conexion.java</file>
             <file>file:/C:/Users/Administrador/Documents/GitHub/GrupoSoft/src/uy/gruposoft/logica/FachadaLogica.java</file>
+            <file>file:/C:/Users/Administrador/Documents/GitHub/GrupoSoft/src/uy/gruposoft/persistencia/PersistenciaAfiliado.java</file>
+            <file>file:/C:/Users/Administrador/Documents/GitHub/GrupoSoft/src/uy/gruposoft/logica/CeldaRenderer.java</file>
         </group>
     </open-files>
 </project-private>

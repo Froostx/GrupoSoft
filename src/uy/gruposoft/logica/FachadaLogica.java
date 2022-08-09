@@ -100,7 +100,25 @@ public class FachadaLogica {
         PersistenciaAfiliado.altaAfiliado(afiliado);
     }
     
-    
+     public static void modificarAfiliado(Afiliado afiliado) throws AfiliadoException {
+
+        PersistenciaAfiliado.modificarAfiliado(afiliado);
+
+    }
+     
+      public static Afiliados buscarAfiliado(Afiliado afiliado) throws AfiliadoException {
+        Afiliados afiliados = new Afiliados();
+        afiliados = PersistenciaAfiliado.buscarAfiliados(afiliado);
+
+        return afiliados;
+    }
+      
+      public static void eliminarAfiliado(Afiliado afiliado) throws AfiliadoException {
+
+        PersistenciaAfiliado.bajaAfiliado(afiliado);
+    }
+      
+      
    
 
 }
