@@ -66,7 +66,7 @@ public class VentanaAfiliaciones extends javax.swing.JInternalFrame {
 
         tabla.setModel(modelo);
 
-        tabla.setDefaultRenderer(Object.class, new CeldaRenderer(9));
+       
         tabla.getColumnModel().getColumn(0).setPreferredWidth(140);
         tabla.getColumnModel().getColumn(1).setPreferredWidth(140);
         tabla.getColumnModel().getColumn(2).setPreferredWidth(140);
@@ -74,7 +74,7 @@ public class VentanaAfiliaciones extends javax.swing.JInternalFrame {
         tabla.setAutoResizeMode(tabla.AUTO_RESIZE_OFF);
         tabla.getTableHeader().setReorderingAllowed(false);
 
-        tabla.getInputMap(tabla.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT).put(KeyStroke.getKeyStroke(KeyEvent.VK_ENTER, 0, false), 9);
+       
     }
 
     public void validarAfiliacion() throws AfiliacionesException {
