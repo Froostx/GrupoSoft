@@ -89,10 +89,8 @@ public class VentanaDeudores extends javax.swing.JInternalFrame {
         ingreso_meses = new javax.swing.JTextField();
         jLabel12 = new javax.swing.JLabel();
         insertarDeudor = new javax.swing.JButton();
-
+        ingreso_ci1 = new javax.swing.JTextField();
         ingreso_ci = new javax.swing.JTextField();
-        jLabel16 = new javax.swing.JLabel();
-
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tabla = new javax.swing.JTable();
@@ -138,14 +136,6 @@ public class VentanaDeudores extends javax.swing.JInternalFrame {
         jLabel11.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel11.setText("ci Afiliado");
 
-        ingreso_ci.setRequestFocusEnabled(false);
-        ingreso_ci.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ingreso_ciActionPerformed(evt);
-            }
-        });
-
-
         ingreso_meses.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 ingreso_mesesActionPerformed(evt);
@@ -160,6 +150,12 @@ public class VentanaDeudores extends javax.swing.JInternalFrame {
         insertarDeudor.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 insertarDeudorinsertarLocal2ActionPerformed(evt);
+            }
+        });
+
+        ingreso_ci.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ingreso_ciActionPerformed(evt);
             }
         });
 
@@ -179,7 +175,7 @@ public class VentanaDeudores extends javax.swing.JInternalFrame {
                     .addComponent(insertarDeudor)
                     .addComponent(ingreso_meses, javax.swing.GroupLayout.DEFAULT_SIZE, 165, Short.MAX_VALUE)
                     .addComponent(ingreso_ci))
-                .addContainerGap(54, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -188,7 +184,7 @@ public class VentanaDeudores extends javax.swing.JInternalFrame {
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel11)
                     .addComponent(ingreso_ci, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(56, 56, 56)
+                .addGap(55, 55, 55)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(ingreso_meses, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel12))
@@ -197,12 +193,7 @@ public class VentanaDeudores extends javax.swing.JInternalFrame {
                 .addContainerGap(232, Short.MAX_VALUE))
         );
 
-
-        jLabel16.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        jLabel16.setText("Consultar ci");
-
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Lista De Deudores", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 1, 14))); // NOI18N
-
         jPanel1.setLayout(new java.awt.BorderLayout());
 
         tabla.setModel(new javax.swing.table.DefaultTableModel(
@@ -262,10 +253,8 @@ public class VentanaDeudores extends javax.swing.JInternalFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-
                         .addGap(12, 12, 12)
                         .addComponent(txtbuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
-
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(consultar)
                         .addGap(112, 112, 112)
@@ -276,7 +265,7 @@ public class VentanaDeudores extends javax.swing.JInternalFrame {
                         .addComponent(aumentar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(eliminar)
-                        .addGap(0, 0, Short.MAX_VALUE))
+                        .addGap(0, 42, Short.MAX_VALUE))
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(14, 14, 14))
         );
@@ -285,18 +274,14 @@ public class VentanaDeudores extends javax.swing.JInternalFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-
-                        .addGap(0, 23, Short.MAX_VALUE)
-
+                        .addGap(0, 24, Short.MAX_VALUE)
                         .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-
                                 .addComponent(aumentar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(eliminar))
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-
                                 .addComponent(disminuir, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(jLabel17)
                                 .addComponent(consultar)
@@ -305,8 +290,6 @@ public class VentanaDeudores extends javax.swing.JInternalFrame {
                         .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addGap(16, 16, 16))
         );
-
-        jPanel1.getAccessibleContext().setAccessibleName("Lista De Deudores");
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -399,10 +382,6 @@ public class VentanaDeudores extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_eliminarMouseClicked
 
-
-    private void ingreso_ciActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ingreso_ciActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_ingreso_ciActionPerformed
 
 
     private void insertarDeudorinsertarLocal2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_insertarDeudorinsertarLocal2ActionPerformed
@@ -668,6 +647,10 @@ public class VentanaDeudores extends javax.swing.JInternalFrame {
 
     }//GEN-LAST:event_consultarActionPerformed
 
+    private void ingreso_ciActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ingreso_ciActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_ingreso_ciActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton aumentar;
@@ -675,6 +658,7 @@ public class VentanaDeudores extends javax.swing.JInternalFrame {
     private javax.swing.JButton disminuir;
     private javax.swing.JButton eliminar;
     private javax.swing.JTextField ingreso_ci;
+    private javax.swing.JTextField ingreso_ci1;
     private javax.swing.JTextField ingreso_meses;
     private javax.swing.JButton insertarDeudor;
     private javax.swing.JLabel jLabel11;

@@ -29,10 +29,8 @@
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
-
                       <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
                       <Component id="txtbuscar" min="-2" pref="115" max="-2" attributes="0"/>
-
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="consultar" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="112" max="-2" attributes="0"/>
@@ -43,7 +41,7 @@
                       <Component id="aumentar" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Component id="eliminar" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                      <EmptySpace min="0" pref="42" max="32767" attributes="0"/>
                   </Group>
                   <Component id="jPanel1" max="32767" attributes="0"/>
               </Group>
@@ -55,10 +53,8 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="1" attributes="0">
               <Group type="103" groupAlignment="0" attributes="0">
-
                   <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="0" pref="23" max="32767" attributes="0"/>
-
+                      <EmptySpace min="0" pref="24" max="32767" attributes="0"/>
                       <Component id="jPanel4" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" attributes="0">
@@ -67,10 +63,7 @@
                               <Component id="aumentar" alignment="3" max="32767" attributes="0"/>
                               <Component id="eliminar" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <Component id="aumentar" alignment="0" min="-2" pref="24" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
-
-
                               <Component id="disminuir" alignment="3" min="-2" pref="24" max="-2" attributes="0"/>
                               <Component id="jLabel17" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="consultar" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -139,7 +132,7 @@
                       <Component id="ingreso_meses" alignment="0" pref="165" max="32767" attributes="0"/>
                       <Component id="ingreso_ci" alignment="0" max="32767" attributes="0"/>
                   </Group>
-                  <EmptySpace pref="54" max="32767" attributes="0"/>
+                  <EmptySpace max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -151,7 +144,7 @@
                       <Component id="jLabel11" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="ingreso_ci" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace min="-2" pref="56" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="55" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="ingreso_meses" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jLabel12" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -172,16 +165,6 @@
             <Property name="text" type="java.lang.String" value="ci Afiliado"/>
           </Properties>
         </Component>
-
-        <Component class="javax.swing.JTextField" name="ingreso_ci">
-          <Properties>
-            <Property name="requestFocusEnabled" type="boolean" value="false"/>
-          </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="ingreso_ciActionPerformed"/>
-          </Events>
-        </Component>
-
         <Component class="javax.swing.JTextField" name="ingreso_meses">
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="ingreso_mesesActionPerformed"/>
@@ -204,7 +187,12 @@
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="insertarDeudorinsertarLocal2ActionPerformed"/>
           </Events>
         </Component>
+        <Component class="javax.swing.JTextField" name="ingreso_ci1">
+        </Component>
         <Component class="javax.swing.JTextField" name="ingreso_ci">
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="ingreso_ciActionPerformed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>
@@ -218,9 +206,6 @@
           </Border>
         </Property>
       </Properties>
-      <AccessibilityProperties>
-        <Property name="AccessibleContext.accessibleName" type="java.lang.String" value="Lista De Deudores"/>
-      </AccessibilityProperties>
 
       <Layout class="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout"/>
       <SubComponents>
