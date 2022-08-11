@@ -21,7 +21,7 @@ public class Afiliado {
     private String mail;
     private Date nacimiento;
     private int numeroLocal;
-    private boolean propietario;
+    private String propietario;
     private Date fechaAlta;
 
     public int getCedula() {
@@ -90,13 +90,7 @@ public class Afiliado {
         this.numeroLocal = numeroLocal;
     }
 
-    public boolean isPropietario() {
-        return propietario;
-    }
-
-    public void setPropietario(boolean propietario) {
-        this.propietario = propietario;
-    }
+   
 
     public Date getFechaAlta() {
         return fechaAlta;
@@ -113,5 +107,17 @@ public class Afiliado {
     public void setTelefono(String telefono) {
         this.telefono = telefono;
     }
+
+    public String getPropietario() {
+        return propietario;
+    }
+
+    public void setPropietario(String propietario) {
+        this.propietario = propietario;
+    }
+
+    
+
+    
     
 }
