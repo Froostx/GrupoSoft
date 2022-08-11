@@ -1,8 +1,10 @@
 package uy.gruposoft.logica;
 
+import uy.gruposoft.excepciones.AfiliacionesException;
 import uy.gruposoft.excepciones.AfiliadoException;
 import uy.gruposoft.excepciones.LocalException;
 import uy.gruposoft.excepciones.UsuarioException;
+import uy.gruposoft.persistencia.PersistenciaAfiliaciones;
 import uy.gruposoft.persistencia.PersistenciaAfiliado;
 import uy.gruposoft.persistencia.PersistenciaLocal;
 import uy.gruposoft.persistencia.PersistenciaUsuario;
@@ -116,6 +118,26 @@ public class FachadaLogica {
       public static void eliminarAfiliado(Afiliado afiliado) throws AfiliadoException {
 
         PersistenciaAfiliado.bajaAfiliado(afiliado);
+    }
+      
+      //afiliaciones
+      
+      public static Afiliaciones cargarAfiliaciones() throws AfiliacionesException{
+          
+        Afiliaciones afiliaciones = new Afiliaciones();
+        afiliaciones = PersistenciaAfiliaciones.mostrarAfiliaciones();
+        
+        return afiliaciones;
+    }
+      
+      public static void insertarAfiliacion(Afiliacion afiliacion) throws AfiliacionesException{
+        PersistenciaAfiliaciones.altaAfiliaciones(afiliacion);
+    }
+      
+       public static void modificarAfiliacion(Afiliacion afiliacion) throws AfiliacionesException {
+
+        PersistenciaAfiliaciones.modificarAfiliaciones(afiliacion);
+
     }
       
       

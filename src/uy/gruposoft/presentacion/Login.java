@@ -5,7 +5,6 @@
  */
 package uy.gruposoft.presentacion;
 
-import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import uy.gruposoft.logica.FachadaLogica;
 import uy.gruposoft.logica.Usuario;
@@ -133,7 +132,7 @@ public class Login extends javax.swing.JFrame {
 
             System.out.println("LOG - Login: " + nombre + " se conecto");
 
-            JLabel mensajeLbl = new JLabel();
+        
 
             MenuPrincipal verMenuPrincipal = new MenuPrincipal();
             verMenuPrincipal.setVisible(true);

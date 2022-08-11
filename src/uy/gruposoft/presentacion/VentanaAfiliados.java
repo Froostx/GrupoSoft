@@ -353,9 +353,9 @@ public class VentanaAfiliados extends javax.swing.JInternalFrame {
 
         setClosable(true);
         setIconifiable(true);
-        setMaximumSize(new java.awt.Dimension(1150, 700));
+        setMaximumSize(new java.awt.Dimension(1470, 700));
         setMinimumSize(new java.awt.Dimension(1150, 700));
-        setPreferredSize(new java.awt.Dimension(1150, 700));
+        setPreferredSize(new java.awt.Dimension(1470, 700));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Nuevo Afiliado", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 1, 14))); // NOI18N
@@ -517,7 +517,7 @@ public class VentanaAfiliados extends javax.swing.JInternalFrame {
 
         jPanel2.add(jScrollPane1, java.awt.BorderLayout.CENTER);
 
-        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 66, 726, 600));
+        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 70, 1040, 600));
 
         jLabel11.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         jLabel11.setText("Buscar Por Cedula");
