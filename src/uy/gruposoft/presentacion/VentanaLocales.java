@@ -5,6 +5,7 @@
  */
 package uy.gruposoft.presentacion;
 
+import java.awt.event.KeyEvent;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -20,6 +21,9 @@ import uy.gruposoft.logica.Locales;
  */
 public class VentanaLocales extends javax.swing.JInternalFrame {
 
+    
+    public Local localSeleccionado = new Local();
+
     /**
      * Creates new form VentanaLocales
      *
@@ -34,7 +38,17 @@ public class VentanaLocales extends javax.swing.JInternalFrame {
 
         String[] nombresColumnas = {"nro_local", "negocio", "encargado", "Fecha Alta"};
         Locales locales = FachadaLogica.cargarLocales();
-        DefaultTableModel modelo = new DefaultTableModel(null, nombresColumnas);
+        DefaultTableModel modelo = new DefaultTableModel(null, nombresColumnas) {
+        
+            public boolean isCellEditable(int row, int col){
+                if (col == 0)
+                    return false;
+                else 
+                    return true;
+            }
+        };
+        
+        
 
         Object[] fila = new Object[modelo.getColumnCount()];
 
@@ -282,6 +296,7 @@ public class VentanaLocales extends javax.swing.JInternalFrame {
             else{
                 FachadaLogica.insertarLocal(local);
                 JOptionPane.showMessageDialog(this, "El Local se ingreso correctamente");
+                mostrarLocales();
 
             }
              
@@ -313,114 +328,109 @@ public class VentanaLocales extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_txtbuscarActionPerformed
 
     private void txtbuscarKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtbuscarKeyReleased
-//        if(txtbuscar.getText().equals("")){
-//            try {
-//                mostrarUsuarios();
-//            } catch (UsuarioException ex) {
-//                Logger.getLogger(VentanaDeUsuario.class.getName()).log(Level.SEVERE, null, ex);
-//            }
-//        }else{
-//            try {
-//                buscarUsuarios();
-//            } catch (UsuarioException ex) {
-//                Logger.getLogger(VentanaDeUsuario.class.getName()).log(Level.SEVERE, null, ex);
-//            }
-//        }
+        if(txtbuscar.getText().equals("")){
+            try {
+                mostrarLocales();
+            } catch (LocalException ex) {
+                Logger.getLogger(VentanaDeUsuario.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }else{
+            try {
+                buscarLocales();
+            } catch (LocalException ex) {
+                Logger.getLogger(VentanaDeUsuario.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
     }//GEN-LAST:event_txtbuscarKeyReleased
 
     private void modificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_modificarActionPerformed
-//
-//        int seleccion = tabla.getSelectedRowCount();
-//
-//        if (seleccion == 1) {
-//            if (usuarioFilaSeleccionada.getUsuario() == null && usuarioFilaSeleccionada.getNombre() == null && usuarioFilaSeleccionada.getApellido() == null && usuarioFilaSeleccionada.getEmail() == null && usuarioFilaSeleccionada.getClave() == null) {
-//                JOptionPane.showMessageDialog(this, "no se modifico ningun registro");
-//            } else {
-//                if (caracteresValidos(usuarioFilaSeleccionada.getUsuario()) && caracteresValidos(usuarioFilaSeleccionada.getNombre()) && caracteresValidos(usuarioFilaSeleccionada.getApellido())) {
-//                    try {
-//                        FachadaLogica.modificarUsuario(usuarioFilaSeleccionada);
-//
-//                    } catch (UsuarioException ex) {
-//                        Logger.getLogger(VentanaDeUsuario.class.getName()).log(Level.SEVERE, null, ex);
-//
-//                    }
-//                    JOptionPane.showMessageDialog(this, "Registro Modificado Correctamente");
-//
-//                } else {
-//                    JOptionPane.showMessageDialog(this, "ingrese Caracteres Validos");
-//                }
-//            }
-//
-//        }else{
-//            JOptionPane.showMessageDialog(this, "no hay fila seleccionada");
-//
-//        }
+
+        int seleccion = tabla.getSelectedRowCount();
+
+        if (seleccion == 1) {
+            if (localSeleccionado.getNombreNegocio() == null) {
+                JOptionPane.showMessageDialog(this, "no se modifico ningun registro");
+            } else {
+                    try {
+                        FachadaLogica.modificarLocal(localSeleccionado);
+
+                    } catch (LocalException ex) {
+                        Logger.getLogger(VentanaLocales.class.getName()).log(Level.SEVERE, null, ex);
+
+                    }
+                    JOptionPane.showMessageDialog(this, "Registro Modificado Correctamente");
+
+                }
+              
+        }else{
+            JOptionPane.showMessageDialog(this, "no hay fila seleccionada");
+        }
+
+        
     }//GEN-LAST:event_modificarActionPerformed
 
     private void eliminarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_eliminarMouseClicked
         // TODO add your handling code here:
 
-//        int seleccion = tabla.getSelectedRowCount();
-//        try {
-//            if (seleccion == 1) {
-//                int res = JOptionPane.showConfirmDialog(null, "¿Desea Eliminar el Registro?", "Confirm", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
-//                if (res == JOptionPane.YES_OPTION) {
-//
-//                    FachadaLogica.eliminarUsuario(usuarioFilaSeleccionada);
-//                }
-//            } else {
-//                JOptionPane.showMessageDialog(null, "Debe Seleccionar Fila");
-//            }
-//
-//        } catch (UsuarioException ex) {
-//            Logger.getLogger(VentanaDeUsuario.class.getName()).log(Level.SEVERE, null, ex);
-//
-//        }
-//
-//        try {
-//            mostrarUsuarios();
-//        } catch (UsuarioException ex) {
-//            Logger.getLogger(VentanaDeUsuario.class.getName()).log(Level.SEVERE, null, ex);
-//        }
+        int seleccion = tabla.getSelectedRowCount();
+        try {
+            if (seleccion == 1) {
+                int res = JOptionPane.showConfirmDialog(null, "¿Desea Eliminar el Registro?", "Confirm", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+                if (res == JOptionPane.YES_OPTION) {
+
+                    FachadaLogica.eliminarLocal(localSeleccionado);
+                }
+            } else {
+                JOptionPane.showMessageDialog(null, "Debe Seleccionar Fila");
+            }
+
+        } catch (LocalException ex) {
+            Logger.getLogger(VentanaDeUsuario.class.getName()).log(Level.SEVERE, null, ex);
+
+        }
+
+        try {
+            mostrarLocales();
+        } catch (LocalException ex) {
+            Logger.getLogger(VentanaDeUsuario.class.getName()).log(Level.SEVERE, null, ex);
+        }
 
     }//GEN-LAST:event_eliminarMouseClicked
 
     private void tablaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaMouseClicked
-//        int id = (int) tabla.getValueAt(tabla.getSelectedRow(), 0);
-//
-//        usuarioFilaSeleccionada.setId(id);
+        int nro = (int) tabla.getValueAt(tabla.getSelectedRow(), 0);
+        
+        String negocio = tabla.getValueAt(tabla.getSelectedRow(), 1).toString();
+
+        String encargado = tabla.getValueAt(tabla.getSelectedRow(), 2).toString();
+
+        localSeleccionado.setNumeroLocal(nro);
+        localSeleccionado.setNombreNegocio(negocio);
+        localSeleccionado.setEncargado(encargado);
     }//GEN-LAST:event_tablaMouseClicked
 
     private void tablaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tablaKeyReleased
         // TODO add your handling code here:
-//        int key = evt.getKeyCode();
-//        if (key == KeyEvent.VK_ENTER) {
-//
-//            int id = (int) tabla.getValueAt(tabla.getSelectedRow(), 0);
-//
-//            String usuarioFila = tabla.getValueAt(tabla.getSelectedRow(), 1).toString();
-//
-//            String nombreFila = tabla.getValueAt(tabla.getSelectedRow(), 2).toString();
-//
-//            String apellidoFila = tabla.getValueAt(tabla.getSelectedRow(), 3).toString();
-//
-//            String emailFila = tabla.getValueAt(tabla.getSelectedRow(), 4).toString();
-//
-//            String claveFila = tabla.getValueAt(tabla.getSelectedRow(), 5).toString();
-//
-//            usuarioFilaSeleccionada.setId(id);
-//            usuarioFilaSeleccionada.setUsuario(usuarioFila);
-//            usuarioFilaSeleccionada.setNombre(nombreFila);
-//            usuarioFilaSeleccionada.setApellido(apellidoFila);
-//            usuarioFilaSeleccionada.setEmail(emailFila);
-//            usuarioFilaSeleccionada.setClave(claveFila);
-//
-//        }
-//
-//        }
-//
-//        public static boolean caracteresValidos(String datos) {
-//            return datos.matches("[a-z A-Z]*");
+        int key = evt.getKeyCode();
+        if (key == KeyEvent.VK_ENTER) {
+
+            int numero = (int) tabla.getValueAt(tabla.getSelectedRow(), 0);
+
+            String negocio = tabla.getValueAt(tabla.getSelectedRow(), 1).toString();
+
+            String encargado = tabla.getValueAt(tabla.getSelectedRow(), 2).toString();
+
+
+            localSeleccionado.setNumeroLocal(numero);
+            localSeleccionado.setNombreNegocio(negocio);
+            localSeleccionado.setEncargado(encargado);
+
+        }
+
+    }
+
+        public static boolean caracteresValidos(String datos) {
+            return datos.matches("[a-z A-Z]*");
     }//GEN-LAST:event_tablaKeyReleased
 
     private void encargadoTxt2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_encargadoTxt2ActionPerformed
@@ -432,6 +442,40 @@ public class VentanaLocales extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_ingresoLocal2ActionPerformed
 
 
+    public  void buscarLocales() throws LocalException {
+
+        String[] nombresColumnas = {"nro_local", "negocio", "encargado", "Fecha Alta"};
+        
+        String buscar = txtbuscar.getText();
+        Local local = new Local();
+        local.setNombreNegocio(buscar);
+        Locales locales = FachadaLogica.buscarLocal(local);
+        DefaultTableModel modelo = new DefaultTableModel(null, nombresColumnas);
+
+        Object[] fila = new Object[modelo.getColumnCount()];
+
+        for (int i = 0; i < locales.getLocales().size(); i++) {
+            fila[0] = locales.getLocales().get(i).getNumeroLocal();
+            fila[1] = locales.getLocales().get(i).getNombreNegocio();
+            fila[2] = locales.getLocales().get(i).getEncargado();
+            fila[3] = locales.getLocales().get(i).getFechaAlta();
+
+            modelo.addRow(fila);
+
+        }
+        tabla.setModel(modelo);
+
+        tabla.getColumnModel().getColumn(0).setPreferredWidth(20);
+        tabla.getColumnModel().getColumn(1).setPreferredWidth(60);
+        tabla.getColumnModel().getColumn(2).setPreferredWidth(60);
+        tabla.getColumnModel().getColumn(3).setPreferredWidth(60);
+
+    }
+    
+    
+    
+    
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton eliminar;
     private javax.swing.JTextField encargadoTxt2;
@@ -450,3 +494,4 @@ public class VentanaLocales extends javax.swing.JInternalFrame {
     private javax.swing.JTextField txtbuscar;
     // End of variables declaration//GEN-END:variables
 }
+

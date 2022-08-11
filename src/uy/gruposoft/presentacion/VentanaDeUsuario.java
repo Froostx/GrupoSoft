@@ -238,6 +238,11 @@ public class VentanaDeUsuario extends javax.swing.JInternalFrame {
                 eliminarMouseClicked(evt);
             }
         });
+        eliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                eliminarActionPerformed(evt);
+            }
+        });
 
         jLabel6.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel6.setText("Buscar por Usuario");
@@ -459,7 +464,15 @@ public class VentanaDeUsuario extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_txtbuscarKeyReleased
 
+
     public void buscarUsuarios() throws UsuarioException {
+
+    private void eliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eliminarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_eliminarActionPerformed
+
+    public  void buscarUsuarios() throws UsuarioException {
+
 
         String[] nombresColumnas = {"Id", "Usuario", "Nombre", "Apellido", "Email", "Contraseña", "Fecha Alta"};
 

@@ -1,11 +1,17 @@
 package uy.gruposoft.logica;
 
+
 import uy.gruposoft.excepciones.AfiliacionesException;
+
+import java.sql.SQLException;
+
 import uy.gruposoft.excepciones.AfiliadoException;
+import uy.gruposoft.excepciones.DeudorException;
 import uy.gruposoft.excepciones.LocalException;
 import uy.gruposoft.excepciones.UsuarioException;
 import uy.gruposoft.persistencia.PersistenciaAfiliaciones;
 import uy.gruposoft.persistencia.PersistenciaAfiliado;
+import uy.gruposoft.persistencia.PersistenciaDeudor;
 import uy.gruposoft.persistencia.PersistenciaLocal;
 import uy.gruposoft.persistencia.PersistenciaUsuario;
 
@@ -79,6 +85,22 @@ public class FachadaLogica {
         PersistenciaLocal.altaLocal(local);
     }
     
+    public static void modificarLocal(Local local) throws LocalException {
+
+    PersistenciaLocal.modificarLocal(local);
+
+    }
+    
+    public static void eliminarLocal(Local local) throws LocalException{
+        PersistenciaLocal.eliminarLocal(local);
+    }
+
+    public static Locales buscarLocal(Local local) throws LocalException {
+        Locales locales = new Locales();
+        locales = PersistenciaLocal.buscarLocales(local);
+
+        return locales;
+    }
     
     
     //Afiliados:
@@ -102,6 +124,7 @@ public class FachadaLogica {
         PersistenciaAfiliado.altaAfiliado(afiliado);
     }
     
+
      public static void modificarAfiliado(Afiliado afiliado) throws AfiliadoException {
 
         PersistenciaAfiliado.modificarAfiliado(afiliado);
@@ -142,5 +165,42 @@ public class FachadaLogica {
       
       
    
+
+    
+   // deudores
+    
+        public static Deudores cargarDeudores() throws DeudorException, SQLException{
+        Deudores deudores = new Deudores();
+        deudores = PersistenciaDeudor.mostrarDeudores();
+        
+        return deudores;
+    }
+        
+    public static boolean verificarDeudor(Deudor deudor) throws DeudorException {
+        boolean existeDeudor;
+        existeDeudor = PersistenciaDeudor.verificarDeudor(deudor);
+
+        return existeDeudor;
+    }
+    
+    public static void insertarDeudor(Deudor deudor) throws DeudorException{
+        PersistenciaDeudor.altaDeudor(deudor);
+    }
+    
+    public static void eliminarDeudor(Deudor deudor) throws DeudorException {
+
+        PersistenciaDeudor.bajaDeudor(deudor);
+    }
+    
+    public static void modificarDeuda(Deudor deudor) throws DeudorException{
+        
+        PersistenciaDeudor.modificarDeuda(deudor);
+        
+    
+    }
+    
+    
+
+
 
 }
