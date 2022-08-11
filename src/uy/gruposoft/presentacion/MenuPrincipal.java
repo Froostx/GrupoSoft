@@ -15,6 +15,7 @@ import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.JInternalFrame;
 import javax.swing.JOptionPane;
+import uy.gruposoft.excepciones.AfiliacionesException;
 import uy.gruposoft.excepciones.AfiliadoException;
 import uy.gruposoft.excepciones.DeudorException;
 import uy.gruposoft.excepciones.LocalException;
@@ -63,7 +64,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         deudores = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
         jMenuItem6 = new javax.swing.JMenuItem();
-        jMenuItem7 = new javax.swing.JMenuItem();
+        Afiliaciones = new javax.swing.JMenuItem();
         jMenuItem9 = new javax.swing.JMenuItem();
         jMenuItem10 = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
@@ -144,8 +145,13 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jMenuItem6.setText("Estados De Cuenta");
         jMenu2.add(jMenuItem6);
 
-        jMenuItem7.setText("Listados De Afiliaciones");
-        jMenu2.add(jMenuItem7);
+        Afiliaciones.setText("Listados De Afiliaciones");
+        Afiliaciones.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                AfiliacionesActionPerformed(evt);
+            }
+        });
+        jMenu2.add(Afiliaciones);
 
         jMenuItem9.setText("Listado De Locales");
         jMenu2.add(jMenuItem9);
@@ -269,6 +275,38 @@ public class MenuPrincipal extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_localesActionPerformed
 
+
+    private void AfiliacionesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AfiliacionesActionPerformed
+        VentanaAfiliaciones verAfiliaciones = null;
+        try {
+            verAfiliaciones = new VentanaAfiliaciones();
+        } catch (AfiliacionesException ex) {
+            Logger.getLogger(MenuPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        if (JInternalFrames_AbiertosAfiliaciones(verAfiliaciones) == false) {
+            Ventanas.add(verAfiliaciones);
+
+            Dimension desktopSize = Ventanas.getSize();
+            Dimension FrameSize = verAfiliaciones.getSize();
+            verAfiliaciones.setLocation((desktopSize.width - FrameSize.width) / 2, (desktopSize.height - FrameSize.height) / 2);
+            verAfiliaciones.show();
+
+        }
+    }//GEN-LAST:event_AfiliacionesActionPerformed
+     public boolean JInternalFrames_AbiertosAfiliaciones(VentanaAfiliaciones jif) { 
+    JInternalFrame[] jif_Activos = MenuPrincipal.Ventanas.getAllFrames();
+
+    for (int i = 0; i < jif_Activos.length; i++) {
+
+        if (jif.getClass().isInstance(jif_Activos[i])) {
+            JOptionPane.showMessageDialog(null, "La ventana que esta intentando abrir ya esta abierta.", "Información", JOptionPane.INFORMATION_MESSAGE);
+            return true;
+        }
+    }
+    return false;
+     }
+
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
 	Login login = new Login();
         login.setVisible(true);
@@ -309,6 +347,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_NegocioActionPerformed
     
     
+
     public boolean JInternalFrames_AbiertosLocal(VentanaLocales jif) { 
     JInternalFrame[] jif_Activos = MenuPrincipal.Ventanas.getAllFrames();
 
@@ -389,6 +428,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenuItem Afiliaciones;
     private javax.swing.JMenuItem Negocio;
     private javax.swing.JMenuItem Usuario;
     private static javax.swing.JDesktopPane Ventanas;
@@ -403,7 +443,6 @@ public class MenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem6;
-    private javax.swing.JMenuItem jMenuItem7;
     private javax.swing.JMenuItem jMenuItem8;
     private javax.swing.JMenuItem jMenuItem9;
     private javax.swing.JMenuItem locales;

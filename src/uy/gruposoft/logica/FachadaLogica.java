@@ -1,10 +1,15 @@
 package uy.gruposoft.logica;
 
+
+import uy.gruposoft.excepciones.AfiliacionesException;
+
 import java.sql.SQLException;
+
 import uy.gruposoft.excepciones.AfiliadoException;
 import uy.gruposoft.excepciones.DeudorException;
 import uy.gruposoft.excepciones.LocalException;
 import uy.gruposoft.excepciones.UsuarioException;
+import uy.gruposoft.persistencia.PersistenciaAfiliaciones;
 import uy.gruposoft.persistencia.PersistenciaAfiliado;
 import uy.gruposoft.persistencia.PersistenciaDeudor;
 import uy.gruposoft.persistencia.PersistenciaLocal;
@@ -119,6 +124,48 @@ public class FachadaLogica {
         PersistenciaAfiliado.altaAfiliado(afiliado);
     }
     
+
+     public static void modificarAfiliado(Afiliado afiliado) throws AfiliadoException {
+
+        PersistenciaAfiliado.modificarAfiliado(afiliado);
+
+    }
+     
+      public static Afiliados buscarAfiliado(Afiliado afiliado) throws AfiliadoException {
+        Afiliados afiliados = new Afiliados();
+        afiliados = PersistenciaAfiliado.buscarAfiliados(afiliado);
+
+        return afiliados;
+    }
+      
+      public static void eliminarAfiliado(Afiliado afiliado) throws AfiliadoException {
+
+        PersistenciaAfiliado.bajaAfiliado(afiliado);
+    }
+      
+      //afiliaciones
+      
+      public static Afiliaciones cargarAfiliaciones() throws AfiliacionesException{
+          
+        Afiliaciones afiliaciones = new Afiliaciones();
+        afiliaciones = PersistenciaAfiliaciones.mostrarAfiliaciones();
+        
+        return afiliaciones;
+    }
+      
+      public static void insertarAfiliacion(Afiliacion afiliacion) throws AfiliacionesException{
+        PersistenciaAfiliaciones.altaAfiliaciones(afiliacion);
+    }
+      
+       public static void modificarAfiliacion(Afiliacion afiliacion) throws AfiliacionesException {
+
+        PersistenciaAfiliaciones.modificarAfiliaciones(afiliacion);
+
+    }
+      
+      
+   
+
     
    // deudores
     
@@ -153,6 +200,7 @@ public class FachadaLogica {
     }
     
     
+
 
 
 }

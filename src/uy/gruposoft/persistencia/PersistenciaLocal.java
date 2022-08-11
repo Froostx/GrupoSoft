@@ -10,10 +10,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import uy.gruposoft.excepciones.LocalException;
-import uy.gruposoft.excepciones.UsuarioException;
 import uy.gruposoft.logica.Local;
 import uy.gruposoft.logica.Locales;
-import static uy.gruposoft.persistencia.PersistenciaUsuario.pst;
 
 /**
  *
