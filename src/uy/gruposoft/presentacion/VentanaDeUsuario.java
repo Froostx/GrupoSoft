@@ -465,7 +465,7 @@ public class VentanaDeUsuario extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_txtbuscarKeyReleased
 
 
-    public void buscarUsuarios() throws UsuarioException {
+ 
 
     private void eliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eliminarActionPerformed
         // TODO add your handling code here:
