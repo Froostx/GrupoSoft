@@ -202,14 +202,8 @@ public class PersistenciaAfiliaciones {
                 throw new AfiliacionesException("No pude insertar el afiliado");
             }
             
-       
+             
         
-        
-        //paso 1 : crear la conexion a la base
-        //paso 2 : crear el prepare statement
-        //paso 3 : ejecutar la consulta del preparestatement
-        //paso 5 : cerrar la conexion a la base
-       
           return afiliaciones;
     }
         

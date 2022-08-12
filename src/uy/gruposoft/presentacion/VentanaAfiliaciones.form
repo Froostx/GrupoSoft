@@ -219,6 +219,9 @@
       </SubComponents>
     </Container>
     <Component class="com.toedter.calendar.JDateChooser" name="fechaDesde">
+      <Properties>
+        <Property name="maxSelectableDate" type="java.util.Date" value="null"/>
+      </Properties>
     </Component>
     <Component class="com.toedter.calendar.JDateChooser" name="fechaHasta">
     </Component>

@@ -63,10 +63,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         Negocio = new javax.swing.JMenuItem();
         deudores = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
-        jMenuItem6 = new javax.swing.JMenuItem();
         Afiliaciones = new javax.swing.JMenuItem();
-        jMenuItem9 = new javax.swing.JMenuItem();
-        jMenuItem10 = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
         jMenuItem2 = new javax.swing.JMenuItem();
         jMenuItem3 = new javax.swing.JMenuItem();
@@ -142,9 +139,6 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
         jMenu2.setText("Informes");
 
-        jMenuItem6.setText("Estados De Cuenta");
-        jMenu2.add(jMenuItem6);
-
         Afiliaciones.setText("Listados De Afiliaciones");
         Afiliaciones.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -152,12 +146,6 @@ public class MenuPrincipal extends javax.swing.JFrame {
             }
         });
         jMenu2.add(Afiliaciones);
-
-        jMenuItem9.setText("Listado De Locales");
-        jMenu2.add(jMenuItem9);
-
-        jMenuItem10.setText("Listado De Deudores");
-        jMenu2.add(jMenuItem10);
 
         jMenuBar1.add(jMenu2);
 
@@ -439,12 +427,9 @@ public class MenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
-    private javax.swing.JMenuItem jMenuItem10;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
-    private javax.swing.JMenuItem jMenuItem6;
     private javax.swing.JMenuItem jMenuItem8;
-    private javax.swing.JMenuItem jMenuItem9;
     private javax.swing.JMenuItem locales;
     // End of variables declaration//GEN-END:variables
     private void setIconImage() {

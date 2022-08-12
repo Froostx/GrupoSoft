@@ -31,6 +31,7 @@ public class VentanaAfiliaciones extends javax.swing.JInternalFrame {
     public VentanaAfiliaciones() throws AfiliacionesException {
         initComponents();
         mostrarAfiliaciones();
+        
     }
 
     public void mostrarAfiliaciones() throws AfiliacionesException {
@@ -71,7 +72,10 @@ public class VentanaAfiliaciones extends javax.swing.JInternalFrame {
         tabla.getColumnModel().getColumn(3).setPreferredWidth(135);
         tabla.setAutoResizeMode(tabla.AUTO_RESIZE_OFF);
         tabla.getTableHeader().setReorderingAllowed(false);
-
+        
+        Date date = new Date();
+        fechaDesde.setMaxSelectableDate(date);
+        fechaHasta.setMaxSelectableDate(date);
     }
 
     public void mostrarAfiliacionesFecha(RangoFechas rangoFechas) throws AfiliacionesException {
@@ -272,6 +276,8 @@ public class VentanaAfiliaciones extends javax.swing.JInternalFrame {
         jScrollPane1.setViewportView(tabla);
 
         jPanel2.add(jScrollPane1, java.awt.BorderLayout.CENTER);
+
+        fechaDesde.setMaxSelectableDate(null);
 
         buscarFecha.setText("Buscar");
         buscarFecha.addActionListener(new java.awt.event.ActionListener() {

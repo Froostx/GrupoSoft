@@ -79,11 +79,6 @@
             <Property name="text" type="java.lang.String" value="Informes"/>
           </Properties>
           <SubComponents>
-            <MenuItem class="javax.swing.JMenuItem" name="jMenuItem6">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Estados De Cuenta"/>
-              </Properties>
-            </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="Afiliaciones">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Listados De Afiliaciones"/>
@@ -91,16 +86,6 @@
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="AfiliacionesActionPerformed"/>
               </Events>
-            </MenuItem>
-            <MenuItem class="javax.swing.JMenuItem" name="jMenuItem9">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Listado De Locales"/>
-              </Properties>
-            </MenuItem>
-            <MenuItem class="javax.swing.JMenuItem" name="jMenuItem10">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Listado De Deudores"/>
-              </Properties>
             </MenuItem>
           </SubComponents>
         </Menu>
