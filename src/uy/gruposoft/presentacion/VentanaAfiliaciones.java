@@ -10,21 +10,20 @@ import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
-import javax.swing.KeyStroke;
 import javax.swing.table.DefaultTableModel;
 import uy.gruposoft.excepciones.AfiliacionesException;
 import uy.gruposoft.logica.Afiliacion;
 import uy.gruposoft.logica.Afiliaciones;
-import uy.gruposoft.logica.CeldaRenderer;
 import uy.gruposoft.logica.FachadaLogica;
+import uy.gruposoft.logica.RangoFechas;
 
 /**
  *
  * @author Administrador
  */
 public class VentanaAfiliaciones extends javax.swing.JInternalFrame {
+
     public Afiliacion afiliacionFilaSeleccionada = new Afiliacion();
-    
 
     /**
      * Creates new form VentanaAfiliaciones
@@ -66,7 +65,6 @@ public class VentanaAfiliaciones extends javax.swing.JInternalFrame {
 
         tabla.setModel(modelo);
 
-       
         tabla.getColumnModel().getColumn(0).setPreferredWidth(140);
         tabla.getColumnModel().getColumn(1).setPreferredWidth(140);
         tabla.getColumnModel().getColumn(2).setPreferredWidth(140);
@@ -74,7 +72,47 @@ public class VentanaAfiliaciones extends javax.swing.JInternalFrame {
         tabla.setAutoResizeMode(tabla.AUTO_RESIZE_OFF);
         tabla.getTableHeader().setReorderingAllowed(false);
 
-       
+    }
+
+    public void mostrarAfiliacionesFecha(RangoFechas rangoFechas) throws AfiliacionesException {
+
+        String[] nombresColumnas = {"Id", "Cedula", "Monto", "Fecha De Pago"};
+        Afiliaciones afiliaciones = FachadaLogica.buscarAfiliacion(rangoFechas);
+
+        DefaultTableModel modelo = new DefaultTableModel(null, nombresColumnas) {
+
+            public boolean isCellEditable(int row, int col) {
+                if (col == 0 || col == 3) { //columnIndex: the column you want to make it editable
+
+                    return false;
+                } else {
+                    return true;
+                }
+            }
+
+        };
+
+        Object[] fila = new Object[modelo.getColumnCount()];
+
+        for (int i = 0; i < afiliaciones.getAfiliaciones().size(); i++) {
+            fila[0] = afiliaciones.getAfiliaciones().get(i).getId();
+            fila[1] = afiliaciones.getAfiliaciones().get(i).getCedula();
+            fila[2] = afiliaciones.getAfiliaciones().get(i).getMonto();
+            fila[3] = afiliaciones.getAfiliaciones().get(i).getFechaDePago();
+
+            modelo.addRow(fila);
+
+        }
+
+        tabla.setModel(modelo);
+
+        tabla.getColumnModel().getColumn(0).setPreferredWidth(140);
+        tabla.getColumnModel().getColumn(1).setPreferredWidth(140);
+        tabla.getColumnModel().getColumn(2).setPreferredWidth(140);
+        tabla.getColumnModel().getColumn(3).setPreferredWidth(135);
+        tabla.setAutoResizeMode(tabla.AUTO_RESIZE_OFF);
+        tabla.getTableHeader().setReorderingAllowed(false);
+
     }
 
     public void validarAfiliacion() throws AfiliacionesException {
@@ -145,7 +183,7 @@ public class VentanaAfiliaciones extends javax.swing.JInternalFrame {
         tabla = new javax.swing.JTable();
         fechaDesde = new com.toedter.calendar.JDateChooser();
         fechaHasta = new com.toedter.calendar.JDateChooser();
-        jButton2 = new javax.swing.JButton();
+        buscarFecha = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         modificarTxt = new javax.swing.JButton();
@@ -221,6 +259,11 @@ public class VentanaAfiliaciones extends javax.swing.JInternalFrame {
 
             }
         ));
+        tabla.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tablaMouseClicked(evt);
+            }
+        });
         tabla.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 tablaKeyReleased(evt);
@@ -230,7 +273,12 @@ public class VentanaAfiliaciones extends javax.swing.JInternalFrame {
 
         jPanel2.add(jScrollPane1, java.awt.BorderLayout.CENTER);
 
-        jButton2.setText("Buscar");
+        buscarFecha.setText("Buscar");
+        buscarFecha.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buscarFechaActionPerformed(evt);
+            }
+        });
 
         jLabel4.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel4.setText("Desde");
@@ -246,6 +294,11 @@ public class VentanaAfiliaciones extends javax.swing.JInternalFrame {
         });
 
         eliminarTxt.setText("Eliminar");
+        eliminarTxt.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                eliminarTxtMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -268,7 +321,7 @@ public class VentanaAfiliaciones extends javax.swing.JInternalFrame {
                         .addGap(49, 49, 49)
                         .addComponent(fechaHasta, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(34, 34, 34)
-                        .addComponent(jButton2)
+                        .addComponent(buscarFecha)
                         .addGap(18, 18, 18)
                         .addComponent(modificarTxt)
                         .addGap(18, 18, 18)
@@ -285,7 +338,7 @@ public class VentanaAfiliaciones extends javax.swing.JInternalFrame {
                     .addComponent(fechaHasta, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jButton2)
+                        .addComponent(buscarFecha)
                         .addComponent(modificarTxt)
                         .addComponent(eliminarTxt)))
                 .addGap(33, 33, 33)
@@ -312,12 +365,12 @@ public class VentanaAfiliaciones extends javax.swing.JInternalFrame {
         int key = evt.getKeyCode();
         if (key == KeyEvent.VK_ENTER) {
             int id = Integer.parseInt(tabla.getValueAt(tabla.getSelectedRow(), 0).toString());
-            
+
             String cedula = tabla.getValueAt(tabla.getSelectedRow(), 1).toString();
 
             String monto = tabla.getValueAt(tabla.getSelectedRow(), 2).toString();
 
-            Date fechaPago = (java.util.Date) tabla.getValueAt(tabla.getSelectedRow(),3);
+            Date fechaPago = (java.util.Date) tabla.getValueAt(tabla.getSelectedRow(), 3);
 
             long d = fechaPago.getTime(); //guardamos en un long el tiempo
 
@@ -327,11 +380,11 @@ public class VentanaAfiliaciones extends javax.swing.JInternalFrame {
                 JOptionPane.showMessageDialog(this, "no se modifico ningun registro");
             } else {
                 if (!caracteresValidos(String.valueOf(cedula)) && !caracteresValidos(monto)) {
-                    
+
                     afiliacionFilaSeleccionada.setId(id);
                     afiliacionFilaSeleccionada.setCedula(Integer.valueOf(cedula));
                     afiliacionFilaSeleccionada.setMonto(Integer.valueOf(monto));
-                   afiliacionFilaSeleccionada.setFechaDePago(pago);
+                    afiliacionFilaSeleccionada.setFechaDePago(pago);
                 } else {
                     JOptionPane.showMessageDialog(this, "ingrese Caracteres Validos");
                 }
@@ -367,13 +420,81 @@ public class VentanaAfiliaciones extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_modificarTxtActionPerformed
 
+    private void eliminarTxtMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_eliminarTxtMouseClicked
+        // TODO add your handling code here:
+
+        int seleccion = tabla.getSelectedRowCount();
+        try {
+            if (seleccion == 1) {
+                int res = JOptionPane.showConfirmDialog(null, "¿Desea Eliminar el Registro?", "Confirm", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+                if (res == JOptionPane.YES_OPTION) {
+
+                    FachadaLogica.eliminarAfiliacion(afiliacionFilaSeleccionada);
+                }
+            } else {
+                JOptionPane.showMessageDialog(null, "Debe Seleccionar Fila");
+            }
+
+        } catch (AfiliacionesException ex) {
+            Logger.getLogger(VentanaDeUsuario.class.getName()).log(Level.SEVERE, null, ex);
+
+        }
+
+        try {
+            mostrarAfiliaciones();
+        } catch (AfiliacionesException ex) {
+            Logger.getLogger(VentanaDeUsuario.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_eliminarTxtMouseClicked
+
+    private void tablaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaMouseClicked
+        int id = (int) tabla.getValueAt(tabla.getSelectedRow(), 0);
+
+        afiliacionFilaSeleccionada.setId(id);
+    }//GEN-LAST:event_tablaMouseClicked
+
+    private void buscarFechaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buscarFechaActionPerformed
+
+        Date fechaUno = fechaDesde.getDate();
+        Date fechaDos = fechaHasta.getDate();
+
+        if (fechaUno == null || fechaDos == null) {
+            JOptionPane.showMessageDialog(this, "Uno De los Calendarios esta vacio");
+        } else if (fechaUno.getDate() >= fechaDos.getDate()) {
+            JOptionPane.showMessageDialog(this, "Rango de Fechas Invalido");
+        
+        } else {
+            long f = fechaUno.getTime();
+
+            java.sql.Date fDesde = new java.sql.Date(f);
+
+            long d = fechaDos.getTime();
+
+            java.sql.Date fHasta = new java.sql.Date(d);
+
+            RangoFechas rangoFechas = new RangoFechas();
+
+            rangoFechas.setFechaUno(fDesde);
+
+            rangoFechas.setFechaDos(fHasta);
+            try {
+                mostrarAfiliacionesFecha(rangoFechas);
+            } catch (AfiliacionesException ex) {
+                Logger.getLogger(VentanaAfiliaciones.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        fechaDesde.setDate(null);
+        fechaHasta.setDate(null);
+        
+    }//GEN-LAST:event_buscarFechaActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton buscarFecha;
     private javax.swing.JTextField cedulaTxt;
     private javax.swing.JButton eliminarTxt;
     private com.toedter.calendar.JDateChooser fechaDesde;
     private com.toedter.calendar.JDateChooser fechaHasta;
-    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;

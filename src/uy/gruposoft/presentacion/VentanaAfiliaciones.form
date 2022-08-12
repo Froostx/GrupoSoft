@@ -47,7 +47,7 @@
                       <EmptySpace min="-2" pref="49" max="-2" attributes="0"/>
                       <Component id="fechaHasta" min="-2" pref="167" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
-                      <Component id="jButton2" min="-2" max="-2" attributes="0"/>
+                      <Component id="buscarFecha" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="modificarTxt" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
@@ -68,7 +68,7 @@
                   <Component id="fechaHasta" alignment="1" min="-2" max="-2" attributes="0"/>
                   <Component id="jLabel5" alignment="1" min="-2" max="-2" attributes="0"/>
                   <Group type="103" alignment="1" groupAlignment="3" attributes="0">
-                      <Component id="jButton2" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="buscarFecha" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="modificarTxt" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="eliminarTxt" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
@@ -210,6 +210,7 @@
                 </Property>
               </Properties>
               <Events>
+                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="tablaMouseClicked"/>
                 <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="tablaKeyReleased"/>
               </Events>
             </Component>
@@ -221,10 +222,13 @@
     </Component>
     <Component class="com.toedter.calendar.JDateChooser" name="fechaHasta">
     </Component>
-    <Component class="javax.swing.JButton" name="jButton2">
+    <Component class="javax.swing.JButton" name="buscarFecha">
       <Properties>
         <Property name="text" type="java.lang.String" value="Buscar"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buscarFechaActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel4">
       <Properties>
@@ -254,6 +258,9 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Eliminar"/>
       </Properties>
+      <Events>
+        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="eliminarTxtMouseClicked"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>

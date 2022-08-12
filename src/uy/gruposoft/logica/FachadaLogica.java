@@ -199,7 +199,16 @@ public class FachadaLogica {
     
     }
     
+    public static void eliminarAfiliacion(Afiliacion afiliacion) throws AfiliacionesException {
+
+        PersistenciaAfiliaciones.bajaAfiliacion(afiliacion);
+    }
     
+    public static Afiliaciones buscarAfiliacion(RangoFechas rangoFechas) throws AfiliacionesException {
+        Afiliaciones afiliaciones = new Afiliaciones();
+        afiliaciones = PersistenciaAfiliaciones.buscarAfiliacion(rangoFechas);
+        return afiliaciones;
+    }
 
 
 
