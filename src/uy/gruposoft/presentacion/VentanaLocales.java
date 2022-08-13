@@ -469,9 +469,6 @@ public class VentanaLocales extends javax.swing.JInternalFrame {
         tabla.getColumnModel().getColumn(1).setPreferredWidth(60);
         tabla.getColumnModel().getColumn(2).setPreferredWidth(60);
         tabla.getColumnModel().getColumn(3).setPreferredWidth(60);
-        tabla.getColumnModel().getColumn(4).setPreferredWidth(160);
-        tabla.getColumnModel().getColumn(5).setPreferredWidth(60);
-        tabla.getColumnModel().getColumn(6).setPreferredWidth(60);
 
     }
     

@@ -36,7 +36,18 @@ public class VentanaDeUsuario extends javax.swing.JInternalFrame {
 
         String[] nombresColumnas = {"Id", "Usuario", "Nombre", "Apellido", "Email", "Contraseña", "Fecha Alta"};
         Usuarios usuarios = FachadaLogica.cargarUsuario();
-        DefaultTableModel modelo = new DefaultTableModel(null, nombresColumnas);
+        DefaultTableModel modelo = new DefaultTableModel(null, nombresColumnas) {
+            
+            public boolean isCellEditable(int row, int col) {
+                if (col == 0) { //columnIndex: the column you want to make it editable
+
+                    return false;
+                } else {
+                    return true;
+                }
+            }
+
+        };
 
         Object[] fila = new Object[modelo.getColumnCount()];
 
@@ -208,11 +219,6 @@ public class VentanaDeUsuario extends javax.swing.JInternalFrame {
                 .addContainerGap(114, Short.MAX_VALUE))
         );
 
-        txtbuscar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtbuscarActionPerformed(evt);
-            }
-        });
         txtbuscar.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 txtbuscarKeyReleased(evt);
@@ -332,11 +338,6 @@ public class VentanaDeUsuario extends javax.swing.JInternalFrame {
         claveTxt.setText("");
     }
 
-    
-
-    private void txtbuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtbuscarActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtbuscarActionPerformed
 
     private void insertarUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_insertarUsuarioActionPerformed
         try {
@@ -350,7 +351,7 @@ public class VentanaDeUsuario extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_insertarUsuarioActionPerformed
 
     private void modificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_modificarActionPerformed
-        
+
         int seleccion = tabla.getSelectedRowCount();
 
         if (seleccion == 1) {
@@ -366,16 +367,15 @@ public class VentanaDeUsuario extends javax.swing.JInternalFrame {
 
                     }
                     JOptionPane.showMessageDialog(this, "Registro Modificado Correctamente");
-                  
 
                 } else {
                     JOptionPane.showMessageDialog(this, "ingrese Caracteres Validos");
                 }
             }
-        
-        }else{
+
+        } else {
             JOptionPane.showMessageDialog(this, "no hay fila seleccionada");
-    
+
         }
     }//GEN-LAST:event_modificarActionPerformed
 
@@ -449,20 +449,23 @@ public class VentanaDeUsuario extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_eliminarMouseClicked
 
     private void txtbuscarKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtbuscarKeyReleased
-       if(txtbuscar.getText().equals("")){
-           try {
-               mostrarUsuarios();
-           } catch (UsuarioException ex) {
-               Logger.getLogger(VentanaDeUsuario.class.getName()).log(Level.SEVERE, null, ex);
-           }
-       }else{
+        if (txtbuscar.getText().equals("")) {
             try {
-            buscarUsuarios();
-        } catch (UsuarioException ex) {
-            Logger.getLogger(VentanaDeUsuario.class.getName()).log(Level.SEVERE, null, ex);
+                mostrarUsuarios();
+            } catch (UsuarioException ex) {
+                Logger.getLogger(VentanaDeUsuario.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } else {
+            try {
+                buscarUsuarios();
+            } catch (UsuarioException ex) {
+                Logger.getLogger(VentanaDeUsuario.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
-       }
     }//GEN-LAST:event_txtbuscarKeyReleased
+
+
+ 
 
     private void eliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eliminarActionPerformed
         // TODO add your handling code here:
@@ -470,13 +473,25 @@ public class VentanaDeUsuario extends javax.swing.JInternalFrame {
 
     public  void buscarUsuarios() throws UsuarioException {
 
+
         String[] nombresColumnas = {"Id", "Usuario", "Nombre", "Apellido", "Email", "Contraseña", "Fecha Alta"};
-        
+
         String buscar = txtbuscar.getText();
         Usuario usuario = new Usuario();
         usuario.setUsuario(buscar);
         Usuarios usuarios = FachadaLogica.buscarUsuario(usuario);
-        DefaultTableModel modelo = new DefaultTableModel(null, nombresColumnas);
+        DefaultTableModel modelo = new DefaultTableModel(null, nombresColumnas){
+            
+            public boolean isCellEditable(int row, int col) {
+                if (col == 0) { //columnIndex: the column you want to make it editable
+
+                    return false;
+                } else {
+                    return true;
+                }
+            }
+
+        };
 
         Object[] fila = new Object[modelo.getColumnCount()];
 
@@ -503,7 +518,7 @@ public class VentanaDeUsuario extends javax.swing.JInternalFrame {
         tabla.getColumnModel().getColumn(6).setPreferredWidth(60);
 
     }
-    
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField apellidoTxt;

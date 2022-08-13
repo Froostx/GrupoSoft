@@ -63,6 +63,15 @@
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="NegocioActionPerformed"/>
               </Events>
             </MenuItem>
+            <MenuItem class="javax.swing.JMenuItem" name="deudores">
+              <Properties>
+                <Property name="actionCommand" type="java.lang.String" value="Deudores"/>
+                <Property name="label" type="java.lang.String" value="Deudores"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="deudoresActionPerformed"/>
+              </Events>
+            </MenuItem>
           </SubComponents>
         </Menu>
         <Menu class="javax.swing.JMenu" name="jMenu2">
@@ -79,6 +88,13 @@
               <Properties>
                 <Property name="text" type="java.lang.String" value="Listado De Deudores"/>
               </Properties>
+            <MenuItem class="javax.swing.JMenuItem" name="Afiliaciones">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Listados De Afiliaciones"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="AfiliacionesActionPerformed"/>
+              </Events>
             </MenuItem>
           </SubComponents>
         </Menu>

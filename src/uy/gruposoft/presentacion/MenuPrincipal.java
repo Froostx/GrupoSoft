@@ -9,12 +9,15 @@ import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Toolkit;
+import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.JInternalFrame;
 import javax.swing.JOptionPane;
+import uy.gruposoft.excepciones.AfiliacionesException;
 import uy.gruposoft.excepciones.AfiliadoException;
+import uy.gruposoft.excepciones.DeudorException;
 import uy.gruposoft.excepciones.LocalException;
 import uy.gruposoft.excepciones.NegocioException;
 import uy.gruposoft.excepciones.UsuarioException;
@@ -59,9 +62,11 @@ public class MenuPrincipal extends javax.swing.JFrame {
         locales = new javax.swing.JMenuItem();
         Usuario = new javax.swing.JMenuItem();
         Negocio = new javax.swing.JMenuItem();
+        deudores = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
         jMenuItem6 = new javax.swing.JMenuItem();
         jMenuItem10 = new javax.swing.JMenuItem();
+        Afiliaciones = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
         jMenuItem2 = new javax.swing.JMenuItem();
         jMenuItem3 = new javax.swing.JMenuItem();
@@ -88,7 +93,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
         jMenu1.setText("Formularios");
 
-        afiliados.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_1, java.awt.event.InputEvent.CTRL_DOWN_MASK));
+        afiliados.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_1, java.awt.event.InputEvent.CTRL_MASK));
         afiliados.setText("Afiliados");
         afiliados.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -97,7 +102,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         });
         jMenu1.add(afiliados);
 
-        locales.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_2, java.awt.event.InputEvent.CTRL_DOWN_MASK));
+        locales.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_2, java.awt.event.InputEvent.CTRL_MASK));
         locales.setText("Locales");
         locales.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -106,7 +111,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         });
         jMenu1.add(locales);
 
-        Usuario.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_3, java.awt.event.InputEvent.CTRL_DOWN_MASK));
+        Usuario.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_3, java.awt.event.InputEvent.CTRL_MASK));
         Usuario.setText("Usuarios");
         Usuario.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -115,7 +120,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         });
         jMenu1.add(Usuario);
 
-        Negocio.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_4, java.awt.event.InputEvent.CTRL_DOWN_MASK));
+        Negocio.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_4, java.awt.event.InputEvent.CTRL_MASK));
         Negocio.setText("Negocio");
         Negocio.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -123,6 +128,15 @@ public class MenuPrincipal extends javax.swing.JFrame {
             }
         });
         jMenu1.add(Negocio);
+
+        deudores.setActionCommand("Deudores");
+        deudores.setLabel("Deudores");
+        deudores.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                deudoresActionPerformed(evt);
+            }
+        });
+        jMenu1.add(deudores);
 
         jMenuBar1.add(jMenu1);
 
@@ -133,6 +147,14 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
         jMenuItem10.setText("Listado De Deudores");
         jMenu2.add(jMenuItem10);
+
+        Afiliaciones.setText("Listados De Afiliaciones");
+        Afiliaciones.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                AfiliacionesActionPerformed(evt);
+            }
+        });
+        jMenu2.add(Afiliaciones);
 
         jMenuBar1.add(jMenu2);
 
@@ -264,6 +286,38 @@ public class MenuPrincipal extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_localesActionPerformed
 
+
+    private void AfiliacionesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AfiliacionesActionPerformed
+        VentanaAfiliaciones verAfiliaciones = null;
+        try {
+            verAfiliaciones = new VentanaAfiliaciones();
+        } catch (AfiliacionesException ex) {
+            Logger.getLogger(MenuPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        if (JInternalFrames_AbiertosAfiliaciones(verAfiliaciones) == false) {
+            Ventanas.add(verAfiliaciones);
+
+            Dimension desktopSize = Ventanas.getSize();
+            Dimension FrameSize = verAfiliaciones.getSize();
+            verAfiliaciones.setLocation((desktopSize.width - FrameSize.width) / 2, (desktopSize.height - FrameSize.height) / 2);
+            verAfiliaciones.show();
+
+        }
+    }//GEN-LAST:event_AfiliacionesActionPerformed
+     public boolean JInternalFrames_AbiertosAfiliaciones(VentanaAfiliaciones jif) { 
+    JInternalFrame[] jif_Activos = MenuPrincipal.Ventanas.getAllFrames();
+
+    for (int i = 0; i < jif_Activos.length; i++) {
+
+        if (jif.getClass().isInstance(jif_Activos[i])) {
+            JOptionPane.showMessageDialog(null, "La ventana que esta intentando abrir ya esta abierta.", "Información", JOptionPane.INFORMATION_MESSAGE);
+            return true;
+        }
+    }
+    return false;
+     }
+
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
 	Login login = new Login();
         login.setVisible(true);
@@ -293,9 +347,37 @@ public class MenuPrincipal extends javax.swing.JFrame {
             verNegocios.show();
 
         }
+    private void deudoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deudoresActionPerformed
+        // TODO add your handling code here:
+        VentanaDeudores verDeudores = null;
+        try {
+            
+            verDeudores = new VentanaDeudores();
+            
+        } catch (DeudorException ex) {
+            Logger.getLogger(MenuPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(MenuPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        if (JInternalFrames_AbiertosDeudor(verDeudores) == false) { 
+            Ventanas.add(verDeudores);
+            
+                      
+            Dimension desktopSize = Ventanas.getSize();
+            Dimension FrameSize = verDeudores.getSize();
+            verDeudores.setLocation((desktopSize.width - FrameSize.width) / 2, (desktopSize.height - FrameSize.height) / 2);
+            verDeudores.show();
+    }//GEN-LAST:event_deudoresActionPerformed
+
+    }
+    
+    private void NegocioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NegocioActionPerformed
+        // TODO add your handling code here:
     }//GEN-LAST:event_NegocioActionPerformed
     
     
+
     public boolean JInternalFrames_AbiertosLocal(VentanaLocales jif) { 
     JInternalFrame[] jif_Activos = MenuPrincipal.Ventanas.getAllFrames();
 
@@ -321,6 +403,22 @@ public class MenuPrincipal extends javax.swing.JFrame {
     }
     return false;
     }
+    
+    
+    
+    public boolean JInternalFrames_AbiertosDeudor(VentanaDeudores jif) { 
+    JInternalFrame[] jif_Activos = MenuPrincipal.Ventanas.getAllFrames();
+
+    for (int i = 0; i < jif_Activos.length; i++) {
+
+        if (jif.getClass().isInstance(jif_Activos[i])) {
+            JOptionPane.showMessageDialog(null, "La ventana que esta intentando abrir ya esta abierta.", "Información", JOptionPane.INFORMATION_MESSAGE);
+            return true;
+        }
+    }
+    return false;
+    }
+    
     
 
     /**
@@ -360,16 +458,17 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenuItem Afiliaciones;
     private javax.swing.JMenuItem Negocio;
     private javax.swing.JMenuItem Usuario;
     private static javax.swing.JDesktopPane Ventanas;
     private javax.swing.JMenuItem afiliados;
+    private javax.swing.JMenuItem deudores;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
-    private javax.swing.JMenuItem jMenuItem10;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem6;

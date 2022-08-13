@@ -1,10 +1,18 @@
 package uy.gruposoft.logica;
 
+
+import uy.gruposoft.excepciones.AfiliacionesException;
+
+import java.sql.SQLException;
+
 import uy.gruposoft.excepciones.AfiliadoException;
+import uy.gruposoft.excepciones.DeudorException;
 import uy.gruposoft.excepciones.LocalException;
 import uy.gruposoft.excepciones.NegocioException;
 import uy.gruposoft.excepciones.UsuarioException;
+import uy.gruposoft.persistencia.PersistenciaAfiliaciones;
 import uy.gruposoft.persistencia.PersistenciaAfiliado;
+import uy.gruposoft.persistencia.PersistenciaDeudor;
 import uy.gruposoft.persistencia.PersistenciaLocal;
 import uy.gruposoft.persistencia.PersistenciaNegocio;
 import uy.gruposoft.persistencia.PersistenciaUsuario;
@@ -118,7 +126,6 @@ public class FachadaLogica {
         PersistenciaAfiliado.altaAfiliado(afiliado);
     }
     
-    
     // Negocios:
     
     public static Negocios cargarNegocios() throws NegocioException {
@@ -152,6 +159,92 @@ public class FachadaLogica {
     public static Negocios buscarNegocio(Negocio negocio) throws NegocioException {
         Negocios negocios = new Negocios();
         negocios = PersistenciaNegocio.buscarNegocios(negocio);
+
+     public static void modificarAfiliado(Afiliado afiliado) throws AfiliadoException {
+
+        PersistenciaAfiliado.modificarAfiliado(afiliado);
+
+    }
+     
+      public static Afiliados buscarAfiliado(Afiliado afiliado) throws AfiliadoException {
+        Afiliados afiliados = new Afiliados();
+        afiliados = PersistenciaAfiliado.buscarAfiliados(afiliado);
+
+        return afiliados;
+    }
+      
+      public static void eliminarAfiliado(Afiliado afiliado) throws AfiliadoException {
+
+        PersistenciaAfiliado.bajaAfiliado(afiliado);
+    }
+      
+      //afiliaciones
+      
+      public static Afiliaciones cargarAfiliaciones() throws AfiliacionesException{
+          
+        Afiliaciones afiliaciones = new Afiliaciones();
+        afiliaciones = PersistenciaAfiliaciones.mostrarAfiliaciones();
+        
+        return afiliaciones;
+    }
+      
+      public static void insertarAfiliacion(Afiliacion afiliacion) throws AfiliacionesException{
+        PersistenciaAfiliaciones.altaAfiliaciones(afiliacion);
+    }
+      
+       public static void modificarAfiliacion(Afiliacion afiliacion) throws AfiliacionesException {
+
+        PersistenciaAfiliaciones.modificarAfiliaciones(afiliacion);
+
+    }
+      
+      
+   
+
+    
+   // deudores
+    
+        public static Deudores cargarDeudores() throws DeudorException, SQLException{
+        Deudores deudores = new Deudores();
+        deudores = PersistenciaDeudor.mostrarDeudores();
+        
+        return deudores;
+    }
+        
+    public static boolean verificarDeudor(Deudor deudor) throws DeudorException {
+        boolean existeDeudor;
+        existeDeudor = PersistenciaDeudor.verificarDeudor(deudor);
+
+        return existeDeudor;
+    }
+    
+    public static void insertarDeudor(Deudor deudor) throws DeudorException{
+        PersistenciaDeudor.altaDeudor(deudor);
+    }
+    
+    public static void eliminarDeudor(Deudor deudor) throws DeudorException {
+
+        PersistenciaDeudor.bajaDeudor(deudor);
+    }
+    
+    public static void modificarDeuda(Deudor deudor) throws DeudorException{
+        
+        PersistenciaDeudor.modificarDeuda(deudor);
+        
+    
+    }
+    
+    public static void eliminarAfiliacion(Afiliacion afiliacion) throws AfiliacionesException {
+
+        PersistenciaAfiliaciones.bajaAfiliacion(afiliacion);
+    }
+    
+    public static Afiliaciones buscarAfiliacion(RangoFechas rangoFechas) throws AfiliacionesException {
+        Afiliaciones afiliaciones = new Afiliaciones();
+        afiliaciones = PersistenciaAfiliaciones.buscarAfiliacion(rangoFechas);
+        return afiliaciones;
+    }
+
 
         return negocios;
     }

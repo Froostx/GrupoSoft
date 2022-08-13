@@ -5,13 +5,12 @@
  */
 package uy.gruposoft.presentacion;
 
-import java.awt.Desktop;
+
+
 import java.awt.Toolkit;
-import java.awt.event.KeyEvent;
-import java.net.URI;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import javax.swing.JLabel;
+
 import javax.swing.JOptionPane;
 import uy.gruposoft.logica.FachadaLogica;
 import uy.gruposoft.logica.Usuario;
@@ -126,7 +125,7 @@ public class Login extends javax.swing.JFrame {
 	    String timeStamp = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss").format(dateTime);
             System.out.println(timeStamp + " ||INFO|| " + "--" + " ||Login|| " + "Message: " + nombre + " se conecto");
 
-            JLabel mensajeLbl = new JLabel();
+        
 
             MenuPrincipal verMenuPrincipal = new MenuPrincipal();
             verMenuPrincipal.setVisible(true);
