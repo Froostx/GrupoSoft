@@ -2,9 +2,11 @@ package uy.gruposoft.logica;
 
 import uy.gruposoft.excepciones.AfiliadoException;
 import uy.gruposoft.excepciones.LocalException;
+import uy.gruposoft.excepciones.NegocioException;
 import uy.gruposoft.excepciones.UsuarioException;
 import uy.gruposoft.persistencia.PersistenciaAfiliado;
 import uy.gruposoft.persistencia.PersistenciaLocal;
+import uy.gruposoft.persistencia.PersistenciaNegocio;
 import uy.gruposoft.persistencia.PersistenciaUsuario;
 
 public class FachadaLogica {
@@ -117,7 +119,40 @@ public class FachadaLogica {
     }
     
     
-   
+    // Negocios:
+    
+    public static Negocios cargarNegocios() throws NegocioException {
+     Negocios negocios = new Negocios();
+     negocios = PersistenciaNegocio.mostrarNegocios();
 
+     return negocios;
+    }
+    
+    public static boolean verificarNegocio(Negocio negocio) throws NegocioException{
+        
+        boolean existeNegocio = PersistenciaNegocio.existeNegocio(negocio);
+        
+        return existeNegocio;
+    }
+    
+    public static void insertarNegocio(Negocio negocio) throws NegocioException{
+        PersistenciaNegocio.altaNegocio(negocio);
+    }
+    
+    public static void modificarNegocio(Negocio negocio) throws NegocioException {
 
+    PersistenciaNegocio.modificacionNegocio(negocio);
+
+    }
+    
+    public static void eliminarNegocio(Negocio negocio) throws NegocioException{
+        PersistenciaNegocio.bajaNegocio(negocio);
+    }
+
+    public static Negocios buscarNegocio(Negocio negocio) throws NegocioException {
+        Negocios negocios = new Negocios();
+        negocios = PersistenciaNegocio.buscarNegocios(negocio);
+
+        return negocios;
+    }
 }
