@@ -404,10 +404,12 @@ public class VentanaDeudores extends javax.swing.JInternalFrame {
         String ci_afiliado = this.ingreso_ci.getText();
         String cant_meses = this.ingreso_meses.getText();
         
+
+
+        if (ci_afiliado.compareTo("")!=0 && cant_meses.compareTo("")!=0)
+        {
         boolean isNumeric1 =  ci_afiliado.matches("[+-]?\\d*(\\.\\d+)?");
         boolean isNumeric2 =  cant_meses.matches("[+-]?\\d*(\\.\\d+)?");
-
-        
         if (isNumeric1 && isNumeric2)
         {   
             int ci = Integer.parseInt(ci_afiliado);
@@ -458,6 +460,11 @@ public class VentanaDeudores extends javax.swing.JInternalFrame {
         else
         {
             JOptionPane.showMessageDialog(this, "Ingrese un caracter valido para el numero del local");            
+        }
+        }
+        else
+        {
+            JOptionPane.showMessageDialog(this, "Ingrese caracteres validos");    
         }
         
         

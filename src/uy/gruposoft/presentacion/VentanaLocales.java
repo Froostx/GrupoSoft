@@ -279,31 +279,41 @@ public class VentanaLocales extends javax.swing.JInternalFrame {
         String negocio = this.negocioTxt2.getText();
         String encargado = this.encargadoTxt2.getText();
         
-        boolean isNumeric =  numeroStr.matches("[+-]?\\d*(\\.\\d+)?");
-        if (isNumeric)
-        {   
-            int numero = Integer.parseInt(numeroStr);
-            
-            Local local = new Local();
-            
-            local.setNumeroLocal(numero);
-            local.setNombreNegocio(negocio);
-            local.setEncargado(encargado);
-            
-            if (FachadaLogica.verificarLocal(local)){
-                JOptionPane.showMessageDialog(this, " ya existe un local con ese numero, ingrese otro");
-            }
-            else{
-                FachadaLogica.insertarLocal(local);
-                JOptionPane.showMessageDialog(this, "El Local se ingreso correctamente");
-                mostrarLocales();
+        if (numeroStr.compareTo("")!=0 && negocio.compareTo("")!=0 && encargado.compareTo("")!=0)
+        {
+
+
+            boolean isNumeric =  numeroStr.matches("[+-]?\\d*(\\.\\d+)?");
+            if (isNumeric)
+            {   
+                int numero = Integer.parseInt(numeroStr);
+
+                Local local = new Local();
+
+                local.setNumeroLocal(numero);
+                local.setNombreNegocio(negocio);
+                local.setEncargado(encargado);
+
+                if (FachadaLogica.verificarLocal(local)){
+                    JOptionPane.showMessageDialog(this, "Ya existe un local con ese numero, ingrese otro");
+                }
+                else{
+                    FachadaLogica.insertarLocal(local);
+                    JOptionPane.showMessageDialog(this, "El Local se ingreso correctamente");
+                    mostrarLocales();
+
+                }
 
             }
-             
+            else
+            {
+                JOptionPane.showMessageDialog(this, "Ingrese un caracter valido para el numero del local");            
+            }
         }
         else
         {
-            JOptionPane.showMessageDialog(this, "Ingrese un caracter valido para el numero del local");            
+            JOptionPane.showMessageDialog(this, "Ingrese caracteres validos");            
+
         }
         
         
