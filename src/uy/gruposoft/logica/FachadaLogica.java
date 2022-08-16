@@ -126,6 +126,22 @@ public class FachadaLogica {
         PersistenciaAfiliado.altaAfiliado(afiliado);
     }
     
+    public static void modificarAfiliado(Afiliado afiliado) throws AfiliadoException {
+
+        PersistenciaAfiliado.modificarAfiliado(afiliado);
+
+    }
+     
+      public static Afiliados buscarAfiliado(Afiliado afiliado) throws AfiliadoException {
+        Afiliados afiliados = new Afiliados();
+        afiliados = PersistenciaAfiliado.buscarAfiliados(afiliado);
+
+        return afiliados;
+    }
+      
+    
+    
+    
     // Negocios:
     
     public static Negocios cargarNegocios() throws NegocioException {
@@ -159,20 +175,10 @@ public class FachadaLogica {
     public static Negocios buscarNegocio(Negocio negocio) throws NegocioException {
         Negocios negocios = new Negocios();
         negocios = PersistenciaNegocio.buscarNegocios(negocio);
-
-     public static void modificarAfiliado(Afiliado afiliado) throws AfiliadoException {
-
-        PersistenciaAfiliado.modificarAfiliado(afiliado);
-
+        return negocios;
     }
+
      
-      public static Afiliados buscarAfiliado(Afiliado afiliado) throws AfiliadoException {
-        Afiliados afiliados = new Afiliados();
-        afiliados = PersistenciaAfiliado.buscarAfiliados(afiliado);
-
-        return afiliados;
-    }
-      
       public static void eliminarAfiliado(Afiliado afiliado) throws AfiliadoException {
 
         PersistenciaAfiliado.bajaAfiliado(afiliado);
@@ -246,6 +252,6 @@ public class FachadaLogica {
     }
 
 
-        return negocios;
-    }
+     
+    
 }
