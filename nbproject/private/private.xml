@@ -3,14 +3,20 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/guill/Desktop/GrupoSoft_gral/GrupoSoft/src/uy/gruposoft/presentacion/Login.java</file>
-            <file>file:/C:/Users/Administrador/Documents/GitHub/GrupoSoft/src/uy/gruposoft/presentacion/VentanaAfiliaciones.java</file>
+<<<<<<< HEAD
+            <file>file:/Users/andressantucci/Desktop/BIOS/GrupoSoft/src/uy/gruposoft/presentacion/VentanaDeudores.java</file>
+            <file>file:/Users/andressantucci/Desktop/BIOS/GrupoSoft/src/uy/gruposoft/logica/Afiliados.java</file>
+            <file>file:/Users/andressantucci/Desktop/BIOS/GrupoSoft/src/uy/gruposoft/presentacion/VentanaLocales.java</file>
+            <file>file:/Users/andressantucci/Desktop/BIOS/GrupoSoft/src/uy/gruposoft/logica/Local.java</file>
+            <file>file:/Users/andressantucci/Desktop/BIOS/GrupoSoft/src/uy/gruposoft/presentacion/Login.java</file>
+=======
+            <file>file:/C:/Users/Administrador/Documents/GitHub/GrupoSoft/src/uy/gruposoft/presentacion/VentanaDeUsuario.java</file>
+            <file>file:/C:/Users/Administrador/Documents/GitHub/GrupoSoft/src/uy/gruposoft/persistencia/PersistenciaUsuario.java</file>
             <file>file:/C:/Users/Administrador/Documents/GitHub/GrupoSoft/src/uy/gruposoft/presentacion/Login.java</file>
-            <file>file:/C:/Users/Administrador/Documents/GitHub/GrupoSoft/src/uy/gruposoft/logica/Afiliado.java</file>
             <file>file:/C:/Users/Administrador/Documents/GitHub/GrupoSoft/src/uy/gruposoft/presentacion/VentanaAfiliados.java</file>
-            <file>file:/C:/Users/Administrador/Documents/GitHub/GrupoSoft/src/uy/gruposoft/logica/FachadaLogica.java</file>
             <file>file:/C:/Users/Administrador/Documents/GitHub/GrupoSoft/src/uy/gruposoft/persistencia/PersistenciaAfiliado.java</file>
-            <file>file:/C:/Users/Administrador/Documents/GitHub/GrupoSoft/src/uy/gruposoft/persistencia/PersistenciaAfiliaciones.java</file>
+            <file>file:/C:/Users/Administrador/Documents/GitHub/GrupoSoft/src/uy/gruposoft/logica/FachadaLogica.java</file>
+>>>>>>> parent of 9dda780 (Adición de negocios)
         </group>
     </open-files>
 </project-private>

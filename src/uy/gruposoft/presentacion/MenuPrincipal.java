@@ -33,12 +33,13 @@ import uy.gruposoft.presentacion.VentanaLocales;
  */
 public class MenuPrincipal extends javax.swing.JFrame {
 
+
     /**
      * Creates new form MenuPrincipal
      */
     public MenuPrincipal() {
         initComponents();
-	setIconImage();
+        setIconImage();
         this.setExtendedState(this.MAXIMIZED_BOTH);
 
     }
@@ -69,7 +70,17 @@ public class MenuPrincipal extends javax.swing.JFrame {
         Negocio = new javax.swing.JMenuItem();
         deudores = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
+<<<<<<< HEAD
+=======
+        jMenuItem6 = new javax.swing.JMenuItem();
+<<<<<<< HEAD
+>>>>>>> aaa3f0aed7c9c87d0f13f1014ba1b250aa98f5fe
         Afiliaciones = new javax.swing.JMenuItem();
+=======
+        jMenuItem7 = new javax.swing.JMenuItem();
+>>>>>>> parent of 9dda780 (Adición de negocios)
+        jMenuItem9 = new javax.swing.JMenuItem();
+        jMenuItem10 = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
         jMenuItem2 = new javax.swing.JMenuItem();
         jMenuItem3 = new javax.swing.JMenuItem();
@@ -125,11 +136,6 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
         Negocio.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_4, java.awt.event.InputEvent.CTRL_DOWN_MASK));
         Negocio.setText("Negocio");
-        Negocio.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                NegocioActionPerformed(evt);
-            }
-        });
         jMenu1.add(Negocio);
 
         deudores.setActionCommand("Deudores");
@@ -145,6 +151,13 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
         jMenu2.setText("Informes");
 
+<<<<<<< HEAD
+=======
+        jMenuItem6.setText("Estados De Cuenta");
+        jMenu2.add(jMenuItem6);
+
+<<<<<<< HEAD
+>>>>>>> aaa3f0aed7c9c87d0f13f1014ba1b250aa98f5fe
         Afiliaciones.setText("Listados De Afiliaciones");
         Afiliaciones.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -152,6 +165,16 @@ public class MenuPrincipal extends javax.swing.JFrame {
             }
         });
         jMenu2.add(Afiliaciones);
+=======
+        jMenuItem7.setText("Listados De Afiliaciones");
+        jMenu2.add(jMenuItem7);
+>>>>>>> parent of 9dda780 (Adición de negocios)
+
+        jMenuItem9.setText("Listado De Locales");
+        jMenu2.add(jMenuItem9);
+
+        jMenuItem10.setText("Listado De Deudores");
+        jMenu2.add(jMenuItem10);
 
         jMenuBar1.add(jMenu2);
 
@@ -200,7 +223,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         } catch (AfiliadoException ex) {
             Logger.getLogger(MenuPrincipal.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
         if (JInternalFrames_AbiertosLocal(verAfiliados) == false) {
             Ventanas.add(verAfiliados);
 
@@ -210,7 +233,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
             verAfiliados.show();
 
         }
-        
+
     }//GEN-LAST:event_afiliadosActionPerformed
 
     public boolean JInternalFrames_Abiertos(VentanaDeUsuario jif) { // Creamos un metodo publico de tipo boolean.
@@ -226,6 +249,28 @@ public class MenuPrincipal extends javax.swing.JFrame {
         }
         return false;
     }
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+
+
+    public boolean JInternalFrames_AbiertosNegocios(VentanaNegocios jif) { // Creamos un metodo publico de tipo boolean.
+        JInternalFrame[] jif_Activos = MenuPrincipal.Ventanas.getAllFrames(); // Este arreglo almacena todos los JInternalFrames que esten abierto en el jDesktopPane.
+
+        for (int i = 0; i < jif_Activos.length; i++) { // Creamos un ciclo for para recorrer nuestro arreglo utilizando la propiedad length de nuestro arreglo.
+
+            // Validamos con un if si nuestro arreglo en la posición i es igual al JInternalFrame que esta activo en el jDesktopPane, si es igual devolverá true.
+            if (jif.getClass().isInstance(jif_Activos[i])) {
+                JOptionPane.showMessageDialog(null, "La ventana que esta intentando abrir ya esta abierta.", "Información", JOptionPane.INFORMATION_MESSAGE);
+                return true;
+            }
+        }
+        return false;
+    }
+=======
+>>>>>>> parent of 9dda780 (Adición de negocios)
+
+>>>>>>> aaa3f0aed7c9c87d0f13f1014ba1b250aa98f5fe
 
 
     private void UsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UsuarioActionPerformed
@@ -239,8 +284,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
         if (JInternalFrames_Abiertos(verUsuarios) == false) { //Solo si es false se abrirá el InternalFrame ya que si devuelve true es porque esta abierto el mismo InternalFrame.
             Ventanas.add(verUsuarios);
-            
-                      
+
             Dimension desktopSize = Ventanas.getSize();
             Dimension FrameSize = verUsuarios.getSize();
             verUsuarios.setLocation((desktopSize.width - FrameSize.width) / 2, (desktopSize.height - FrameSize.height) / 2);
@@ -257,7 +301,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         } catch (LocalException ex) {
             Logger.getLogger(MenuPrincipal.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
         if (JInternalFrames_AbiertosLocal(verLocales) == false) {
             Ventanas.add(verLocales);
 
@@ -277,7 +321,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         } catch (AfiliacionesException ex) {
             Logger.getLogger(MenuPrincipal.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
         if (JInternalFrames_AbiertosAfiliaciones(verAfiliaciones) == false) {
             Ventanas.add(verAfiliaciones);
 
@@ -288,21 +332,21 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
         }
     }//GEN-LAST:event_AfiliacionesActionPerformed
-     public boolean JInternalFrames_AbiertosAfiliaciones(VentanaAfiliaciones jif) { 
-    JInternalFrame[] jif_Activos = MenuPrincipal.Ventanas.getAllFrames();
+    public boolean JInternalFrames_AbiertosAfiliaciones(VentanaAfiliaciones jif) {
+        JInternalFrame[] jif_Activos = MenuPrincipal.Ventanas.getAllFrames();
 
-    for (int i = 0; i < jif_Activos.length; i++) {
+        for (int i = 0; i < jif_Activos.length; i++) {
 
-        if (jif.getClass().isInstance(jif_Activos[i])) {
-            JOptionPane.showMessageDialog(null, "La ventana que esta intentando abrir ya esta abierta.", "Información", JOptionPane.INFORMATION_MESSAGE);
-            return true;
+            if (jif.getClass().isInstance(jif_Activos[i])) {
+                JOptionPane.showMessageDialog(null, "La ventana que esta intentando abrir ya esta abierta.", "Información", JOptionPane.INFORMATION_MESSAGE);
+                return true;
+            }
         }
+        return false;
     }
-    return false;
-     }
 
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
-	Login login = new Login();
+        Login login = new Login();
         login.setVisible(true);
         dispose();
     }//GEN-LAST:event_jMenuItem2ActionPerformed
@@ -310,80 +354,103 @@ public class MenuPrincipal extends javax.swing.JFrame {
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
         dispose();
     }//GEN-LAST:event_jMenuItem3ActionPerformed
+<<<<<<< HEAD
 
+<<<<<<< HEAD
+=======
+
+    private void NegocioActionPerformed(java.awt.event.ActionEvent evt) {
+        // TODO add your handling code here:
+        VentanaNegocios verNegocios = null;
+        try {
+            verNegocios = new VentanaNegocios();
+        } catch (NegocioException ex) {
+            Logger.getLogger(MenuPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        if (JInternalFrames_AbiertosNegocios(verNegocios) == false) { //Solo si es false se abrirá el InternalFrame ya que si devuelve true es porque esta abierto el mismo InternalFrame.
+            Ventanas.add(verNegocios);
+
+            Dimension desktopSize = Ventanas.getSize();
+            Dimension FrameSize = verNegocios.getSize();
+            verNegocios.setLocation((desktopSize.width - FrameSize.width) / 2, (desktopSize.height - FrameSize.height) / 2);
+            verNegocios.show();
+
+        }
+
+>>>>>>> aaa3f0aed7c9c87d0f13f1014ba1b250aa98f5fe
     private void deudoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deudoresActionPerformed
         // TODO add your handling code here:
         VentanaDeudores verDeudores = null;
         try {
-            
+
             verDeudores = new VentanaDeudores();
-            
+
         } catch (DeudorException ex) {
             Logger.getLogger(MenuPrincipal.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
             Logger.getLogger(MenuPrincipal.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-        if (JInternalFrames_AbiertosDeudor(verDeudores) == false) { 
+        if (JInternalFrames_AbiertosDeudor(verDeudores) == false) {
             Ventanas.add(verDeudores);
-            
-                      
+
             Dimension desktopSize = Ventanas.getSize();
             Dimension FrameSize = verDeudores.getSize();
             verDeudores.setLocation((desktopSize.width - FrameSize.width) / 2, (desktopSize.height - FrameSize.height) / 2);
             verDeudores.show();
     }//GEN-LAST:event_deudoresActionPerformed
-
     }
-    
+
+
     private void NegocioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NegocioActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_NegocioActionPerformed
+=======
     
     
-
     public boolean JInternalFrames_AbiertosLocal(VentanaLocales jif) { 
     JInternalFrame[] jif_Activos = MenuPrincipal.Ventanas.getAllFrames();
+>>>>>>> parent of 9dda780 (Adición de negocios)
 
-    for (int i = 0; i < jif_Activos.length; i++) {
+    public boolean JInternalFrames_AbiertosLocal(VentanaLocales jif) {
+        JInternalFrame[] jif_Activos = MenuPrincipal.Ventanas.getAllFrames();
 
-        if (jif.getClass().isInstance(jif_Activos[i])) {
-            JOptionPane.showMessageDialog(null, "La ventana que esta intentando abrir ya esta abierta.", "Información", JOptionPane.INFORMATION_MESSAGE);
-            return true;
+        for (int i = 0; i < jif_Activos.length; i++) {
+
+            if (jif.getClass().isInstance(jif_Activos[i])) {
+                JOptionPane.showMessageDialog(null, "La ventana que esta intentando abrir ya esta abierta.", "Información", JOptionPane.INFORMATION_MESSAGE);
+                return true;
+            }
         }
+        return false;
     }
-    return false;
-    }
-    
-    public boolean JInternalFrames_AbiertosLocal(VentanaAfiliados jif) { 
-    JInternalFrame[] jif_Activos = MenuPrincipal.Ventanas.getAllFrames();
 
-    for (int i = 0; i < jif_Activos.length; i++) {
+    public boolean JInternalFrames_AbiertosLocal(VentanaAfiliados jif) {
+        JInternalFrame[] jif_Activos = MenuPrincipal.Ventanas.getAllFrames();
 
-        if (jif.getClass().isInstance(jif_Activos[i])) {
-            JOptionPane.showMessageDialog(null, "La ventana que esta intentando abrir ya esta abierta.", "Información", JOptionPane.INFORMATION_MESSAGE);
-            return true;
+        for (int i = 0; i < jif_Activos.length; i++) {
+
+            if (jif.getClass().isInstance(jif_Activos[i])) {
+                JOptionPane.showMessageDialog(null, "La ventana que esta intentando abrir ya esta abierta.", "Información", JOptionPane.INFORMATION_MESSAGE);
+                return true;
+            }
         }
+        return false;
     }
-    return false;
-    }
-    
-    
-    
-    public boolean JInternalFrames_AbiertosDeudor(VentanaDeudores jif) { 
-    JInternalFrame[] jif_Activos = MenuPrincipal.Ventanas.getAllFrames();
 
-    for (int i = 0; i < jif_Activos.length; i++) {
+    public boolean JInternalFrames_AbiertosDeudor(VentanaDeudores jif) {
+        JInternalFrame[] jif_Activos = MenuPrincipal.Ventanas.getAllFrames();
 
-        if (jif.getClass().isInstance(jif_Activos[i])) {
-            JOptionPane.showMessageDialog(null, "La ventana que esta intentando abrir ya esta abierta.", "Información", JOptionPane.INFORMATION_MESSAGE);
-            return true;
+        for (int i = 0; i < jif_Activos.length; i++) {
+
+            if (jif.getClass().isInstance(jif_Activos[i])) {
+                JOptionPane.showMessageDialog(null, "La ventana que esta intentando abrir ya esta abierta.", "Información", JOptionPane.INFORMATION_MESSAGE);
+                return true;
+            }
         }
+        return false;
     }
-    return false;
-    }
-    
-    
 
     /**
      * @param args the command line arguments
@@ -433,9 +500,16 @@ public class MenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItem10;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
+<<<<<<< HEAD
+=======
+    private javax.swing.JMenuItem jMenuItem6;
+    private javax.swing.JMenuItem jMenuItem7;
+>>>>>>> aaa3f0aed7c9c87d0f13f1014ba1b250aa98f5fe
     private javax.swing.JMenuItem jMenuItem8;
+    private javax.swing.JMenuItem jMenuItem9;
     private javax.swing.JMenuItem locales;
     // End of variables declaration//GEN-END:variables
     private void setIconImage() {

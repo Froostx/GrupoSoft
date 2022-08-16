@@ -7,9 +7,13 @@ package uy.gruposoft.presentacion;
 
 
 
+import java.awt.Desktop;
 import java.awt.Toolkit;
+import java.awt.event.KeyEvent;
+import java.net.URI;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import javax.swing.JLabel;
 
 import javax.swing.JOptionPane;
 import uy.gruposoft.logica.FachadaLogica;

@@ -253,13 +253,11 @@ public class VentanaDeudores extends javax.swing.JInternalFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-
                         .addGap(12, 12, 12)
                         .addComponent(txtbuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(consultar)
                         .addGap(112, 112, 112)
-
                         .addComponent(jLabel17)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(disminuir)
@@ -406,10 +404,12 @@ public class VentanaDeudores extends javax.swing.JInternalFrame {
         String ci_afiliado = this.ingreso_ci.getText();
         String cant_meses = this.ingreso_meses.getText();
         
+
+
+        if (ci_afiliado.compareTo("")!=0 && cant_meses.compareTo("")!=0)
+        {
         boolean isNumeric1 =  ci_afiliado.matches("[+-]?\\d*(\\.\\d+)?");
         boolean isNumeric2 =  cant_meses.matches("[+-]?\\d*(\\.\\d+)?");
-
-        
         if (isNumeric1 && isNumeric2)
         {   
             int ci = Integer.parseInt(ci_afiliado);
@@ -460,6 +460,11 @@ public class VentanaDeudores extends javax.swing.JInternalFrame {
         else
         {
             JOptionPane.showMessageDialog(this, "Ingrese un caracter valido para el numero del local");            
+        }
+        }
+        else
+        {
+            JOptionPane.showMessageDialog(this, "Ingrese caracteres validos");    
         }
         
         
