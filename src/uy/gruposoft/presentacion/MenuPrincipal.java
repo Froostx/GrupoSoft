@@ -19,8 +19,13 @@ import uy.gruposoft.excepciones.AfiliacionesException;
 import uy.gruposoft.excepciones.AfiliadoException;
 import uy.gruposoft.excepciones.DeudorException;
 import uy.gruposoft.excepciones.LocalException;
-import uy.gruposoft.excepciones.NegocioException;
 import uy.gruposoft.excepciones.UsuarioException;
+import uy.gruposoft.presentacion.Login;
+import uy.gruposoft.presentacion.VentanaAfiliaciones;
+import uy.gruposoft.presentacion.VentanaAfiliados;
+import uy.gruposoft.presentacion.VentanaDeUsuario;
+import uy.gruposoft.presentacion.VentanaDeudores;
+import uy.gruposoft.presentacion.VentanaLocales;
 
 /**
  *
@@ -64,8 +69,6 @@ public class MenuPrincipal extends javax.swing.JFrame {
         Negocio = new javax.swing.JMenuItem();
         deudores = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
-        jMenuItem6 = new javax.swing.JMenuItem();
-        jMenuItem10 = new javax.swing.JMenuItem();
         Afiliaciones = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
         jMenuItem2 = new javax.swing.JMenuItem();
@@ -93,7 +96,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
         jMenu1.setText("Formularios");
 
-        afiliados.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_1, java.awt.event.InputEvent.CTRL_MASK));
+        afiliados.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_1, java.awt.event.InputEvent.CTRL_DOWN_MASK));
         afiliados.setText("Afiliados");
         afiliados.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -102,7 +105,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         });
         jMenu1.add(afiliados);
 
-        locales.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_2, java.awt.event.InputEvent.CTRL_MASK));
+        locales.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_2, java.awt.event.InputEvent.CTRL_DOWN_MASK));
         locales.setText("Locales");
         locales.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -111,7 +114,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         });
         jMenu1.add(locales);
 
-        Usuario.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_3, java.awt.event.InputEvent.CTRL_MASK));
+        Usuario.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_3, java.awt.event.InputEvent.CTRL_DOWN_MASK));
         Usuario.setText("Usuarios");
         Usuario.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -120,7 +123,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         });
         jMenu1.add(Usuario);
 
-        Negocio.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_4, java.awt.event.InputEvent.CTRL_MASK));
+        Negocio.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_4, java.awt.event.InputEvent.CTRL_DOWN_MASK));
         Negocio.setText("Negocio");
         Negocio.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -141,12 +144,6 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jMenuBar1.add(jMenu1);
 
         jMenu2.setText("Informes");
-
-        jMenuItem6.setText("Estados De Cuenta");
-        jMenu2.add(jMenuItem6);
-
-        jMenuItem10.setText("Listado De Deudores");
-        jMenu2.add(jMenuItem10);
 
         Afiliaciones.setText("Listados De Afiliaciones");
         Afiliaciones.addActionListener(new java.awt.event.ActionListener() {
@@ -217,20 +214,6 @@ public class MenuPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_afiliadosActionPerformed
 
     public boolean JInternalFrames_Abiertos(VentanaDeUsuario jif) { // Creamos un metodo publico de tipo boolean.
-        JInternalFrame[] jif_Activos = MenuPrincipal.Ventanas.getAllFrames(); // Este arreglo almacena todos los JInternalFrames que esten abierto en el jDesktopPane.
-
-        for (int i = 0; i < jif_Activos.length; i++) { // Creamos un ciclo for para recorrer nuestro arreglo utilizando la propiedad length de nuestro arreglo.
-
-            // Validamos con un if si nuestro arreglo en la posición i es igual al JInternalFrame que esta activo en el jDesktopPane, si es igual devolverá true.
-            if (jif.getClass().isInstance(jif_Activos[i])) {
-                JOptionPane.showMessageDialog(null, "La ventana que esta intentando abrir ya esta abierta.", "Información", JOptionPane.INFORMATION_MESSAGE);
-                return true;
-            }
-        }
-        return false;
-    }
-    
-    public boolean JInternalFrames_AbiertosNegocios(VentanaNegocios jif) { // Creamos un metodo publico de tipo boolean.
         JInternalFrame[] jif_Activos = MenuPrincipal.Ventanas.getAllFrames(); // Este arreglo almacena todos los JInternalFrames que esten abierto en el jDesktopPane.
 
         for (int i = 0; i < jif_Activos.length; i++) { // Creamos un ciclo for para recorrer nuestro arreglo utilizando la propiedad length de nuestro arreglo.
@@ -328,25 +311,6 @@ public class MenuPrincipal extends javax.swing.JFrame {
         dispose();
     }//GEN-LAST:event_jMenuItem3ActionPerformed
 
-    private void NegocioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NegocioActionPerformed
-        // TODO add your handling code here:
-	VentanaNegocios verNegocios = null;
-        try {
-            verNegocios = new VentanaNegocios();
-        } catch (NegocioException ex) {
-            Logger.getLogger(MenuPrincipal.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
-        if (JInternalFrames_AbiertosNegocios(verNegocios) == false) { //Solo si es false se abrirá el InternalFrame ya que si devuelve true es porque esta abierto el mismo InternalFrame.
-            Ventanas.add(verNegocios);
-            
-                      
-            Dimension desktopSize = Ventanas.getSize();
-            Dimension FrameSize = verNegocios.getSize();
-            verNegocios.setLocation((desktopSize.width - FrameSize.width) / 2, (desktopSize.height - FrameSize.height) / 2);
-            verNegocios.show();
-
-        }
     private void deudoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deudoresActionPerformed
         // TODO add your handling code here:
         VentanaDeudores verDeudores = null;
@@ -471,7 +435,6 @@ public class MenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
-    private javax.swing.JMenuItem jMenuItem6;
     private javax.swing.JMenuItem jMenuItem8;
     private javax.swing.JMenuItem locales;
     // End of variables declaration//GEN-END:variables

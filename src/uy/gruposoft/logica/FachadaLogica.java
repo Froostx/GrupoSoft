@@ -159,12 +159,13 @@ public class FachadaLogica {
     public static Negocios buscarNegocio(Negocio negocio) throws NegocioException {
         Negocios negocios = new Negocios();
         negocios = PersistenciaNegocio.buscarNegocios(negocio);
+	return negocios;
+    }
 
      public static void modificarAfiliado(Afiliado afiliado) throws AfiliadoException {
-
         PersistenciaAfiliado.modificarAfiliado(afiliado);
-
     }
+    
      
       public static Afiliados buscarAfiliado(Afiliado afiliado) throws AfiliadoException {
         Afiliados afiliados = new Afiliados();
@@ -246,6 +247,6 @@ public class FachadaLogica {
     }
 
 
-        return negocios;
-    }
+   
 }
+
