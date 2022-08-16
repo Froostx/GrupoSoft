@@ -141,28 +141,10 @@ public class FachadaLogica {
     
     
     
-    // Negocios:
-    
-    public static Negocios cargarNegocios() throws NegocioException {
-     Negocios negocios = new Negocios();
-     negocios = PersistenciaNegocio.mostrarNegocios();
+   
 
-     return negocios;
-    }
-    
-    public static boolean verificarNegocio(Negocio negocio) throws NegocioException{
-        
-        boolean existeNegocio = PersistenciaNegocio.existeNegocio(negocio);
-        
-        return existeNegocio;
-    }
-    
-    public static void insertarNegocio(Negocio negocio) throws NegocioException{
-        PersistenciaNegocio.altaNegocio(negocio);
-    }
-    
-    public static void modificarNegocio(Negocio negocio) throws NegocioException {
 
+<<<<<<< HEAD
     PersistenciaNegocio.modificacionNegocio(negocio);
 
     }
@@ -255,4 +237,6 @@ public class FachadaLogica {
 =======
 
 >>>>>>> parent of 5160dd6 (Merge branch 'main' of https://github.com/Froostx/GrupoSoft)
+=======
+>>>>>>> parent of 9dda780 (Adición de negocios)
 }

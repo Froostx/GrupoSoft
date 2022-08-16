@@ -65,7 +65,11 @@ public class MenuPrincipal extends javax.swing.JFrame {
         deudores = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
         jMenuItem6 = new javax.swing.JMenuItem();
+<<<<<<< HEAD
         Afiliaciones = new javax.swing.JMenuItem();
+=======
+        jMenuItem7 = new javax.swing.JMenuItem();
+>>>>>>> parent of 9dda780 (Adición de negocios)
         jMenuItem9 = new javax.swing.JMenuItem();
         jMenuItem10 = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
@@ -123,11 +127,6 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
         Negocio.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_4, java.awt.event.InputEvent.CTRL_MASK));
         Negocio.setText("Negocio");
-        Negocio.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                NegocioActionPerformed(evt);
-            }
-        });
         jMenu1.add(Negocio);
 
         deudores.setActionCommand("Deudores");
@@ -146,6 +145,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jMenuItem6.setText("Estados De Cuenta");
         jMenu2.add(jMenuItem6);
 
+<<<<<<< HEAD
         Afiliaciones.setText("Listados De Afiliaciones");
         Afiliaciones.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -153,6 +153,10 @@ public class MenuPrincipal extends javax.swing.JFrame {
             }
         });
         jMenu2.add(Afiliaciones);
+=======
+        jMenuItem7.setText("Listados De Afiliaciones");
+        jMenu2.add(jMenuItem7);
+>>>>>>> parent of 9dda780 (Adición de negocios)
 
         jMenuItem9.setText("Listado De Locales");
         jMenu2.add(jMenuItem9);
@@ -233,6 +237,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         }
         return false;
     }
+<<<<<<< HEAD
 
 
     public boolean JInternalFrames_AbiertosNegocios(VentanaNegocios jif) { // Creamos un metodo publico de tipo boolean.
@@ -248,6 +253,8 @@ public class MenuPrincipal extends javax.swing.JFrame {
         }
         return false;
     }
+=======
+>>>>>>> parent of 9dda780 (Adición de negocios)
 
 
 
@@ -332,6 +339,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
         dispose();
     }//GEN-LAST:event_jMenuItem3ActionPerformed
+<<<<<<< HEAD
 
 
     private void NegocioActionPerformed(java.awt.event.ActionEvent evt) {
@@ -380,6 +388,12 @@ public class MenuPrincipal extends javax.swing.JFrame {
     private void NegocioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NegocioActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_NegocioActionPerformed
+=======
+    
+    
+    public boolean JInternalFrames_AbiertosLocal(VentanaLocales jif) { 
+    JInternalFrame[] jif_Activos = MenuPrincipal.Ventanas.getAllFrames();
+>>>>>>> parent of 9dda780 (Adición de negocios)
 
     public boolean JInternalFrames_AbiertosLocal(VentanaLocales jif) {
         JInternalFrame[] jif_Activos = MenuPrincipal.Ventanas.getAllFrames();
@@ -472,6 +486,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem6;
+    private javax.swing.JMenuItem jMenuItem7;
     private javax.swing.JMenuItem jMenuItem8;
     private javax.swing.JMenuItem jMenuItem9;
     private javax.swing.JMenuItem locales;
