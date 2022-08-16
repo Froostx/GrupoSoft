@@ -8,11 +8,13 @@ import java.sql.SQLException;
 import uy.gruposoft.excepciones.AfiliadoException;
 import uy.gruposoft.excepciones.DeudorException;
 import uy.gruposoft.excepciones.LocalException;
+import uy.gruposoft.excepciones.NegocioException;
 import uy.gruposoft.excepciones.UsuarioException;
 import uy.gruposoft.persistencia.PersistenciaAfiliaciones;
 import uy.gruposoft.persistencia.PersistenciaAfiliado;
 import uy.gruposoft.persistencia.PersistenciaDeudor;
 import uy.gruposoft.persistencia.PersistenciaLocal;
+import uy.gruposoft.persistencia.PersistenciaNegocio;
 import uy.gruposoft.persistencia.PersistenciaUsuario;
 
 public class FachadaLogica {
@@ -124,7 +126,6 @@ public class FachadaLogica {
         PersistenciaAfiliado.altaAfiliado(afiliado);
     }
     
-<<<<<<< HEAD
     // Negocios:
     
     public static Negocios cargarNegocios() throws NegocioException {
@@ -162,11 +163,6 @@ public class FachadaLogica {
     }
 
      public static void modificarAfiliado(Afiliado afiliado) throws AfiliadoException {
-=======
-<<<<<<< HEAD
-    public static void modificarAfiliado(Afiliado afiliado) throws AfiliadoException {
-
->>>>>>> aaa3f0aed7c9c87d0f13f1014ba1b250aa98f5fe
         PersistenciaAfiliado.modificarAfiliado(afiliado);
     }
     
@@ -178,35 +174,6 @@ public class FachadaLogica {
         return afiliados;
     }
       
-    
-    
-    
-   
-
-
-<<<<<<< HEAD
-    PersistenciaNegocio.modificacionNegocio(negocio);
-
-    }
-    
-    public static void eliminarNegocio(Negocio negocio) throws NegocioException{
-        PersistenciaNegocio.bajaNegocio(negocio);
-    }
-
-    public static Negocios buscarNegocio(Negocio negocio) throws NegocioException {
-        Negocios negocios = new Negocios();
-        negocios = PersistenciaNegocio.buscarNegocios(negocio);
-        return negocios;
-=======
-
-     public static void modificarAfiliado(Afiliado afiliado) throws AfiliadoException {
-
-        PersistenciaAfiliado.modificarAfiliado(afiliado);
-
->>>>>>> parent of 5160dd6 (Merge branch 'main' of https://github.com/Froostx/GrupoSoft)
-    }
-
-     
       public static void eliminarAfiliado(Afiliado afiliado) throws AfiliadoException {
 
         PersistenciaAfiliado.bajaAfiliado(afiliado);
@@ -268,20 +235,18 @@ public class FachadaLogica {
     
     }
     
+    public static void eliminarAfiliacion(Afiliacion afiliacion) throws AfiliacionesException {
+
+        PersistenciaAfiliaciones.bajaAfiliacion(afiliacion);
+    }
     
+    public static Afiliaciones buscarAfiliacion(RangoFechas rangoFechas) throws AfiliacionesException {
+        Afiliaciones afiliaciones = new Afiliaciones();
+        afiliaciones = PersistenciaAfiliaciones.buscarAfiliacion(rangoFechas);
+        return afiliaciones;
+    }
 
 
-<<<<<<< HEAD
    
-=======
-<<<<<<< HEAD
-     
-    
-=======
-
->>>>>>> parent of 5160dd6 (Merge branch 'main' of https://github.com/Froostx/GrupoSoft)
-=======
->>>>>>> parent of 9dda780 (Adición de negocios)
->>>>>>> aaa3f0aed7c9c87d0f13f1014ba1b250aa98f5fe
 }
 
