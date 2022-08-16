@@ -8,13 +8,11 @@ import java.sql.SQLException;
 import uy.gruposoft.excepciones.AfiliadoException;
 import uy.gruposoft.excepciones.DeudorException;
 import uy.gruposoft.excepciones.LocalException;
-import uy.gruposoft.excepciones.NegocioException;
 import uy.gruposoft.excepciones.UsuarioException;
 import uy.gruposoft.persistencia.PersistenciaAfiliaciones;
 import uy.gruposoft.persistencia.PersistenciaAfiliado;
 import uy.gruposoft.persistencia.PersistenciaDeudor;
 import uy.gruposoft.persistencia.PersistenciaLocal;
-import uy.gruposoft.persistencia.PersistenciaNegocio;
 import uy.gruposoft.persistencia.PersistenciaUsuario;
 
 public class FachadaLogica {
@@ -126,6 +124,7 @@ public class FachadaLogica {
         PersistenciaAfiliado.altaAfiliado(afiliado);
     }
     
+<<<<<<< HEAD
     public static void modificarAfiliado(Afiliado afiliado) throws AfiliadoException {
 
         PersistenciaAfiliado.modificarAfiliado(afiliado);
@@ -176,6 +175,13 @@ public class FachadaLogica {
         Negocios negocios = new Negocios();
         negocios = PersistenciaNegocio.buscarNegocios(negocio);
         return negocios;
+=======
+
+     public static void modificarAfiliado(Afiliado afiliado) throws AfiliadoException {
+
+        PersistenciaAfiliado.modificarAfiliado(afiliado);
+
+>>>>>>> parent of 5160dd6 (Merge branch 'main' of https://github.com/Froostx/GrupoSoft)
     }
 
      
@@ -240,18 +246,13 @@ public class FachadaLogica {
     
     }
     
-    public static void eliminarAfiliacion(Afiliacion afiliacion) throws AfiliacionesException {
-
-        PersistenciaAfiliaciones.bajaAfiliacion(afiliacion);
-    }
     
-    public static Afiliaciones buscarAfiliacion(RangoFechas rangoFechas) throws AfiliacionesException {
-        Afiliaciones afiliaciones = new Afiliaciones();
-        afiliaciones = PersistenciaAfiliaciones.buscarAfiliacion(rangoFechas);
-        return afiliaciones;
-    }
 
 
+<<<<<<< HEAD
      
     
+=======
+
+>>>>>>> parent of 5160dd6 (Merge branch 'main' of https://github.com/Froostx/GrupoSoft)
 }
