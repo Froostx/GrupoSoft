@@ -19,13 +19,8 @@ import uy.gruposoft.excepciones.AfiliacionesException;
 import uy.gruposoft.excepciones.AfiliadoException;
 import uy.gruposoft.excepciones.DeudorException;
 import uy.gruposoft.excepciones.LocalException;
+import uy.gruposoft.excepciones.NegocioException;
 import uy.gruposoft.excepciones.UsuarioException;
-import uy.gruposoft.presentacion.Login;
-import uy.gruposoft.presentacion.VentanaAfiliaciones;
-import uy.gruposoft.presentacion.VentanaAfiliados;
-import uy.gruposoft.presentacion.VentanaDeUsuario;
-import uy.gruposoft.presentacion.VentanaDeudores;
-import uy.gruposoft.presentacion.VentanaLocales;
 
 /**
  *
@@ -226,6 +221,20 @@ public class MenuPrincipal extends javax.swing.JFrame {
         }
         return false;
     }
+    
+    public boolean JInternalFrames_AbiertosNegocios(VentanaNegocios jif) { // Creamos un metodo publico de tipo boolean.
+        JInternalFrame[] jif_Activos = MenuPrincipal.Ventanas.getAllFrames(); // Este arreglo almacena todos los JInternalFrames que esten abierto en el jDesktopPane.
+
+        for (int i = 0; i < jif_Activos.length; i++) { // Creamos un ciclo for para recorrer nuestro arreglo utilizando la propiedad length de nuestro arreglo.
+
+            // Validamos con un if si nuestro arreglo en la posición i es igual al JInternalFrame que esta activo en el jDesktopPane, si es igual devolverá true.
+            if (jif.getClass().isInstance(jif_Activos[i])) {
+                JOptionPane.showMessageDialog(null, "La ventana que esta intentando abrir ya esta abierta.", "Información", JOptionPane.INFORMATION_MESSAGE);
+                return true;
+            }
+        }
+        return false;
+    }
 
 
     private void UsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UsuarioActionPerformed
@@ -338,6 +347,23 @@ public class MenuPrincipal extends javax.swing.JFrame {
     
     private void NegocioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NegocioActionPerformed
         // TODO add your handling code here:
+	VentanaNegocios verNegocios = null;
+        try {
+            verNegocios = new VentanaNegocios();
+        } catch (NegocioException ex) {
+            Logger.getLogger(MenuPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        if (JInternalFrames_AbiertosNegocios(verNegocios) == false) { //Solo si es false se abrirá el InternalFrame ya que si devuelve true es porque esta abierto el mismo InternalFrame.
+            Ventanas.add(verNegocios);
+            
+                      
+            Dimension desktopSize = Ventanas.getSize();
+            Dimension FrameSize = verNegocios.getSize();
+            verNegocios.setLocation((desktopSize.width - FrameSize.width) / 2, (desktopSize.height - FrameSize.height) / 2);
+            verNegocios.show();
+
+        }
     }//GEN-LAST:event_NegocioActionPerformed
     
     
