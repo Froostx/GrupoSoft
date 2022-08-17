@@ -417,6 +417,7 @@ public class VentanaNegocios extends javax.swing.JInternalFrame {
             fila[1] = negocios.getNegocios().get(i).getCantidad_locales();
             fila[2] = negocios.getNegocios().get(i).getRubro();
             fila[3] = negocios.getNegocios().get(i).getMarca();
+	    fila[4] = negocios.getNegocios().get(i).getFechaAlta();
 
             modelo.addRow(fila);
 
