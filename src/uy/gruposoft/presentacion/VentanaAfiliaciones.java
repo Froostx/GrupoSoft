@@ -305,6 +305,11 @@ public class VentanaAfiliaciones extends javax.swing.JInternalFrame {
                 eliminarTxtMouseClicked(evt);
             }
         });
+        eliminarTxt.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                eliminarTxtActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -493,6 +498,10 @@ public class VentanaAfiliaciones extends javax.swing.JInternalFrame {
         fechaHasta.setDate(null);
         
     }//GEN-LAST:event_buscarFechaActionPerformed
+
+    private void eliminarTxtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eliminarTxtActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_eliminarTxtActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

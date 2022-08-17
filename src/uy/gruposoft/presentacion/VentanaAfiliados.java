@@ -7,7 +7,9 @@ package uy.gruposoft.presentacion;
 
 import uy.gruposoft.logica.CeldaRenderer;
 import java.awt.event.KeyEvent;
+import java.sql.SQLException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -18,8 +20,11 @@ import javax.swing.JOptionPane;
 import javax.swing.KeyStroke;
 import javax.swing.table.DefaultTableModel;
 import uy.gruposoft.excepciones.AfiliadoException;
+import uy.gruposoft.excepciones.DeudorException;
 import uy.gruposoft.logica.Afiliado;
 import uy.gruposoft.logica.Afiliados;
+import uy.gruposoft.logica.Deudor;
+import uy.gruposoft.logica.Deudores;
 import uy.gruposoft.logica.FachadaLogica;
 import uy.gruposoft.logica.Paises;
 
@@ -692,6 +697,23 @@ public class VentanaAfiliados extends javax.swing.JInternalFrame {
             if (seleccion == 1) {
                 int res = JOptionPane.showConfirmDialog(null, "¿Desea Eliminar el Registro?", "Confirm", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
                 if (res == JOptionPane.YES_OPTION) {
+                    
+                    int ci = afiliadoFilaSeleccionada.getCedula();
+                    Boolean encontrado = false;
+                    
+                    Deudores aux = FachadaLogica.cargarDeudores();
+                    ArrayList<Deudor> deudores = aux.getDeudores();
+
+                    for(int i = 0; i < deudores.size(); i++ )
+                    {
+                        Deudor deudor = deudores.get(i);
+                        if (deudor.getCiAfiliado() == ci)
+                        {
+                            encontrado = true;
+                            FachadaLogica.eliminarDeudor(deudor);
+                            break;
+                        }
+                    }
 
                     FachadaLogica.eliminarAfiliado(afiliadoFilaSeleccionada);
                 }
@@ -702,6 +724,10 @@ public class VentanaAfiliados extends javax.swing.JInternalFrame {
         } catch (AfiliadoException ex) {
             Logger.getLogger(VentanaDeUsuario.class.getName()).log(Level.SEVERE, null, ex);
 
+        } catch (DeudorException ex) {
+            Logger.getLogger(VentanaAfiliados.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(VentanaAfiliados.class.getName()).log(Level.SEVERE, null, ex);
         }
 
         try {

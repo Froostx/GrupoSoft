@@ -279,6 +279,10 @@ public class VentanaLocales extends javax.swing.JInternalFrame {
         String negocio = this.negocioTxt2.getText();
         String encargado = this.encargadoTxt2.getText();
         
+        
+        if (numeroStr.compareTo("") != 0 && negocio.compareTo("")!=0 && encargado.compareTo("")!=0)
+        {
+        
         boolean isNumeric =  numeroStr.matches("[+-]?\\d*(\\.\\d+)?");
         if (isNumeric)
         {   
@@ -304,6 +308,12 @@ public class VentanaLocales extends javax.swing.JInternalFrame {
         else
         {
             JOptionPane.showMessageDialog(this, "Ingrese un caracter valido para el numero del local");            
+        }
+        }
+        else
+        {
+            JOptionPane.showMessageDialog(this, "Ingrese caracteres validos ");            
+          
         }
         
         

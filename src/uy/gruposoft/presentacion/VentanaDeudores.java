@@ -301,19 +301,7 @@ public class VentanaDeudores extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_txtbuscarActionPerformed
 
     private void txtbuscarKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtbuscarKeyReleased
-//        if(txtbuscar.getText().equals("")){
-//            try {
-//                mostrarLocales();
-//            } catch (LocalException ex) {
-//                Logger.getLogger(VentanaDeUsuario.class.getName()).log(Level.SEVERE, null, ex);
-//            }
-//        }else{
-//            try {
-//                buscarLocales();
-//            } catch (LocalException ex) {
-//                Logger.getLogger(VentanaDeUsuario.class.getName()).log(Level.SEVERE, null, ex);
-//            }
-//        }
+
     }//GEN-LAST:event_txtbuscarKeyReleased
 
     private void aumentarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aumentarActionPerformed
@@ -406,6 +394,10 @@ public class VentanaDeudores extends javax.swing.JInternalFrame {
         String ci_afiliado = this.ingreso_ci.getText();
         String cant_meses = this.ingreso_meses.getText();
         
+        if (ci_afiliado.compareTo("") != 0 && cant_meses.compareTo("") != 0)
+        {
+        
+        
         boolean isNumeric1 =  ci_afiliado.matches("[+-]?\\d*(\\.\\d+)?");
         boolean isNumeric2 =  cant_meses.matches("[+-]?\\d*(\\.\\d+)?");
 
@@ -461,7 +453,11 @@ public class VentanaDeudores extends javax.swing.JInternalFrame {
         {
             JOptionPane.showMessageDialog(this, "Ingrese un caracter valido para el numero del local");            
         }
-        
+        }
+        else{
+            JOptionPane.showMessageDialog(this, "Ingrese caracteres validos ");            
+
+        }
         
     }
     
