@@ -91,7 +91,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
         jMenu1.setText("Formularios");
 
-        afiliados.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_1, java.awt.event.InputEvent.CTRL_DOWN_MASK));
+        afiliados.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_1, java.awt.event.InputEvent.CTRL_MASK));
         afiliados.setText("Afiliados");
         afiliados.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -100,7 +100,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         });
         jMenu1.add(afiliados);
 
-        locales.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_2, java.awt.event.InputEvent.CTRL_DOWN_MASK));
+        locales.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_2, java.awt.event.InputEvent.CTRL_MASK));
         locales.setText("Locales");
         locales.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -109,7 +109,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         });
         jMenu1.add(locales);
 
-        Usuario.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_3, java.awt.event.InputEvent.CTRL_DOWN_MASK));
+        Usuario.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_3, java.awt.event.InputEvent.CTRL_MASK));
         Usuario.setText("Usuarios");
         Usuario.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -118,7 +118,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         });
         jMenu1.add(Usuario);
 
-        Negocio.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_4, java.awt.event.InputEvent.CTRL_DOWN_MASK));
+        Negocio.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_4, java.awt.event.InputEvent.CTRL_MASK));
         Negocio.setText("Negocio");
         Negocio.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -127,6 +127,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         });
         jMenu1.add(Negocio);
 
+        deudores.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_5, java.awt.event.InputEvent.CTRL_MASK));
         deudores.setActionCommand("Deudores");
         deudores.setLabel("Deudores");
         deudores.addActionListener(new java.awt.event.ActionListener() {
@@ -140,6 +141,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
         jMenu2.setText("Informes");
 
+        Afiliaciones.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_1, java.awt.event.InputEvent.SHIFT_MASK));
         Afiliaciones.setText("Listados De Afiliaciones");
         Afiliaciones.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -152,6 +154,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
         jMenu3.setText("Cerrar");
 
+        jMenuItem2.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_2, java.awt.event.InputEvent.SHIFT_MASK));
         jMenuItem2.setText("Cerrar sesion");
         jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -160,6 +163,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         });
         jMenu3.add(jMenuItem2);
 
+        jMenuItem3.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_3, java.awt.event.InputEvent.SHIFT_MASK));
         jMenuItem3.setText("Salir");
         jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

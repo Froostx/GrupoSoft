@@ -24,7 +24,7 @@ public class PersistenciaAfiliaciones {
      private static final String insert = "INSERT INTO grupo_soft.afiliaciones (cedula,monto,fecha_pago) VALUES (?,?,current_timestamp())";
      private static final String update = "UPDATE grupo_soft.afiliaciones SET cedula = ?,monto = ?, fecha_pago = ? WHERE id = ?";
      private static final String eliminar = "UPDATE grupo_soft.afiliaciones SET fecha_baja = current_timestamp() WHERE id = ?";
-     private static final String buscarPorFecha = "SELECT *FROM afiliaciones WHERE fecha_pago BETWEEN ? and ?";
+     private static final String buscarPorFecha = "SELECT *FROM afiliaciones WHERE fecha_pago BETWEEN ? and ? and fecha_baja IS null";
      
      
      static Connection cn = null;

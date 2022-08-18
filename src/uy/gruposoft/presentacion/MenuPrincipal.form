@@ -65,6 +65,9 @@
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="deudores">
               <Properties>
+                <Property name="accelerator" type="javax.swing.KeyStroke" editor="org.netbeans.modules.form.editors.KeyStrokeEditor">
+                  <KeyStroke key="Ctrl+5"/>
+                </Property>
                 <Property name="actionCommand" type="java.lang.String" value="Deudores"/>
                 <Property name="label" type="java.lang.String" value="Deudores"/>
               </Properties>
@@ -81,6 +84,9 @@
           <SubComponents>
             <MenuItem class="javax.swing.JMenuItem" name="Afiliaciones">
               <Properties>
+                <Property name="accelerator" type="javax.swing.KeyStroke" editor="org.netbeans.modules.form.editors.KeyStrokeEditor">
+                  <KeyStroke key="Shift+1"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Listados De Afiliaciones"/>
               </Properties>
               <Events>
@@ -96,6 +102,9 @@
           <SubComponents>
             <MenuItem class="javax.swing.JMenuItem" name="jMenuItem2">
               <Properties>
+                <Property name="accelerator" type="javax.swing.KeyStroke" editor="org.netbeans.modules.form.editors.KeyStrokeEditor">
+                  <KeyStroke key="Shift+2"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Cerrar sesion"/>
               </Properties>
               <Events>
@@ -104,6 +113,9 @@
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="jMenuItem3">
               <Properties>
+                <Property name="accelerator" type="javax.swing.KeyStroke" editor="org.netbeans.modules.form.editors.KeyStrokeEditor">
+                  <KeyStroke key="Shift+3"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Salir"/>
               </Properties>
               <Events>
